@@ -8,6 +8,14 @@ import { PostData } from "../../MockData";
 export default function PostPage() {
   const navigate = useNavigate();
 
+  const iframePart = () => {
+    return {
+      __html: '<iframe src="../../html/three/index.html"></iframe>',
+    };
+  };
+
+  const testHtml = `<p>hello</p>`;
+
   return (
     <Container>
       <h2 className="blind">포스트 리스트</h2>
@@ -37,6 +45,7 @@ export default function PostPage() {
           );
         })}
       </ul>
+      <a href="src/html/three/index.html">three js로 가기</a>
     </Container>
   );
 }

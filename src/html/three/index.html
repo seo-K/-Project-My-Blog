@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#000" />
+  <meta name="keywords" content="naver" />
+  <meta name="description" content="웹페이지 설명" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:title" content="사이트 명" />
+  <meta property="og:type" content="website" />
+  <!-- 웹페이지 타입(blog, website 등) -->
+  <meta property="og:keywords" content="웹페이지 URL" />
+  <meta property="og:description" content="웹페이지 설명" />
+  <meta property="og:url" content="https://www.naver.com" />
+  <meta property="og:image" content="../assets/images/common/sns_share.jpg" />
+  <meta property="og:image:width" content="400" />
+  <meta property="og:image:height" content="300" />
+  <meta property="og:image:alt" content="이미지 alt" />
+  <meta property="og:site_name" content="사이트 명" />
+  <meta name="twitter:site" content="@트위터아이디" />
+  <!-- 웹 사이트의 @username -->
+  <meta name="twitter:url" content="http://~~~~/this.page" />
+  <!-- 웹상 경로(URL). 불필요 get param을 제거하는 편을 추천 -->
+  <meta name="twitter:title" content="naver" />
+  <!-- 트위터: 콘텐츠 제목-->
+  <meta name="twitter:description" content="웹페이지 설명" />
+  <!-- 트위터: 웹페이지 설명 -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- 트위터: 카드 타입(요약정보, 사진, 비디오) / 카드형식 :  “summary”, “summary_large_image”, “app”, or “player” -->
+  <meta name="twitter:image" content="https://example.com/ogp.jpg" />
+  <!-- 트위터: 표시되는 이미지 / 절대경로 -->
+
+  <link rel="canonical" href="http://~~~~/this.page" />
+  <!-- 표준 페이지 설정. 검색엔진에서 현재 페이지의 URL을 알려둔다. 같은 페이지이지만, 여러 URL이 있는 경우 설정하면, 표준 페이지의 URL로 검색엔진이 보여준다.
+		SEO를 신경쓴다면 꼭 설정  -->
+  <!-- <link rel="icon" href="../assets/images/common/favicon.png" sizes="32x32" />
+  <link rel="icon" href="../assets/images/common/favicon.png" sizes="192x192" /> -->
+  <link rel="apple-touch-icon" href="" />
+  <title>Three Js</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div id="content-wrap">
+    <header id="header"></header>
+    <main id="main">
+      Three js 공부하기
+
+      <h2>1. 큐브</h2>
+      <h2>2. 드로잉 라인</h2>
+      <h2>3. 텍스트 만들기</h2>
+      <div id="info">
+        <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - simple text from json fonts
+      </div>
+
+    </main>
+    <footer id="footer"></footer>
+  </div>
+
+  <!-- JS -->
+  <script src="./js/jquery-3.5.1.js"></script>
+  <script src="./js/100vh.js"></script>
+  <script src="./js/custom.js"></script>
+  <!-- <script src="./js/console.js"></script> -->
+  <script src="./js/three.js"></script>
+  <!-- 1. 큐브 -->
+  <script>
+    // 1.  장면, 카메라, 렌더러 설정
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x333333); // background
+    // scene.fog = new THREE.Fog(0x111111, 150, 200);
+
+    const WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+    const camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);  // ( field of view [표시되는 장면의 범위 n도/단위], 화면 비율,  가깝고 먼 정도 near/far , 깊이 );
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(500, 500); // 렌더링 할 크기 (window.innerWidth, window.innerHeight)
+    document.body.appendChild(renderer.domElement);
+
+    // 2. 큐브만들기
+    const geometry = new THREE.BoxGeometry(1, 1, 1); // 큐브의 점, 채우기
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // hex colors.
+    const cube = new THREE.Mesh(geometry, material); // 재질
+    scene.add(cube);
+
+    camera.position.z = 5; // 카메라 위치
+
+    // 3. scene 렌더링 + 애니메이션
+    // 화면이 새로고침될때마다 렌더링됨 (일반적으로 60초마다)
+    function animate() {
+      // 큐브 애니메이션
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      requestAnimationFrame(animate); // 브라우저 탭으로 이동할때는 일시중지됨 (setInterval을 사용하지않는 이유)
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // WebGL 호환성 확인
+    // if (WebGL.isWebGLAvailable()) {
+    //   // Initiate function or other initializations here
+    //   animate();
+    // } else {
+    //   const warning = WebGL.getWebGLErrorMessage();
+    //   document.getElementById('container').appendChild(warning);
+
+
+
+    // window.addEventListener( 'resize', onResize, false );
+    // animate();
+    // function onResize() {
+
+    //   camera.aspect = window.innerWidth / window.innerHeight;
+    //   camera.updateProjectionMatrix();
+    //   renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // }
+
+    // function animate() {
+
+    //   requestAnimationFrame(animate);
+
+    //   render();
+
+    // }
+
+    // function render() {
+
+    //   renderer.render(scene, camera);
+
+    // }
+    // }
+  </script>
+
+  <!-------------------- 2. 드로잉 라인 -------------------------->
+  <script>
+    // 1.  장면, 카메라, 렌더러 설정
+    const drawScene = new THREE.Scene();
+    const drawCamera = new THREE.PerspectiveCamera(45, 1 / 1, 1, 500);
+    drawCamera.position.set(0, 0, 100);
+    drawCamera.lookAt(0, 0, 0);
+
+    const drawRenderer = new THREE.WebGLRenderer();
+    drawRenderer.setSize(500, 500);
+    document.body.appendChild(drawRenderer.domElement);
+
+    // 2. 드로잉 라인
+    const points = [];
+    points.push(new THREE.Vector3(- 10, 0, 0));
+    points.push(new THREE.Vector3(0, 10, 0));
+    points.push(new THREE.Vector3(10, 0, 0));
+    points.push(new THREE.Vector3(0, -10, 0));
+    points.push(new THREE.Vector3(-10, 0, 0));
+    const drawGeometry = new THREE.BufferGeometry().setFromPoints(points);
+
+    // 일반선
+    const drawMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+
+    // 점선
+    // const drawMaterial = new THREE.LineDashedMaterial({
+    //   color: 0xffffff,
+    //   linewidth: 1,
+    //   scale: 1,
+    //   dashSize: 3,
+    //   gapSize: 1,
+    // });
+    // line.computeLineDistances();
+
+    const line = new THREE.Line(drawGeometry, drawMaterial);
+
+    // 3. scene 렌더링
+    drawScene.add(line);
+    drawRenderer.render(drawScene, drawCamera);
+  </script>
+
+  <!-------------------- 3. 곡선 -------------------------->
+  <script>
+    const curveScene = new THREE.Scene();
+    const curveCamera = new THREE.PerspectiveCamera(45, 1 / 1, 1, 500);
+    const curveRenderer = new THREE.WebGLRenderer();
+    curveRenderer.setSize(500, 500);
+    document.body.appendChild(curveRenderer.domElement);
+
+    const cubicBezierCurve = new THREE.CubicBezierCurve3(
+      new THREE.Vector3(-10, -5, 0),
+      new THREE.Vector3(-5, 10, 0),
+      new THREE.Vector3(0, -10, 0),
+      new THREE.Vector3(5, 5, 0)
+    );
+
+    const lineCurve = new THREE.LineCurve3(
+      new THREE.Vector3(5, 5, 0),
+      new THREE.Vector3(10, 0, 0)
+    );
+
+    const curvePath = new THREE.CurvePath();
+    curvePath.add(cubicBezierCurve);
+    curvePath.add(lineCurve);
+    curvePath.closePath();
+
+    const curveGeometry = new THREE.BufferGeometry();
+    curveGeometry.vertices = curvePath.getPoints(100);
+
+
+    const curveMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    const curveObject = new THREE.Line(curveGeometry, curveMaterial);
+    scene.add(curveObject);
+
+    curveRenderer.render(curveScene, curveCamera)
+
+  </script>
+
+  <!-------------------- 4. 텍스트 -------------------------->
+  <!-- <script>
+    const loader = new FontLoader();
+
+    loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
+
+      const geometry = new TextGeometry('Hello three.js!', {
+        font: font,
+        size: 80,
+        height: 5,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 10,
+        bevelSize: 8,
+        bevelOffset: 0,
+        bevelSegments: 5
+      });
+    });
+  </script> -->
+</body>
+
+</html>
