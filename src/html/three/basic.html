@@ -15,18 +15,37 @@
 
 <!-- JS -->
 <!-- JS -->
-<script src="./js/jquery-3.5.1.js"></script>
+<script type="importmap">
+  {
+      "imports": {
+          "three": "./build/three.module.js"
+      }
+  }
+</script>
 <script type="module" src="./js/basic.js" defer></script>
+<script type="module" src="./js/geometry.js" defer></script>
+<script type="module" src="./js/geometry2.js" defer></script>
+<script type="module" src="./js/geometryShape.js" defer></script>
 
 <style>
-  #webgl-container {
+  div {
+    width: 50vw;
+    aspect-ratio: 1/1;
+    margin-bottom: 1rem;
     width: 50vw;
     aspect-ratio: 1/1;
   }
 </style>
 
 <body>
+  <h2>1. 기본</h2>
   <div id="webgl-container"></div>
+  <h2>2. geometry</h2>
+  <div id="geometry-container"></div>
+  <h2>3. geometry2</h2>
+  <div id="geometry2-container"></div>
+  <h2>4. geometry Shape</h2>
+  <div id="geometry-shape-container"></div>
 </body>
 
 </html>

@@ -49,7 +49,6 @@ class App {
   _setupModel() {
     const geometry = new THREE.BoxGeometry(1, 1, 1); // (가로, 세로, 깊이)
     const material = new THREE.MeshPhongMaterial({ color: 0x44a88 }); // 재질
-
     const cube = new THREE.Mesh(geometry, material);
 
     this._scene.add(cube);
@@ -83,6 +82,3 @@ class App {
 window.onload = function () {
   new App();
 };
-
-// https://www.youtube.com/watch?v=vjKuk5Vp93k&list=PLe6NQuuFBu7HqxY10b6gNu6iisT2-rZv-&index=2 // 0:08
-// https://velog.io/@jisubin12/Three.js-%EA%B0%95%EC%A2%8C-3-Geometry-part-3
