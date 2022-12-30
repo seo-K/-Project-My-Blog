@@ -1,11 +1,15 @@
 # Three js
 
+![alt text](./image/three.png)
+
 - Renderer - Scene(장면) - Light (광원)
 -                        ㄴMesh (Object3D) - Geometry (형상 정의)
 -                                          ㄴMaterial (색상 및 투명도)
 -          ㄴ Camera (시점 = 카메라)
 
 # BufferGeometry
+
+![alt text](./image/three2.png)
 
 ## 메쉬, 선, 점 기하학의 표현입니다.
 
