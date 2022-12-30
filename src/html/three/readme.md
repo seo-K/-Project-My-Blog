@@ -26,16 +26,26 @@
 - TorusGeometry (반지모형) (2차원 원이 360도 돌아가있다고 생각하면됨)
   - ex) TorusGeometry(1, 0.4, 8, 6, Math.PI X 2 ); // [ 반지름, 돌아가는 내부원형 반지름 값, 방사방향, 돌아가는 내부원형 수, 연장각길이]
 - TorusKnotGeometry (매듭모형)
-
   - ex) TorusKnotGeometry(1, 0.4, 20, 30, 3, 4); // [ 반지름, 구성 원통 반지름크기, 원형 수, 원형내부 분할수, 꺾임반복횟수?, 꺾임 ]
 
-- ExtrudeGeometry
-- TextGeometry
-- LatheGeometry
+### 선
+
+![alt text](https://mblogthumb-phinf.pstatic.net/20121013_234/javaking75_13500553141650YoRa_PNG/2012-10-13_002043.png?type=w2)
+
+- quadraticCurveTo(제어점x, 제어점y, 종료점x, 종료점y)
+- bezierCurveTo(제어점x, 제어점y, 제어점x2, 제어점y2, 종료점x, 종료점y)
+
+###
+
+- ExtrudeGeometry (평면 shape에 깊이갚을 부여 + mesh의 윗면과 아랫면을 비스듬하게 처리 === 베벨링)
+- TextGeometry [ExtrudeGeometry의 파생클래스]
+- LatheGeometry (선을 y축 회전하여 얻어지는 3차원 mesh)
+  - LatheGeometry(path, 분할수(12), 시작각(0), 연장각(2PI))
 - ParametricGeometry (수학적 함수식에 2개의 값을 입력하여 얻을 수 있는 좌표로 구성)
-- TubeGeometry
+- TubeGeometry (튜브형태로 곡선 구성)
+  - TubeGeometry(path, 튜브의 진행방향 분할 수/충(64), 튜브의 원통 반지름(1), 원통 분할 수(8)), 원통 닫을지 여부(false)
 - EdgesGeometry (기하학을 구성하는 인접면의 각도에 따라 기하학을 재구성)
-- ShapeGeometry
+- ShapeGeometry (평면 도형 구성)
 - WireframeGeometry (외각선 추가)
 
 - PolyhedronGeometry

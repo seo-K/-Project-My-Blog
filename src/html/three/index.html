@@ -77,7 +77,7 @@
     // scene.fog = new THREE.Fog(0x111111, 150, 200);
 
     const WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
-    const camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);  // ( field of view [표시되는 장면의 범위 n도/단위], 화면 비율,  가깝고 먼 정도 near/far , 깊이 );
+    const camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);  // ( field of view [표시되는 장면의 범위 n도/단위], 화면 비율, 눈앞 10cm 부터, 1000m까지 );
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(500, 500); // 렌더링 할 크기 (window.innerWidth, window.innerHeight)
