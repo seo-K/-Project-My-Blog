@@ -245,11 +245,11 @@ class App {
         height: 1, // 깊이값 / 앞뒤 두께 (50)
         curveSegments: 16, // 하나의 커브를 구성하는 정점의 갯수이다.(12)
         // setting for ExtrudeGeometry
-        bevelEnabled: true, // 베벨링 유무 (true)
-        bevelThickness: 1.5, // 베벨링 두께 값(6)
-        bevelSize: 1.7, // shape의 외곽선으로부터 얼마나 멀리 베벨링할건지 (2)
-        bevelOffset: 0, // text 윤곽선 베벨에서 시작하는 거리 * 필수
-        bevelSegments: 15, // 베벨링 단계수(1)
+        bevelEnabled: true, // 베벨링 유무 (false)
+        bevelThickness: 1.5, // 베벨링 두께 값(10)
+        bevelSize: 1.7, // shape의 외곽선으로부터 얼마나 멀리 베벨링할건지 (5)
+        bevelOffset: 0, // text 윤곽선 베벨에서 시작하는 거리 * 필수 (0)
+        bevelSegments: 0, // 베벨링 단계수(3)
       });
 
       geometry.center();
@@ -262,7 +262,7 @@ class App {
 
       const group = new THREE.Group();
       group.add(cube);
-      // group.add(line);
+      group.add(line);
 
       that._scene.add(group);
       that._cube = group;

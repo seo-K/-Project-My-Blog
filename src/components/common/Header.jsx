@@ -1,6 +1,5 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Map from "./Map";
 
 // image
 import UserImg from "../../assets/images/mock/user.jpg";
@@ -49,9 +48,7 @@ export default function Header() {
             Mypage
           </NavLink>
         </nav>
-        <div className="user-area">
-          <Map />
-        </div>
+        <div className="aaa">&copy;seoYeong</div>
       </div>
     </Container>
   );
@@ -60,7 +57,8 @@ export default function Header() {
 const Container = styled.header`
   flex-shrink: 0;
   width: 25%;
-  max-width: 15rem;
+  min-width: 15rem;
+  max-width: 20rem;
   height: 100vh;
 
   display: flex;
@@ -81,8 +79,8 @@ const Container = styled.header`
       text-align: center;
 
       img {
-        width: 7rem;
-        height: 7rem;
+        width: 10rem;
+        height: 10rem;
 
         background-color: var(--mainYellow);
 
@@ -92,6 +90,7 @@ const Container = styled.header`
       }
 
       figcaption {
+        font-size: 1rem;
         font-weight: bold;
       }
 
@@ -106,11 +105,15 @@ const Container = styled.header`
         align-items: center;
         text-align: center;
 
+        font-size: 1.2rem;
         color: var(--darkGray);
 
         padding: 1rem;
 
         .icon-wrap {
+          display: flex;
+          align-items: center;
+
           flex-shrink: 0;
           width: 1.5rem;
           height: 1.5rem;
@@ -143,16 +146,10 @@ const Container = styled.header`
       }
     }
 
-    .user-area {
-      width: 100%;
-      aspect-ratio: 1/1;
+    .aaa {
+      text-align: center;
 
       margin-top: auto;
-      padding: 0.5rem;
-      background-color: var(--gray);
-
-      border-radius: 10px;
-      overflow: hidden;
     }
   }
 `;

@@ -32,10 +32,14 @@ export default function DefaultPage() {
 
 const Container = styled.div`
   display: flex;
-  min-height: 100%;
+  height: 100vh;
 
   main {
+    display: flex;
+    flex-direction: column;
+
     flex: 1;
+    height: calc(100vh - 2rem);
 
     background-color: var(--gray);
     border-radius: 20px;
@@ -47,12 +51,13 @@ const Container = styled.div`
       display: flex;
       align-items: center;
 
-      width: 100%;
+      width: 25rem;
+      max-width: 100%;
 
       border-radius: 50px;
       border: 1px solid var(--darkGray);
 
-      padding: 0.5rem 1rem;
+      padding: 0 1rem;
       margin-bottom: 2rem;
 
       .icon-wrap {
@@ -60,6 +65,12 @@ const Container = styled.div`
         height: 1.5rem;
 
         margin-right: 0.5rem;
+      }
+
+      input {
+        width: calc(100% - 2rem);
+
+        padding: 0.5rem 0;
       }
     }
   }

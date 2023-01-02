@@ -6,6 +6,8 @@
   --gray: #f6f6f6;
   --darkGray: #a5a5a5;
   --beige: #e2decd;
+  --white: #fff;
+  --mainGreen: #00565b;
   /* --darkGray: #929292; */
 }
 
@@ -15,74 +17,139 @@
 
 @font-face {
   font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-Black.woff") format("woff");
+  src: local("Pretendard"), url("./assets/fonts/pretendard/Pretendard-Black.woff") format("woff");
+  font-weight: 900;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"),
+    url("./assets/fonts/pretendard/Pretendard-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"), url("./assets/fonts/pretendard/Pretendard-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"), url("./assets/fonts/pretendard/Pretendard-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"), url("./assets/fonts/pretendard/Pretendard-Medium.woff") format("woff");
+  font-weight: 500;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"), url("./assets/fonts/pretendard/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"),
+    url("./assets/fonts/pretendard/Pretendard-ExtraLight.woff") format("woff");
+  font-weight: 300;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"), url("./assets/fonts/pretendard/Pretendard-Light.woff") format("woff");
+  font-weight: 200;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Pre";
+  src: local("Pretendard"), url("./assets/fonts/pretendard/Pretendard-Thin.woff") format("woff");
+  font-weight: 100;
+  font-display: fallback;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-Black.ttf") format("truetype");
   font-weight: 900;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-ExtraBold.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-Bold.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-Bold.ttf") format("truetype");
   font-weight: 700;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-SemiBold.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-Medium.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-Medium.ttf") format("truetype");
   font-weight: 500;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-Regular.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-Regular.ttf") format("truetype");
   font-weight: 400;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-ExtraLight.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-ExtraLight.ttf") format("truetype");
   font-weight: 300;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-Light.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-Light.ttf") format("truetype");
   font-weight: 200;
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("./assets/fonts/Pretendard-Thin.woff") format("woff");
+  font-family: "Poppins";
+  src: local("Poppins"), url("./assets/fonts/poppins/Poppins-Thin.ttf") format("truetype");
   font-weight: 100;
   font-display: fallback;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  vertical-align: middle;
-  box-sizing: border-box;
 }
 
 * {
@@ -368,13 +435,11 @@ body {
   letter-spacing: normal;
   -webkit-tap-highlight-color: transparent;
 
+  font: 400 62.5%/1.2 "Poppins", "Pre", sans-serif;
+
   background-color: var(--white);
   color: var(--black);
   scroll-behavior: smooth;
-}
-
-body {
-  font: 400 1rem/1.2 "Pre", sans-serif;
 }
 
 input,

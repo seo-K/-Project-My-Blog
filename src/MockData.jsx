@@ -9,8 +9,8 @@ const PostData = [
     id: 0,
     category: "javascript",
     postImg: PostImg01,
-    title: "블로그01",
-    desc: "[Description] 설명이 들어가는 장소입니다.",
+    title: "블로그01블로그01블로그01블로그01",
+    desc: "[Description] 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다.",
     like: "9,900,000",
     comment: [
       {
@@ -21,7 +21,6 @@ const PostData = [
   {
     id: 1,
     category: "react",
-    postImg: PostImg02,
     title: "블로그01",
     desc: "[Description] 설명이 들어가는 장소입니다.",
     like: "9,900,000",
@@ -45,7 +44,6 @@ const PostData = [
   {
     id: 4,
     category: "swiper",
-    postImg: PostImg02,
     title: "FiA530laments",
     desc: "[Description] 설명이 들어가는 장소입니다.",
     like: "9,900,000",

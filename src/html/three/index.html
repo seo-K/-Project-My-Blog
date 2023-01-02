@@ -54,10 +54,13 @@
       Three js 공부하기
 
       <h2>1. 큐브</h2>
+      <div id="cube-container"></div>
       <h2>2. 드로잉 라인</h2>
-      <h2>3. 텍스트 만들기</h2>
-      <div id="info">
-        <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - simple text from json fonts
+      <div id="draw-container"></div>
+      <h2>3. 구형 만들기</h2>
+      <hr>
+      <div id="circle-container">
+        <!-- <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - simple text from json fonts -->
       </div>
 
     </main>
@@ -65,23 +68,29 @@
   </div>
 
   <!-- JS -->
-  <script src="./js/100vh.js"></script>
-  <script src="./js/custom.js"></script>
-  <!-- <script src="./js/console.js"></script> -->
-  <script src="./js/three.js"></script>
-  <!-- 1. 큐브 -->
+  <script src="js/three.js"></script>
+  <script type="importmap">
+    {
+        "imports": {
+            "three": "./build/three.module.js"
+        }
+    }
+  </script>
+
+  <!-------------------- 1. 큐브 -------------------->
   <script>
     // 1.  장면, 카메라, 렌더러 설정
+    const cubeContainer = document.querySelector("#cube-container");
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x333333); // background
-    // scene.fog = new THREE.Fog(0x111111, 150, 200);
+    // scene.fog = new THREE.Fog(0xffff00, 150, 200);
 
     const WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
     const camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);  // ( field of view [표시되는 장면의 범위 n도/단위], 화면 비율, 눈앞 10cm 부터, 1000m까지 );
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(500, 500); // 렌더링 할 크기 (window.innerWidth, window.innerHeight)
-    document.body.appendChild(renderer.domElement);
+    cubeContainer.appendChild(renderer.domElement);
 
     // 2. 큐브만들기
     const geometry = new THREE.BoxGeometry(1, 1, 1); // 큐브의 점, 채우기
@@ -143,6 +152,7 @@
   <!-------------------- 2. 드로잉 라인 -------------------------->
   <script>
     // 1.  장면, 카메라, 렌더러 설정
+    const drawContainer = document.querySelector("#draw-container")
     const drawScene = new THREE.Scene();
     const drawCamera = new THREE.PerspectiveCamera(45, 1 / 1, 1, 500);
     drawCamera.position.set(0, 0, 100);
@@ -150,7 +160,7 @@
 
     const drawRenderer = new THREE.WebGLRenderer();
     drawRenderer.setSize(500, 500);
-    document.body.appendChild(drawRenderer.domElement);
+    drawContainer.appendChild(drawRenderer.domElement);
 
     // 2. 드로잉 라인
     const points = [];
@@ -179,10 +189,10 @@
     // 3. scene 렌더링
     drawScene.add(line);
     drawRenderer.render(drawScene, drawCamera);
-  </script>
+  </script> -->
 
   <!-------------------- 3. 곡선 -------------------------->
-  <script>
+  <!-- <script>
     const curveScene = new THREE.Scene();
     const curveCamera = new THREE.PerspectiveCamera(45, 1 / 1, 1, 500);
     const curveRenderer = new THREE.WebGLRenderer();
@@ -212,30 +222,101 @@
 
     const curveMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
     const curveObject = new THREE.Line(curveGeometry, curveMaterial);
-    scene.add(curveObject);
+    curveScene.add(curveObject);
 
     curveRenderer.render(curveScene, curveCamera)
 
+  </script>-->
+
+  <!-- ------------------ 4. 구형 ------------------------ -->
+  <script type="module">
+    import { OrbitControls } from "./examples/jsm/controls/OrbitControls.js";
+    const divContainer = document.querySelector("#circle-container");
+    const circleScene = new THREE.Scene();
+    circleScene.background = new THREE.Color(0x333333);
+    const circleCamera = new THREE.PerspectiveCamera(45, 1 / 1, 1, 500);
+    circleCamera.position.z = 15;
+    const circleRenderer = new THREE.WebGLRenderer({ antialias: true });
+    circleRenderer.setSize(500, 500);
+    divContainer.appendChild(circleRenderer.domElement);
+
+    // 마우스 컨트롤
+    const controls = new OrbitControls(circleCamera, divContainer);
+
+    const sphereGeometry = new THREE.SphereGeometry(1.2, 32, 12, 0, Math.PI, 0, Math.PI / 2); // [반지름(1)], 수평방향 분할 수 = 값이 클수록 완전한 형태의 원형(32), 수직방향 분할 수(16) , 수평방향 시작각(0), 수평방향 연장각(2PI), 수직방향 시작각(0), 수직방향 연장각(PI)
+    const fillMaterial = new THREE.MeshPhongMaterial({ color: 0x44a88 }); // 재질
+    const sphere = new THREE.Mesh(sphereGeometry, fillMaterial);
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffff00 });
+    const sphereLine = new THREE.LineSegments(
+      new THREE.WireframeGeometry(sphereGeometry),
+      lineMaterial,
+    );
+
+    const sphereGroup = new THREE.Group();
+    sphereGroup.add(sphere);
+    sphereGroup.add(sphereLine);
+    circleScene.add(sphereGroup);
+
+    circleRenderer.render(circleScene, circleCamera);
+
+    // 마우스 컨트롤
+    function update(time) {
+      time *= 0.001;
+    }
+    function animate() {
+      requestAnimationFrame(animate);
+      // required if controls.enableDamping or controls.autoRotate are set to true
+      controls.update();
+      circleRenderer.render(circleScene, circleCamera);
+    }
+    animate()
   </script>
+  <!-- <script type="module">
+    import { FontLoader } from "./examples/jsm/loaders/FontLoader.js";
+    import { TextGeometry } from "./examples/jsm/geometries/TextGeometry.js";
+    import { OrbitControls } from "./examples/jsm/controls/OrbitControls.js";
+    const divContainer = document.querySelector("#text-container");
+    const textScene = new THREE.Scene();
+    textScene.background = new THREE.Color(0x333333);
+    const textCamera = new THREE.PerspectiveCamera(45, 1 / 1, 1, 500);
+    textCamera.position.z = 15;
+    const textRenderer = new THREE.WebGLRenderer({ antialias: true });
+    textRenderer.setSize(500, 500);
+    divContainer.appendChild(textRenderer.domElement);
 
-  <!-------------------- 4. 텍스트 -------------------------->
-  <!-- <script>
+    // new OrbitControls(textCamera, divContainer);
+
     const loader = new FontLoader();
-
-    loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
-
-      const geometry = new TextGeometry('Hello three.js!', {
+    loader.load("./css/fonts/East Sea Dokdo_Regular.json", (font) => {
+      const geometry = new TextGeometry("대한민국\nKorea #1", {
         font: font,
-        size: 80,
-        height: 5,
+        size: 10,
+        height: 1.5,
         curveSegments: 12,
         bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 8,
-        bevelOffset: 0,
-        bevelSegments: 5
+        bevelThickness: 0.03,
+        bevelSize: 0.03,
+        bevelOffset: 0.005,
+        bevelSegments: 24,
       });
+
+      geometry.center();
+
+      const material = new THREE.MeshPhongMaterial({ color: "#689F38" });
+      const mesh = new THREE.Mesh(geometry, material);
+
+      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffff00 });
+      const line = new THREE.LineSegments(new THREE.WireframeGeometry(geometry), lineMaterial);
+
+      const group = new THREE.Group();
+      group.add(mesh);
+      group.add(line);
+
+      textScene.add(group);
+      console.log(group)
     });
+
+    textRenderer.render(textScene, textCamera);
   </script> -->
 </body>
 

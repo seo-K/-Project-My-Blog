@@ -1,6 +1,7 @@
 # Three js
 
 ![alt text](./image/three.png)
+![alt text](./image/three3.png)
 
 - Renderer - Scene(장면) - Light (광원)
 -                        ㄴMesh (Object3D) - Geometry (형상 정의)
@@ -63,3 +64,17 @@
 - 정점 색상(Vertex Color)
 - 텍스트 멥핑을 위한 UV 좌표
 - 사용자 정의 데이터
+
+# Object3D
+
+- Mesh (3각형 면)
+- Line (선)
+- Points (점)
+
+## 속성
+
+![alt text](./image/three4.png)
+
+- position (x, y, z) 기본값 0
+- rotation (x, y, z 의 회전값) 기본값 0
+- scale (x, y, z 의 scale) 기본값 1
