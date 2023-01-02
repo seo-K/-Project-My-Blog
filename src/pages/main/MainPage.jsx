@@ -43,7 +43,11 @@ export default function MainPage() {
       </section>
       <section className="git-article">
         <h3 className="title">Git Status</h3>
-        <div className="content-wrap"></div>
+        <div className="content-wrap">
+          <div className="git-status-wrap">
+            <img src="https://ghchart.rshah.org/00565b/seo-K" alt="git 잔디 이미지" />
+          </div>
+        </div>
       </section>
       <section className="area-article">
         <h3 className="title">Area</h3>
@@ -64,9 +68,7 @@ const Container = styled.div`
   gap: 1rem;
 
   grid-template-columns: repeat(3, 1fr);
-  /* grid-template-rows: minmax(40%, auto); */
-  /* grid-template-rows: repeat(auto, 2); */
-  grid-template-rows: repeat(2, minmax(40vh, auto));
+  grid-template-rows: repeat(2, minmax(40rem, auto));
   grid-template-areas:
     "dashboard post post"
     "git git area";
@@ -104,6 +106,32 @@ const Container = styled.div`
             margin-top: 0.8rem;
           }
         }
+
+        &:after {
+          position: absolute;
+          bottom: 0.5rem;
+          right: 1.5rem;
+          content: "D";
+
+          font-size: 12rem;
+          font-weight: 800;
+          line-height: 1;
+
+          color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:before {
+          position: absolute;
+          bottom: 0.5rem;
+          right: 0.5rem;
+          content: "a";
+
+          font-size: 6rem;
+          font-weight: 800;
+          line-height: 1;
+
+          color: rgba(255, 255, 255, 0.2);
+        }
       }
     }
 
@@ -126,17 +154,36 @@ const Container = styled.div`
 
     &.git-article {
       grid-area: git;
+
+      background-color: var(--white);
+      border-radius: 10px;
+
+      padding: 1.5rem;
+
+      .content-wrap {
+        .git-status-wrap {
+          width: 100%;
+        }
+      }
     }
 
     &.area-article {
       grid-area: area;
+
+      background-color: var(--white);
+      border-radius: 10px;
+
+      padding: 1.5rem;
+
+      .content-wrap {
+      }
     }
 
     .title {
       font-size: 2.4rem;
       font-weight: 600;
 
-      margin-bottom: 1rem;
+      margin-bottom: 3rem;
     }
   }
 

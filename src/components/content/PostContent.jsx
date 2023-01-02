@@ -52,7 +52,7 @@ const Container = styled(Link)`
     margin: 0 auto;
 
     figure {
-      width: 100%;
+      width: 15rem;
       aspect-ratio: 1 / 1;
 
       margin-bottom: 1.8rem;
@@ -67,8 +67,8 @@ const Container = styled(Link)`
 
           content: "";
 
-          width: calc(100% + 1rem);
-          height: calc(100% + 1rem);
+          width: 100%;
+          height: 100%;
           border-radius: 50px 10px 10px 10px;
 
           background-color: var(--mainYellow);
@@ -77,8 +77,8 @@ const Container = styled(Link)`
 
         &:before {
           position: absolute;
-          bottom: -0.8rem;
-          right: -0.8rem;
+          bottom: -0.5rem;
+          right: -0.5rem;
 
           content: "";
 

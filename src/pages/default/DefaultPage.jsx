@@ -18,13 +18,15 @@ export default function DefaultPage() {
     <Container>
       <Header />
       <main>
-        <div className="search-wrap">
-          <button type="submit" className="icon-wrap">
-            <img src={SearchSvg} alt="검색" />
-          </button>
-          <input type="search" placeholder="검색어를 입력해주세요." />
+        <div className="main-wrap">
+          <div className="search-wrap">
+            <button type="submit" className="icon-wrap">
+              <img src={SearchSvg} alt="검색" />
+            </button>
+            <input type="search" placeholder="검색어를 입력해주세요." />
+          </div>
+          <Outlet />
         </div>
-        <Outlet />
       </main>
     </Container>
   );
@@ -41,11 +43,19 @@ const Container = styled.div`
     flex: 1;
     height: calc(100vh - 2rem);
 
-    background-color: var(--gray);
-    border-radius: 20px;
-
-    padding: 1rem 1.5rem;
     margin: 1rem;
+
+    background-color: var(--white);
+
+    .main-wrap {
+      max-width: 150rem;
+
+      background-color: var(--gray);
+      border-radius: 10px;
+
+      padding: 1rem 1.5rem;
+      margin: 0 auto;
+    }
 
     .search-wrap {
       display: flex;
