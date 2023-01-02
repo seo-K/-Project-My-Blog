@@ -48,6 +48,7 @@ const Container = styled.div`
     background-color: var(--white);
 
     .main-wrap {
+      width: 100%;
       max-width: 150rem;
 
       background-color: var(--gray);

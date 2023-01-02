@@ -7,10 +7,10 @@ import ImgIcon from "../../assets/images/icon/image.svg";
 import ReadMoreIcon from "../../assets/images/icon/more.svg";
 
 export default function PostContent({ data }) {
-  const { postImg, category, title, desc } = data || {};
+  const { id, postImg, category, title, desc } = data || {};
 
   return (
-    <Container to="/">
+    <Container to="/post/:id">
       <div className="post-content-wrap">
         {postImg ? (
           <figure>
