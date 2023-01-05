@@ -31,8 +31,7 @@ export default function MainPage() {
       <section className="post-article">
         <h3 className="title">Post</h3>
         <ul className="content-wrap">
-          {PostData?.filter((item, index) => index < 3).map((list, index) => {
-            console.log(list);
+          {PostData?.filter((item, index) => index < 3).map((list) => {
             return (
               <li key={"postList" + list.id}>
                 <PostContent data={list} />
@@ -68,7 +67,11 @@ const Container = styled.div`
   gap: 1rem;
 
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, minmax(40rem, auto));
+  /* grid-auto-rows: minmax(37rem, auto); */
+  /* grid-template-rows: auto; */
+  /* grid-template-rows: revert; */
+  /* grid-template-rows: repeat(2, auto); */
+  /* grid-template-rows: repeat(2, minmax(40rem, auto)); */
   grid-template-areas:
     "dashboard post post"
     "git git area";
@@ -140,11 +143,11 @@ const Container = styled.div`
 
       .content-wrap {
         display: flex;
-        gap: 3rem;
+        gap: 2%;
 
         > li {
           flex: 1;
-          height: 35rem;
+          min-height: 35rem;
 
           border-radius: 50px 10px 10px 10px;
           background-color: var(--white);
@@ -190,8 +193,9 @@ const Container = styled.div`
   /* map */
   .map-area {
     position: relative;
-    width: 300px;
-    aspect-ratio: 1/1;
+    width: 100%;
+    /* aspect-ratio: 1/1; */
+    height: 20rem;
 
     margin-top: auto;
 

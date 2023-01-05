@@ -52,7 +52,7 @@ const Container = styled(Link)`
     margin: 0 auto;
 
     figure {
-      width: 15rem;
+      width: 100%;
       aspect-ratio: 1 / 1;
 
       margin-bottom: 1.8rem;
@@ -132,8 +132,6 @@ const Container = styled(Link)`
     }
 
     .desc {
-      margin-bottom: 4rem;
-
       /* 두줄처리 */
       text-overflow: ellipsis;
       overflow: hidden;

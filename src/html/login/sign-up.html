@@ -69,20 +69,16 @@
               <div class="input-wrap">
                 <label for="phoneNumber">Phone number</label>
                 <div class="phone-wrap">
-                  <input id="phoneNumber" type="tel" maxlength="20" name="phoneNumber" data-name="phoneNumber"
+                  <input id="phoneNumber1" type="tel" maxlength="20" name="phoneNumber1" data-name="phoneNumber1"
                     placeholder="Your phoneNumber" autocomplete="tel" required>
                   <button class="verify-button" type="button">Verify</button>
                 </div>
                 <div class="phone-wrap">
-                  <input id="phoneNumber" type="tel" maxlength="20" name="phoneNumber" data-name="phoneNumber"
-                    placeholder="Your phoneNumber" autocomplete="tel" required>
+                  <input id="Verify" type="text" maxlength="20" name="Verify" data-name="Verify"
+                    placeholder="Verify Number" required>
                 </div>
               </div>
-              <div class="input-wrap">
-                <label for="phoneNumber">Phone number</label>
-                <input id="phoneNumber" type="tel" maxlength="20" name="phoneNumber" data-name="phoneNumber"
-                  placeholder="Your phoneNumber" autocomplete="tel" required>
-              </div>
+
               <div class="input-wrap">
                 <label for="Email">Email</label>
                 <input id="Email" type="email" maxlength="50" name="Email" data-name="Email"
@@ -98,12 +94,12 @@
                 <input id="Password2" type="password" minlength="6" maxlength="18" name="Password2"
                   data-name="Password2" placeholder="Confirm Password" autocomplete="off" required>
               </div>
+              <button class="submit-button sign-up-button" type="submit">Sign Up</button>
+              <p class="util-text">
+                Already have any account?<button onClick="location.href='sign-up.html'">Sign In</button>
+              </p>
             </fieldset>
           </form>
-          <button class="submit-button" type="submit">Sign Up</button>
-          <p class="util-text">
-            Already have any account?<button onClick="location.href='sign-up.html'">Sign In</button>
-          </p>
         </div>
       </div>
     </main>
@@ -111,8 +107,7 @@
 
   <!-- JS -->
   <script src="./js/jquery-3.5.1.js"></script>
-  <script src="./js/100vh.js"></script>
-  <script src="./js/custom.js"></script>
+  <script src="./js/custom.js" type="module" defer></script>
 </body>
 
 </html>
