@@ -9,82 +9,6 @@
   /* --darkGray: #929292; */
 }
 
-/* :root[color-theme="dark"] {
-  --mainYellow: #e5f33c;
-} */
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-Black.woff") format("woff");
-  font-weight: 900;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-ExtraBold.woff") format("woff");
-  font-weight: 800;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-Bold.woff") format("woff");
-  font-weight: 700;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-SemiBold.woff") format("woff");
-  font-weight: 600;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-Medium.woff") format("woff");
-  font-weight: 500;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-Regular.woff") format("woff");
-  font-weight: 400;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-ExtraLight.woff") format("woff");
-  font-weight: 300;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-Light.woff") format("woff");
-  font-weight: 200;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Pre";
-  src: local("Pretendard"), url("../../../assets/fonts/Pretendard-Thin.woff") format("woff");
-  font-weight: 100;
-  font-display: fallback;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  vertical-align: middle;
-  box-sizing: border-box;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -374,14 +298,13 @@ body {
 }
 
 body {
-  font: 400 1rem/1.2 "Pre", sans-serif;
+  font: 400 1rem/1.2;
 }
 
 input,
 select,
 textarea,
 button {
-  font-family: "Pre", sans-serif;
   font-size: 100%;
   font-weight: normal;
   letter-spacing: normal;

@@ -5,15 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Basic</title>
 </head>
 
 <!-- CSS -->
 <link rel="stylesheet" href="css/reset.css" />
-<link rel="stylesheet" href="css/common.css" />
 <link rel="stylesheet" href="css/style.css" />
 <!-- https://www.youtube.com/watch?v=nKK7L6QLjkg&list=PLe6NQuuFBu7HqxY10b6gNu6iisT2-rZv-&index=6 -->
-<!-- JS -->
 <!-- JS -->
 <script type="importmap">
   {
@@ -24,12 +22,12 @@
 </script>
 <script type="module" src="./js/basic.js" defer></script>
 <script type="module" src="./js/geometry.js" defer></script>
-<!-- <script type="module" src="./js/geometry2.js" defer></script> -->
 <script type="module" src="./js/geometryShape.js" defer></script>
+<script type="module" src="./js/sceneGraph.js" defer></script>
 
 <style>
   div {
-    width: 100vw;
+    width: 80vw;
     aspect-ratio: 1/1;
     margin-bottom: 1rem;
   }
@@ -37,11 +35,14 @@
 
 <body>
   <h2>1. 기본</h2>
-  <div id="webgl-container"></div>
+  <div id="cube-container"></div>
   <h2>2. geometry</h2>
   <div id="geometry-container"></div>
+  <div id="geometry2-container"></div>
   <h2>3. geometry Shape</h2>
   <div id="geometry-shape-container"></div>
+  <h2>3. scene Graph</h2>
+  <div id="scene-graph-container"></div>
 </body>
 
 </html>

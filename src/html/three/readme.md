@@ -78,3 +78,44 @@
 - position (x, y, z) 기본값 0
 - rotation (x, y, z 의 회전값) 기본값 0
 - scale (x, y, z 의 scale) 기본값 1
+
+# secen graph
+
+![alt text](./image/three5.png)
+
+1. 태양 객체 생성
+
+- 크기 지정 및 재질 추가
+
+2. 지구 추가
+
+- 지구 객체 생성
+- 태양의 자식으로 지구를 추가하는 코드 추가
+- 지구에대한 재질 추가
+
+3. 달 추가
+
+- 달 객체 생성
+- 지구의 자식으로 달을 추가하는 코드 추가
+- 달에대한 재질 추가
+
+4. 자전과 공전을 위해 메서드를 따로 불러오고 update 에 해당 y축 회전 값 추가
+
+# Material
+
+![alt text](./image/three6.png)
+
+- PointMaterial (point 타입 object3D 객체를 위한 재질)
+  - LineBasicMaterial (Line 타입 object3D 객체를 위한 재질)
+  - LineDashedMaterial
+
+## Mesh 타입 Object3D 객체를 위한 재질
+
+- MeshBasicMaterial
+- MeshLambertMaterial
+- MeshPhongMaterial
+- MeshStandardMaterial
+  - MeshPhysicalMaterial
+- MeshDepthMaterial
+- MeshNormalMaterial
+- MeshToonMaterial

@@ -5,7 +5,7 @@ import * as THREE from "../build/three.module.js";
 
 class App {
   constructor() {
-    const divContainer = document.querySelector("#webgl-container");
+    const divContainer = document.querySelector("#cube-container");
     this._divContainer = divContainer; // field로 정의. (다른 method 에서 참조할 수 있도록)
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -79,6 +79,8 @@ class App {
   }
 }
 
-window.onload = function () {
-  new App();
-};
+// window.onload = function () {
+//   new App();
+// };
+
+new App();

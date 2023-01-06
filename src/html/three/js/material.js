@@ -1,8 +1,10 @@
 import * as THREE from "../build/three.module.js";
-import { OrbitControls } from "../examples/jsm/controls/OrbitControls.js";
-class App {
+// "_"로 사용되는 이름 : App클래스 내부에서만 사용되는 private field, private method
+// ㄴ App 바깥에서는 얘네를 부르면 아니되옴.
+
+class App5 {
   constructor() {
-    const divContainer = document.querySelector("#geometry-shape-container");
+    const divContainer = document.querySelector("#scene-graph-container");
     this._divContainer = divContainer;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -16,7 +18,6 @@ class App {
     this._setupCamera();
     this._setupLight();
     this._setupModel();
-    this._setupControls();
 
     window.onresize = this.resize.bind(this);
     this.resize();
@@ -24,15 +25,12 @@ class App {
     requestAnimationFrame(this.render.bind(this));
   }
 
-  _setupModel() {}
-
   _setupCamera() {
     const width = this._divContainer.clientWidth;
     const height = this._divContainer.clientHeight;
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
 
-    camera.position.x = -15;
-    camera.position.z = 15;
+    camera.position.z = 25;
     this._camera = camera;
   }
 
@@ -44,9 +42,7 @@ class App {
     this._scene.add(light);
   }
 
-  _setupControls() {
-    new OrbitControls(this._camera, this._divContainer);
-  }
+  _setupModel() {} // _setupModal
 
   // resize
   resize() {
@@ -67,11 +63,13 @@ class App {
 
   update(time) {
     time *= 0.001; // 상단에서 전달받은 time에 0.001을 곱해 milli-second 단위를 second 단위로 변환
-    // this._cube.rotation.x = time;
-    // this._cube.rotation.y = time;
+    this._solarSystem.rotation.y = time / 2;
+    // this._earthOrbit.rotation.y = time * 2;
+    this._moonOrbit.rotation.y = time * 5;
   }
 }
 
-window.onload = function () {
-  new App();
-};
+new App5();
+// window.onload = function () {
+//   new App5();
+// };

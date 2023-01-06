@@ -2,7 +2,7 @@ import * as THREE from "../build/three.module.js";
 import { OrbitControls } from "../examples/jsm/controls/OrbitControls.js";
 import { FontLoader } from "../examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "../examples/jsm/geometries/TextGeometry.js";
-class App {
+class App4 {
   constructor() {
     const divContainer = document.querySelector("#geometry-shape-container");
     this._divContainer = divContainer;
@@ -241,15 +241,15 @@ class App {
 
       const geometry = new TextGeometry("Apple", {
         font: font, // fontLoader를 통해서 얻어온 객체
-        size: 5, // text mesh size (100)
-        height: 1, // 깊이값 / 앞뒤 두께 (50)
+        size: 10, // text mesh size (100)
+        height: 3, // 깊이값 / 앞뒤 두께 (50)
         curveSegments: 16, // 하나의 커브를 구성하는 정점의 갯수이다.(12)
         // setting for ExtrudeGeometry
         bevelEnabled: true, // 베벨링 유무 (false)
         bevelThickness: 1.5, // 베벨링 두께 값(10)
-        bevelSize: 1.7, // shape의 외곽선으로부터 얼마나 멀리 베벨링할건지 (5)
+        bevelSize: 2.7, // shape의 외곽선으로부터 얼마나 멀리 베벨링할건지 (5)
         bevelOffset: 0, // text 윤곽선 베벨에서 시작하는 거리 * 필수 (0)
-        bevelSegments: 0, // 베벨링 단계수(3)
+        bevelSegments: 0.5, // 베벨링 단계수(3)
       });
 
       geometry.center();
@@ -339,6 +339,7 @@ class App {
   }
 }
 
-window.onload = function () {
-  new App();
-};
+new App4();
+// window.onload = function () {
+//   new App4();
+// };
