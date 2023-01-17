@@ -5,9 +5,6 @@ import Map from "../../components/common/Map";
 import PostContent from "../../components/content/PostContent";
 
 // image
-import UserImg from "../../assets/images/mock/user.jpg";
-import PictureSvg from "../../assets/images/icon/picture.svg";
-import HomeSvg from "../../assets/images/icon/home.svg";
 import { PostData } from "../../MockData";
 
 export default function MainPage() {

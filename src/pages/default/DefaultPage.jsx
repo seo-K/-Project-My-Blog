@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
 
-// image
+// img
 import SearchSvg from "../../assets/images/icon/search.svg";
 
 export default function DefaultPage() {

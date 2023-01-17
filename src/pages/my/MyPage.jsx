@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-// image
-import UserImg from "../../assets/images/mock/user.jpg";
-import PictureSvg from "../../assets/images/icon/picture.svg";
-import HomeSvg from "../../assets/images/icon/home.svg";
-
 export default function MyPage() {
   const navigate = useNavigate();
   // const goWhere = () => {

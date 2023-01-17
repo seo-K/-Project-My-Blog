@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // img
-import ImgIcon from "../../assets/images/icon/image.svg";
-import ReadMoreIcon from "../../assets/images/icon/more.svg";
+import ImgSvg from "../../assets/images/icon/image.svg";
 
 export default function PostContent({ data }) {
   const { id, postImg, category, title, desc } = data || {};
@@ -18,7 +17,7 @@ export default function PostContent({ data }) {
           </figure>
         ) : (
           <figure className="empty-img-wrap">
-            <img src={ImgIcon} alt="포스트 이미지가 없습니다." />
+            <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
           </figure>
         )}
         <h4 className="post-title">
@@ -31,7 +30,7 @@ export default function PostContent({ data }) {
       {/* <button className="read-more-button">
         <span>Read More</span>
         <span className="read-more-icon">
-          <img src={ReadMoreIcon} alt="더보기" />
+          <img src="assets/images/icon/more.svg" alt="더보기" />
         </span>
       </button> */}
     </Container>

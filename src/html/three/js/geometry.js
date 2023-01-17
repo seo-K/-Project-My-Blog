@@ -300,7 +300,7 @@ class App3 {
 
     // 그룹으로 묶기
     const group = new THREE.Group();
-    group.add(cube);
+    // group.add(cube);
     group.add(line);
 
     this._scene.add(group);

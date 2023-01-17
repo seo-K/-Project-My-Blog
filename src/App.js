@@ -7,6 +7,7 @@ import MainPage from "./pages/main/MainPage";
 import PostPage from "./pages/post/PostPage";
 import PostViewPage from "./pages/post/PostViewPage";
 import MyPage from "./pages/my/MyPage";
+import PortfolioPage from "./pages/portfolio/PortfolioPage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="post/:postId" element={<PostViewPage />} />
         <Route path="mypage" element={<MyPage />} />
       </Route>
+      <Route path="/portfolio" element={<PortfolioPage />} />
       {/* <Route path="/post" element={<MainPage />} /> */}
     </Routes>
   );

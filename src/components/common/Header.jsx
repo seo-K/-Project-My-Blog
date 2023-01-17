@@ -1,9 +1,8 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-// image
-import UserImg from "../../assets/images/mock/user.jpg";
-import PictureSvg from "../../assets/images/icon/picture.svg";
+// img
+import UserJpg from "../../assets/images/mock/user.jpg";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ export default function Header() {
       </div>
       <div className="content-wrap">
         <figure className="user-img-wrap">
-          <img src={UserImg} alt="프로필 사진" />
+          <img src={UserJpg} alt="프로필 사진" />
           {/* <img src={PictureSvg} alt="프로필 사진" /> */}
           <figcaption>user Name</figcaption>
         </figure>
