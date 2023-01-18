@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/lazy";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { Pagination, Navigation } from "swiper";
+import { Lazy, Pagination, Navigation } from "swiper";
 
 // image
 import NaverSvg from "../../assets/images/portfolio/naver.svg";
@@ -17,8 +18,16 @@ import CodePenSvg from "../../assets/images/portfolio/codepen.svg";
 
 import NoiseBg from "../../assets/images/portfolio/noise_bg.png";
 import TextureJpg from "../../assets/images/portfolio/texture_bg.jpg";
-import ArrowSvg from "../../assets/images/portfolio/icon_arrow.svg";
 
+// icon
+import LogoSvg from "../../assets/images/portfolio/logo.svg";
+import ArrowSvg from "../../assets/images/portfolio/icon_arrow.svg";
+import LinkSvg from "../../assets/images/portfolio/link.svg";
+import StarSvg from "../../assets/images/portfolio/star.svg";
+import MsgrSvg from "../../assets/images/portfolio/msg.svg";
+import SettingSvg from "../../assets/images/portfolio/settings.svg";
+
+// slider
 import CoolWhiteSlide from "../../assets/images/portfolio/slide/coolwhite.png";
 import DuruperSlide from "../../assets/images/portfolio/slide/duruper.png";
 import FoodyitdaSlide from "../../assets/images/portfolio/slide/foodyitda.png";
@@ -90,14 +99,15 @@ export default function PortfolioPage() {
     YoliSlide,
   ];
 
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+  // SWIPER SETTING
+  const navigationPrevRef = useRef(null);
+  const navigationNextRef = useRef(null);
 
   function List({ data }) {
     const { logoImg, alt, link, text } = data;
 
     return (
-      <ListContent className="sns-list dot-bg">
+      <ListContent>
         <Link to={link}>
           <div className="sns-icon-wrap">
             <img src={logoImg} alt={alt} />
@@ -112,6 +122,7 @@ export default function PortfolioPage() {
     <Container>
       <div className="inner">
         <main>
+          {/* ASIDE */}
           <aside className="aside">
             <hgroup className="aside-title">
               <h1>PORTFOLIO</h1>
@@ -135,7 +146,7 @@ export default function PortfolioPage() {
                 </output>
               </div>
               <article className="aside-custom-wrap">
-                <h2>Custom List</h2>
+                <SubTitle>Custom List</SubTitle>
                 <ul className="custom">
                   <li className="custom-list">
                     <input id="darkMode" type="checkbox" />
@@ -171,6 +182,7 @@ export default function PortfolioPage() {
               </article>
             </div>
           </aside>
+          {/* MID-CONTAINER */}
           <div className="mid-container">
             <section className="sns">
               <h2 className="blind">sns 리스트</h2>
@@ -182,43 +194,45 @@ export default function PortfolioPage() {
             </section>
             <section className="portfolio">
               <div className="portfolio-top-title">
-                <SubTitle>PORTFOLIO</SubTitle>
+                <SubTitle>Project</SubTitle>
                 <div className="swiper-button-wrap">
-                  <button type="button" ref={prevRef}>
-                    <img src={ArrowSvg} alt="" />
+                  <button type="button" ref={navigationPrevRef}>
+                    <img src={ArrowSvg} alt="이전 슬라이드 보기" />
                   </button>
-                  <button type="button" ref={nextRef}>
-                    <img src={ArrowSvg} alt="" />
+                  <button type="button" ref={navigationNextRef}>
+                    <img src={ArrowSvg} alt="다음 슬라이드 보기" />
                   </button>
                 </div>
               </div>
               <Swiper
+                className="portfolio-project-swiper"
+                modules={[Lazy, Pagination, Navigation]}
+                lazy={true}
                 pagination={{
                   type: "fraction",
                 }}
-                modules={[Pagination, Navigation]}
-                className="portfolio-project-swiper"
+                spaceBetween={30}
                 navigation={{
-                  prevEl: prevRef.current ? prevRef.current : undefined,
-                  nextEl: nextRef.current ? nextRef.current : undefined,
+                  prevEl: navigationPrevRef.current,
+                  nextEl: navigationNextRef.current,
                 }}
                 onInit={(swiper) => {
-                  swiper.params.navigation.prevEl = prevRef.current;
-                  swiper.params.navigation.nextEl = nextRef.current;
+                  swiper.params.navigation.prevEl = navigationPrevRef.current;
+                  swiper.params.navigation.nextEl = navigationNextRef.current;
+                  swiper.navigation.init();
                   swiper.navigation.update();
                 }}
               >
-                <span slot="container-start">Container Start</span>
                 {portfolioList.map((list, index) => {
                   return (
                     <SwiperSlide key={index}>
-                      <img src={list} alt="" />
-                      <Link to="/" className="project-swiper-link"></Link>
+                      <div className="slide-img-wrap">
+                        <img src={list} alt="" />
+                      </div>
+                      <Link to="/" className="project-link"></Link>
                     </SwiperSlide>
                   );
                 })}
-
-                {/* <SwiperSlide></SwiperSlide> */}
               </Swiper>
             </section>
             <section className="util">
@@ -227,6 +241,7 @@ export default function PortfolioPage() {
               <div className="career dot-bg"></div>
             </section>
           </div>
+          {/* LAST-CONTAINER */}
           <div className="last-container">
             <section className="side-project-section">
               <SubTitle>SIDE-PROJECTS</SubTitle>
@@ -250,6 +265,7 @@ export default function PortfolioPage() {
     </Container>
   );
 }
+
 const backgroundAnimation = keyframes`
 to {
     background-position-x: 100vw;
@@ -269,20 +285,23 @@ const noiseAnimation = keyframes`
   90%{background-position: -40% 40%;}
 `;
 
+const defaultGap = css`
+  gap: 1rem;
+`;
+
 const Container = styled.div`
+  ${defaultGap}
   display: flex;
   align-items: center;
   justify-content: center;
-
-  gap: 1rem;
 
   width: 100%;
   height: 100vh;
 
   /* animation: ${backgroundAnimation} 5s infinite linear; */
-  background-color: #1c1c25;
-  background: linear-gradient(90deg, #0d334b 19px, transparent 1%) center,
-    linear-gradient(#0d334b 19px, transparent 1%) center, #113f5d;
+  background-color: var(--darkBlueGray);
+  background: linear-gradient(90deg, var(--darkBlue) 19px, transparent 1%) center,
+    linear-gradient(var(--darkBlue) 19px, transparent 1%) center, var(--midBlue);
   background-size: 22px 22px;
   /* background-image: radial-gradient(circle at center, #2a2a33 0.4rem, transparent 0),
     radial-gradient(circle at center, #212125 0.4rem, transparent 0);
@@ -294,20 +313,27 @@ const Container = styled.div`
   }
 
   & main {
+    ${defaultGap}
     display: flex;
-    gap: 1rem;
 
     & > * {
       border-radius: 1rem;
+
+      &:not(.aside) {
+        ${defaultGap}
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+      }
     }
 
     & section {
-      background-color: #25252f;
+      background-color: var(--dark);
       padding: 1.5rem;
       color: #656572;
 
       border-radius: 1rem;
-      border: 1px solid #25252f;
+      border: 1px solid var(--dark);
       box-shadow: 0 0 10px #161616;
 
       &:hover {
@@ -334,14 +360,15 @@ const Container = styled.div`
         width: 80%;
         height: 4rem;
 
-        background-color: #1c1c25;
+        background-color: var(--darkBlue);
         border-radius: 1rem 1rem 0 0;
 
         transform: translateX(-50%);
       }
 
       &-title {
-        border-bottom: 2px solid #e3e3da;
+        border-bottom: 4px solid var(--darkBlue);
+        color: var(--darkBlue);
         padding: 1.5rem 3rem;
 
         h1 {
@@ -352,8 +379,11 @@ const Container = styled.div`
           font-weight: 600;
 
           &:before {
-            content: "로고";
+            width: 3rem;
+            height: 3rem;
+            content: "";
             margin-right: 1.5rem;
+            background: url(${LogoSvg}) no-repeat center / contain;
           }
 
           &:after {
@@ -409,13 +439,10 @@ const Container = styled.div`
           opacity: 0.67;
           mix-blend-mode: overlay;
         }
-
-        &:before {
-        }
       }
 
       &-slide-wrap {
-        background: #6aa3a8;
+        background: var(--darkBlue);
         padding: 1rem 1.5rem;
 
         input[type="range"] {
@@ -424,10 +451,10 @@ const Container = styled.div`
           height: 5rem;
           background: repeating-linear-gradient(
             60deg,
-            #6aa3a8,
-            #6aa3a8 15px,
-            var(--mainGreen) 0,
-            var(--mainGreen) 30px
+            var(--darkBlue),
+            var(--darkBlue) 15px,
+            var(--midBlue) 0,
+            var(--midBlue) 30px
           );
 
           background-position-x: 0;
@@ -464,29 +491,25 @@ const Container = styled.div`
       }
 
       &-custom-wrap {
-        background: #00565b;
+        background: var(--darkBlue);
         padding: 0 1.5rem 2rem;
 
         > h2 {
-          position: relative;
-          font-size: 1.5rem;
-          font-weight: 500;
-          color: #039097;
+          background: transparent;
 
-          padding: 2rem 0;
+          &:before {
+            background-image: url(${SettingSvg});
+          }
         }
 
         .custom {
           &-list {
             display: flex;
             align-items: center;
-            background-color: #6aa3a8;
+            background-color: var(--midBlue);
             padding: 1rem;
 
             border-radius: 1rem;
-
-            &:before {
-            }
 
             & + li {
               margin-top: 1rem;
@@ -513,10 +536,10 @@ const Container = styled.div`
               display: flex;
               align-items: center;
 
-              background: #8e9629;
+              background: var(--darkBlue);
               border-radius: 10rem;
 
-              border: 10px solid #8e9629;
+              border: 10px solid var(--darkBlue);
 
               & > span {
                 position: relative;
@@ -534,6 +557,7 @@ const Container = styled.div`
                 &.on {
                   color: #000;
                 }
+
                 &.off {
                   color: #ffffff71;
                 }
@@ -576,16 +600,12 @@ const Container = styled.div`
     }
 
     & .mid-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      flex-shrink: 0;
       width: 40%;
 
       .sns {
         &-list-wrap {
+          ${defaultGap}
           display: flex;
-          gap: 1rem;
 
           > li {
             flex: 1;
@@ -598,12 +618,16 @@ const Container = styled.div`
           display: flex;
 
           h2 {
-            flex: 1;
+            &:before {
+              background-image: url(${StarSvg});
+            }
           }
 
           .swiper-button-wrap {
             display: flex;
             align-items: center;
+
+            margin-left: 1rem;
 
             button {
               width: 5rem;
@@ -616,24 +640,89 @@ const Container = styled.div`
             }
           }
         }
+
         &-project-swiper {
-          /* position: relative; */
           width: 100%;
-          height: 30rem;
+          height: 32rem;
 
-          background-color: #1c1c25;
+          background-color: var(--darkBlueGray);
           border-radius: 1rem;
+          padding: 2rem 2rem 3.5rem 2rem;
+          margin-top: 1rem;
 
-          &-link {
+          .slide-img-wrap {
+            height: 100%;
+
+            background-color: #fff;
+            overflow: hidden;
+
+            &:after {
+              position: absolute;
+              top: 0;
+              left: 0;
+
+              width: 100%;
+              height: 100%;
+              content: "";
+              background: url(${NoiseBg});
+              animation: ${noiseAnimation} 0.5s infinite linear;
+              mix-blend-mode: overlay;
+            }
+
+            img {
+              height: auto;
+
+              transition: all 0.2s;
+              transform-origin: top;
+            }
+
+            &:hover img {
+              transform: scale(1.03);
+            }
+
+            &:hover ~ .project-link {
+              transform: translateX(0);
+            }
+          }
+
+          .project-link {
             position: absolute;
-            bottom: 0;
-            right: 3rem;
+            bottom: 3rem;
+            right: 0;
             content: "";
 
             width: 6rem;
             height: 6rem;
-            border-radius: 1rem 1rem 0 0;
-            background: #1c1c25;
+            border-radius: 2rem 0 0 2rem;
+            background: var(--darkBlueGray);
+            box-shadow: 0 0 5px var(--darkBlueGray);
+
+            transform: translateX(100%);
+            transition: all 0.4s;
+
+            &:after {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              content: "";
+              background: url(${LinkSvg}) no-repeat center / contain;
+
+              width: 4rem;
+              height: 4rem;
+
+              transform: translate(-50%, -50%);
+            }
+
+            &:hover {
+            }
+          }
+          /* 
+          .swiper-slide-active .project-link {
+            transform: translateY(0);
+          } */
+
+          .swiper-pagination {
+            font-size: 1.3rem;
           }
         }
       }
@@ -644,21 +733,29 @@ const Container = styled.div`
     }
 
     & .last-container {
-      flex-shrink: 0;
       flex: 1;
 
-      border: 5px solid saddlebrown;
-      border-radius: 1rem;
+      h2 {
+        &:before {
+          background-image: url(${MsgrSvg});
+        }
+      }
 
       .side-project-list-wrap {
+        ${defaultGap}
         display: flex;
-        gap: 1rem;
         flex-wrap: wrap;
+
+        margin-top: 1rem;
 
         > li {
           flex-shrink: 0;
           width: calc(50% - 0.5rem);
         }
+      }
+
+      .secret-section {
+        flex: 1;
       }
     }
   }
@@ -672,7 +769,7 @@ const ListContent = styled.li`
   aspect-ratio: 1/1;
   text-align: center;
 
-  background-color: #1c1c25;
+  background-color: var(--darkBlueGray);
   border-radius: 1rem;
 
   padding: 2rem 1rem;
@@ -695,13 +792,15 @@ const ListContent = styled.li`
 const SubTitle = styled.h2`
   display: flex;
   align-items: center;
+  flex: 1;
+
   font-size: 1.8rem;
-  color: #fff;
-  padding: 2.5rem 3rem;
-  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #ffffff80;
+  padding: 2rem 3rem;
 
   border-radius: 1rem;
-  background: #1c1c25;
+  background: var(--darkBlueGray);
 
   &:after {
     flex-shrink: 0;
@@ -714,6 +813,15 @@ const SubTitle = styled.h2`
     background-position: 0 0, 0.5rem 0.5rem;
 
     margin-left: auto;
+  }
+
+  &:before {
+    width: 3rem;
+    height: 3rem;
+
+    margin-right: 1rem;
+    content: "";
+    background: no-repeat center / contain;
   }
 `;
 

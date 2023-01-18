@@ -1,6 +1,11 @@
 @charset "utf-8";
 
 :root {
+  --dark: #25252f;
+  --darkBlueGray: #1c1c25;
+  --darkBlue: #0d334b;
+  --midBlue: #113f5d;
+
   --mainYellow: #e5f33c;
   --mainGreen: #00565b;
   --black: #010101;

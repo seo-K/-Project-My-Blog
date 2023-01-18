@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <clipPath id="clip-path">
+      <circle id="타원_832" data-name="타원 832" cx="9" cy="9" r="9" transform="translate(364 462)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="마스크_그룹_6" data-name="마스크 그룹 6" transform="translate(-364 -462)" clip-path="url(#clip-path)">
+    <g id="그룹_922" data-name="그룹 922" transform="translate(21453.77 18887)">
+      <g id="그룹_4503" data-name="그룹 4503">
+        <g id="그룹_4504" data-name="그룹 4504">
+          <circle id="타원_25" data-name="타원 25" cx="9" cy="9" r="9" transform="translate(-21089.77 -18425)" fill="#bcbcbc"/>
+          <text id="_" data-name="!" transform="translate(-21082.77 -18411)" fill="#fff" font-size="14" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">!</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
