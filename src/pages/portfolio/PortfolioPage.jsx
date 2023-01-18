@@ -11,33 +11,43 @@ import "swiper/css/navigation";
 
 import { Lazy, Pagination, Navigation } from "swiper";
 
-// image
-import NaverSvg from "../../assets/images/portfolio/naver.svg";
-import GithubSvg from "../../assets/images/portfolio/github.svg";
-import CodePenSvg from "../../assets/images/portfolio/codepen.svg";
+// sns icon
+import NaverSvg from "../../assets/images/portfolio/sns_naver.svg";
+import GithubSvg from "../../assets/images/portfolio/sns_github.svg";
+import CodePenSvg from "../../assets/images/portfolio/sns_codepen.svg";
 
-import NoiseBg from "../../assets/images/portfolio/noise_bg.png";
-import TextureJpg from "../../assets/images/portfolio/texture_bg.jpg";
+import NoiseBg from "../../assets/images/portfolio/bg_noise.png";
+import TextureJpg from "../../assets/images/portfolio/bg_texture.jpg";
 
 // icon
 import LogoSvg from "../../assets/images/portfolio/logo.svg";
+import SettingSvg from "../../assets/images/portfolio/title_settings.svg";
+import LinkSvg from "../../assets/images/portfolio/icon_link.svg";
+import LockSvg from "../../assets/images/portfolio/icon_lock.svg";
+import StarSvg from "../../assets/images/portfolio/title_star.svg";
+import ToolSvg from "../../assets/images/portfolio/title_tool.svg";
+import SpotlightSvg from "../../assets/images/portfolio/title_spotlight.svg";
+import MsgrSvg from "../../assets/images/portfolio/title_msg.svg";
 import ArrowSvg from "../../assets/images/portfolio/icon_arrow.svg";
-import LinkSvg from "../../assets/images/portfolio/link.svg";
-import StarSvg from "../../assets/images/portfolio/star.svg";
-import MsgrSvg from "../../assets/images/portfolio/msg.svg";
-import SettingSvg from "../../assets/images/portfolio/settings.svg";
+
+// skill icon
+import HtmlSvg from "../../assets/images/portfolio/tool_html.svg";
+import CssSvg from "../../assets/images/portfolio/tool_css.svg";
+import JsSvg from "../../assets/images/portfolio/tool_js.svg";
+import ReactSvg from "../../assets/images/portfolio/tool_react.svg";
+import ThreeJsSvg from "../../assets/images/portfolio/tool_threejs.svg";
 
 // slider
-import CoolWhiteSlide from "../../assets/images/portfolio/slide/coolwhite.png";
-import DuruperSlide from "../../assets/images/portfolio/slide/duruper.png";
-import FoodyitdaSlide from "../../assets/images/portfolio/slide/foodyitda.png";
-import KruleSlide from "../../assets/images/portfolio/slide/k_rule.png";
-import NpixelSlide from "../../assets/images/portfolio/slide/npixel.png";
-import SindoSlide from "../../assets/images/portfolio/slide/sindo.png";
-import SindoShopSlide from "../../assets/images/portfolio/slide/sindo_shop.png";
-import VdreamSlide from "../../assets/images/portfolio/slide/vdream.png";
 import VitaSlide from "../../assets/images/portfolio/slide/vita.jpg";
+import FoodyitdaSlide from "../../assets/images/portfolio/slide/foodyitda.png";
+import VdreamSlide from "../../assets/images/portfolio/slide/vdream.png";
+import NpixelSlide from "../../assets/images/portfolio/slide/npixel.png";
+import SindoShopSlide from "../../assets/images/portfolio/slide/sindo_shop.png";
+import SindoSlide from "../../assets/images/portfolio/slide/sindo.png";
 import YoliSlide from "../../assets/images/portfolio/slide/yoli.png";
+import KruleSlide from "../../assets/images/portfolio/slide/k_rule.png";
+import DuruperSlide from "../../assets/images/portfolio/slide/duruper.png";
+import CoolWhiteSlide from "../../assets/images/portfolio/slide/coolwhite.png";
 
 export default function PortfolioPage() {
   const navigate = useNavigate();
@@ -45,7 +55,7 @@ export default function PortfolioPage() {
   const snsList = [
     {
       logoImg: NaverSvg,
-      link: "/",
+      link: "https://blog.naver.com/seo-kkk",
       alt: "네이버 블로그",
       text: "네이버 블로그",
     },
@@ -57,7 +67,7 @@ export default function PortfolioPage() {
     },
     {
       logoImg: CodePenSvg,
-      link: "/",
+      link: "https://github.com/seo-K",
       alt: "CodePen",
       text: "CodePen",
     },
@@ -86,34 +96,99 @@ export default function PortfolioPage() {
     },
   ];
 
+  const ToolList = [
+    {
+      img: HtmlSvg,
+      text: "Html",
+    },
+    {
+      img: CssSvg,
+      text: "Css",
+    },
+    {
+      img: JsSvg,
+      text: "Js",
+    },
+    {
+      img: ReactSvg,
+      text: "React",
+    },
+    {
+      img: ThreeJsSvg,
+      text: "ThreerJs",
+    },
+  ];
+
   const portfolioList = [
-    CoolWhiteSlide,
-    DuruperSlide,
-    FoodyitdaSlide,
-    KruleSlide,
-    NpixelSlide,
-    SindoSlide,
-    SindoShopSlide,
-    VdreamSlide,
-    VitaSlide,
-    YoliSlide,
+    {
+      projectImg: VitaSlide,
+      projectName: "비타알고",
+      projectLink: "https://vitaalgo.netlify.app/main.htm",
+    },
+    {
+      projectImg: SindoShopSlide,
+      projectName: "신도리코쇼핑몰",
+      projectLink: "https://sindo.netlify.app/en/index.html",
+    },
+    {
+      projectImg: SindoSlide,
+      projectName: "신도리코랜딩페이지",
+      projectLink: "https://sindo-shop.netlify.app/",
+    },
+    {
+      projectImg: FoodyitdaSlide,
+      projectName: "푸드잇다",
+      projectLink: "https://foodyitda.netlify.app/main.html",
+    },
+    {
+      projectImg: VdreamSlide,
+      projectName: "브이드림",
+      projectLink: "https://vdream.netlify.app/",
+    },
+    {
+      projectImg: DuruperSlide,
+      projectName: "두루퍼",
+      projectLink: "https://duruper.com/",
+    },
+    {
+      projectImg: NpixelSlide,
+      projectName: "엔픽셀",
+    },
+
+    {
+      projectImg: YoliSlide,
+      projectName: "요일",
+    },
+    {
+      projectImg: KruleSlide,
+      projectName: "국룰",
+    },
+    {
+      projectImg: DuruperSlide,
+      projectName: "두루퍼",
+      projectLink: "https://duruper.com/",
+    },
+    {
+      projectImg: CoolWhiteSlide,
+      projectName: "쿨화이트",
+    },
   ];
 
   // SWIPER SETTING
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
 
-  function List({ data }) {
+  function ContentList({ data }) {
     const { logoImg, alt, link, text } = data;
 
     return (
       <ListContent>
-        <Link to={link}>
+        <a href={link} target="_blank">
           <div className="sns-icon-wrap">
             <img src={logoImg} alt={alt} />
           </div>
           {text && <em>{text}</em>}
-        </Link>
+        </a>
       </ListContent>
     );
   }
@@ -188,7 +263,7 @@ export default function PortfolioPage() {
               <h2 className="blind">sns 리스트</h2>
               <ul className="sns-list-wrap">
                 {snsList.map((item, index) => (
-                  <List key={index} data={item} />
+                  <ContentList key={index} data={item} />
                 ))}
               </ul>
             </section>
@@ -226,19 +301,36 @@ export default function PortfolioPage() {
                 {portfolioList.map((list, index) => {
                   return (
                     <SwiperSlide key={index}>
-                      <div className="slide-img-wrap">
-                        <img src={list} alt="" />
-                      </div>
-                      <Link to="/" className="project-link"></Link>
+                      <figure className="slide-img-wrap">
+                        <img src={list.projectImg} alt={list.projectName} />
+                      </figure>
+                      {list.projectLink ? (
+                        <a href={list.projectLink} className="project-link" target="_blank">
+                          <img src={LinkSvg} alt="링크 아이콘" />
+                        </a>
+                      ) : (
+                        <figure className="project-link">
+                          <img src={LockSvg} alt="잠금 아이콘" />
+                        </figure>
+                      )}
                     </SwiperSlide>
                   );
                 })}
               </Swiper>
             </section>
-            <section className="util">
-              <h2 className="blind">자잘한거</h2>
-              <div className="color dot-bg"></div>
-              <div className="career dot-bg"></div>
+            <section className="tools">
+              <SubTitle>Tool</SubTitle>
+              <ul className="tools-list">
+                {ToolList.map((list, index) => {
+                  return (
+                    <li key={"toolList" + index}>
+                      <div className="tools-icon">
+                        <img src={list.img} alt={list.text} />
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
             </section>
           </div>
           {/* LAST-CONTAINER */}
@@ -247,12 +339,12 @@ export default function PortfolioPage() {
               <SubTitle>SIDE-PROJECTS</SubTitle>
               <ul className="side-project-list-wrap">
                 {sideProjectList.map((item, index) => (
-                  <List key={index} data={item} />
+                  <ContentList key={index} data={item} />
                 ))}
               </ul>
             </section>
             <section className="secret-section">
-              <h2>비밀 메세지</h2>
+              <SubTitle>Secret Massage</SubTitle>
               <div className="handel-container"></div>
               <div className="secret-text">
                 <p>비밀메세지</p>
@@ -349,8 +441,6 @@ const Container = styled.div`
 
       background-color: var(--mainYellow);
       padding-bottom: 5rem;
-
-      /* mask-image: linear-gradient(rgba(0, 0, 0, 1), transparent); */
 
       &:after {
         position: absolute;
@@ -520,6 +610,7 @@ const Container = styled.div`
 
               &:checked + .custom-list-toggle:after {
                 transform: translate(5rem, -50%);
+                background-color: var(--mainGreen);
               }
 
               &:checked + .custom-list-toggle .on {
@@ -580,7 +671,7 @@ const Container = styled.div`
                 background-color: var(--mainYellow);
 
                 transform: translateY(-50%);
-                transition: transform 0.5s;
+                transition: all 0.5s;
 
                 z-index: 0;
               }
@@ -622,7 +713,7 @@ const Container = styled.div`
               background-image: url(${StarSvg});
             }
           }
-
+          /* swiper-button-disabled */
           .swiper-button-wrap {
             display: flex;
             align-items: center;
@@ -632,8 +723,17 @@ const Container = styled.div`
             button {
               width: 5rem;
               height: 5rem;
+              opacity: 0.8;
 
-              &:first-child {
+              &.swiper-button-disabled {
+                opacity: 0.3;
+              }
+
+              &:hover {
+                opacity: 1;
+              }
+
+              :first-child {
                 transform: rotate(180deg);
                 margin-right: 1rem;
               }
@@ -649,6 +749,20 @@ const Container = styled.div`
           border-radius: 1rem;
           padding: 2rem 2rem 3.5rem 2rem;
           margin-top: 1rem;
+
+          .swiper-slide {
+            overflow: hidden;
+
+            &:hover {
+              .slide-img-wrap img {
+                transform: scale(1.03);
+              }
+
+              .project-link {
+                transform: translateX(0);
+              }
+            }
+          }
 
           .slide-img-wrap {
             height: 100%;
@@ -675,14 +789,6 @@ const Container = styled.div`
               transition: all 0.2s;
               transform-origin: top;
             }
-
-            &:hover img {
-              transform: scale(1.03);
-            }
-
-            &:hover ~ .project-link {
-              transform: translateX(0);
-            }
           }
 
           .project-link {
@@ -700,12 +806,10 @@ const Container = styled.div`
             transform: translateX(100%);
             transition: all 0.4s;
 
-            &:after {
+            img {
               position: absolute;
               top: 50%;
               left: 50%;
-              content: "";
-              background: url(${LinkSvg}) no-repeat center / contain;
 
               width: 4rem;
               height: 4rem;
@@ -727,18 +831,49 @@ const Container = styled.div`
         }
       }
 
-      .util {
+      .tools {
         flex: 1;
+
+        & h2:before {
+          background-image: url(${ToolSvg});
+        }
+
+        &-list {
+          ${defaultGap}
+          display: flex;
+
+          margin-top: 1rem;
+
+          > li {
+            display: grid;
+            place-content: center;
+
+            padding: 1rem;
+            background: var(--dark);
+            border-radius: 1rem;
+
+            &:nth-child(odd) {
+              margin-top: auto;
+            }
+
+            &:nth-child(even) {
+              margin-bottom: auto;
+            }
+          }
+        }
+
+        &-icon {
+          width: 5rem;
+          height: 5rem;
+        }
       }
     }
 
     & .last-container {
       flex: 1;
 
-      h2 {
-        &:before {
-          background-image: url(${MsgrSvg});
-        }
+      h2:before {
+        background-image: url(${SpotlightSvg});
       }
 
       .side-project-list-wrap {
@@ -756,6 +891,10 @@ const Container = styled.div`
 
       .secret-section {
         flex: 1;
+
+        h2:before {
+          background-image: url(${MsgrSvg});
+        }
       }
     }
   }
@@ -774,9 +913,34 @@ const ListContent = styled.li`
 
   padding: 2rem 1rem;
 
+  & > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    aspect-ratio: 1/1;
+    padding: 2rem;
+
+    border-radius: 50%;
+    background: var(--dark);
+
+    box-shadow: 0 1rem 0 var(--black);
+    transition: all 0.2s;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: 0 0.2rem 0 var(--black);
+      transform: translateY(0.8rem);
+    }
+  }
+
   .sns-icon-wrap {
-    width: 6rem;
-    height: 6rem;
+    flex-shrink: 0;
+    width: 5rem;
+    height: 5rem;
 
     margin: 0 auto;
   }
