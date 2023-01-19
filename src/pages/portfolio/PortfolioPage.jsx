@@ -29,6 +29,10 @@ import ToolSvg from "../../assets/images/portfolio/title_tool.svg";
 import SpotlightSvg from "../../assets/images/portfolio/title_spotlight.svg";
 import MsgrSvg from "../../assets/images/portfolio/title_msg.svg";
 import ArrowSvg from "../../assets/images/portfolio/icon_arrow.svg";
+import InfoSvg from "../../assets/images/portfolio/icon_info.svg";
+import HandleSvg from "../../assets/images/portfolio/icon_handle.svg";
+import CrankSvg from "../../assets/images/portfolio/icon_crank.svg";
+import crank_pathSvg from "../../assets/images/portfolio/icon_crank_path.svg";
 
 // skill icon
 import HtmlSvg from "../../assets/images/portfolio/tool_html.svg";
@@ -51,6 +55,40 @@ import CoolWhiteSlide from "../../assets/images/portfolio/slide/coolwhite.png";
 
 export default function PortfolioPage() {
   const navigate = useNavigate();
+
+  const [isOpen, setOpen] = useState(false);
+  const [isNone, setNone] = useState(false);
+
+  //   const toggleComment = (id) => {
+  //     setShownComments((prevShownComments) => ({
+  //         ...prevShownComments,
+  //         [id]: !prevShownComments[id],
+  //     }));
+  // };
+
+  const OpenEvent = (id) => {
+    setOpen((prevOpen) => ({
+      ...prevOpen,
+      [id]: !prevOpen[id],
+    }));
+
+    setTimeout(function () {
+      setNone((prevNone) => ({
+        ...prevNone,
+        [id]: !prevNone[id],
+      }));
+    }, 2000);
+    console.log(id);
+  };
+  // const OpenEvent = (e) => {
+  //   console.log("눌림");
+  //   e.preventDefault();
+  //   setOpen(true);
+
+  //   setTimeout(function () {
+  //     setNone(true);
+  //   }, 2000);
+  // };
 
   const snsList = [
     {
@@ -183,13 +221,42 @@ export default function PortfolioPage() {
 
     return (
       <ListContent>
+        <div className="circle">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         <a href={link} target="_blank">
-          <div className="sns-icon-wrap">
+          <div className="icon-wrap">
             <img src={logoImg} alt={alt} />
           </div>
           {text && <em>{text}</em>}
         </a>
       </ListContent>
+    );
+  }
+
+  function DoorTrigger(props) {
+    // function Modal({글제목변경}){
+    return (
+      <OpenDoorTrigger
+        type="button"
+        className={`${isOpen && "opened"} ${isNone && "none"}`}
+        onClick={() => OpenEvent(props.id)}
+      >
+        <div className="left-door"></div>
+        <div className="right-door"></div>
+        <div className="lock-icon">
+          <img src={LockSvg} alt="잠금" />
+        </div>
+        <p className="close-info">
+          <b>CLICK TO OPEN</b>
+          <span className="info-icon">
+            <img src={InfoSvg} alt="정보" />
+          </span>
+        </p>
+      </OpenDoorTrigger>
     );
   }
 
@@ -260,6 +327,8 @@ export default function PortfolioPage() {
           {/* MID-CONTAINER */}
           <div className="mid-container">
             <section className="sns">
+              <DoorTrigger id={0} />
+
               <h2 className="blind">sns 리스트</h2>
               <ul className="sns-list-wrap">
                 {snsList.map((item, index) => (
@@ -268,6 +337,7 @@ export default function PortfolioPage() {
               </ul>
             </section>
             <section className="portfolio">
+              <DoorTrigger id={1} />
               <div className="portfolio-top-title">
                 <SubTitle>Project</SubTitle>
                 <div className="swiper-button-wrap">
@@ -319,6 +389,7 @@ export default function PortfolioPage() {
               </Swiper>
             </section>
             <section className="tools">
+              <DoorTrigger id={2} />
               <SubTitle>Tool</SubTitle>
               <ul className="tools-list">
                 {ToolList.map((list, index) => {
@@ -335,7 +406,7 @@ export default function PortfolioPage() {
           </div>
           {/* LAST-CONTAINER */}
           <div className="last-container">
-            <section className="side-project-section">
+            <section className="side-project">
               <SubTitle>SIDE-PROJECTS</SubTitle>
               <ul className="side-project-list-wrap">
                 {sideProjectList.map((item, index) => (
@@ -343,10 +414,10 @@ export default function PortfolioPage() {
                 ))}
               </ul>
             </section>
-            <section className="secret-section">
+            <section className="secret-content">
               <SubTitle>Secret Massage</SubTitle>
               <div className="handel-container"></div>
-              <div className="secret-text">
+              <div className="secret-content-text">
                 <p>비밀메세지</p>
               </div>
             </section>
@@ -362,6 +433,91 @@ const backgroundAnimation = keyframes`
 to {
     background-position-x: 100vw;
   }
+`;
+
+const OpenLeftDoor = keyframes`
+	0% {
+		transform: translateX(0%);
+	}
+
+	12% {
+		transform: translateX(-10.89%);
+	}
+
+	24% {
+		transform: translateX(-43.56%);
+	}
+
+	36% {
+		transform: translateX(-98.01%);
+	}
+
+	54% {
+		transform: translateX(-75.02%);
+	}
+
+	74% {
+		transform: translateX(-98.37%);
+	}
+
+	82% {
+		transform: translateX(-93.75%);
+	}
+
+	92% {
+		transform: translateX(-99.34%);
+	}
+
+	96% {
+		transform: translateX(-98.46%);
+	}
+
+	100% {
+		transform: translateX(-100%);
+	}
+
+`;
+const OpenRightDoor = keyframes`
+	0% {
+		transform: translateX(0%);
+	}
+
+	12% {
+		transform: translateX(10.89%);
+	}
+
+	24% {
+		transform: translateX(43.56%);
+	}
+
+	36% {
+		transform: translateX(98.01%);
+	}
+
+	54% {
+		transform: translateX(75.02%);
+	}
+
+	74% {
+		transform: translateX(98.37%);
+	}
+
+	82% {
+		transform: translateX(93.75%);
+	}
+
+	92% {
+		transform: translateX(99.34%);
+	}
+
+	96% {
+		transform: translateX(98.46%);
+	}
+
+	100% {
+		transform: translateX(100%);
+	}
+
 `;
 
 const noiseAnimation = keyframes`
@@ -395,10 +551,6 @@ const Container = styled.div`
   background: linear-gradient(90deg, var(--darkBlue) 19px, transparent 1%) center,
     linear-gradient(var(--darkBlue) 19px, transparent 1%) center, var(--midBlue);
   background-size: 22px 22px;
-  /* background-image: radial-gradient(circle at center, #2a2a33 0.4rem, transparent 0),
-    radial-gradient(circle at center, #212125 0.4rem, transparent 0);
-  background-size: 2rem 2rem;
-  background-position: 0 0, 0.5rem 0.5rem; */
 
   & .inner {
     width: clamp(32rem, 90%, 184rem);
@@ -420,6 +572,7 @@ const Container = styled.div`
     }
 
     & section {
+      position: relative;
       background-color: var(--dark);
       padding: 1.5rem;
       color: #656572;
@@ -443,6 +596,7 @@ const Container = styled.div`
       padding-bottom: 5rem;
 
       &:after {
+        flex-shrink: 0;
         position: absolute;
         bottom: 0;
         left: 50%;
@@ -469,6 +623,7 @@ const Container = styled.div`
           font-weight: 600;
 
           &:before {
+            flex-shrink: 0;
             width: 3rem;
             height: 3rem;
             content: "";
@@ -477,6 +632,7 @@ const Container = styled.div`
           }
 
           &:after {
+            flex-shrink: 0;
             content: "";
             width: 10rem;
             height: 4rem;
@@ -525,7 +681,7 @@ const Container = styled.div`
 
         &:after {
           background: url(${NoiseBg});
-          animation: ${noiseAnimation} 0.5s infinite linear;
+          /* animation: ${noiseAnimation} 0.5s infinite linear; */
           opacity: 0.67;
           mix-blend-mode: overlay;
         }
@@ -614,7 +770,7 @@ const Container = styled.div`
               }
 
               &:checked + .custom-list-toggle .on {
-                color: #ffffff71;
+                color: #ffffff80;
               }
 
               &:checked + .custom-list-toggle .off {
@@ -650,7 +806,7 @@ const Container = styled.div`
                 }
 
                 &.off {
-                  color: #ffffff71;
+                  color: #ffffff80;
                 }
 
                 & + span {
@@ -681,7 +837,7 @@ const Container = styled.div`
               margin-left: 1rem;
               font-size: 1.8rem;
               font-weight: 600;
-              color: #ffffff71;
+              color: #ffffff80;
 
               cursor: pointer;
             }
@@ -743,7 +899,7 @@ const Container = styled.div`
 
         &-project-swiper {
           width: 100%;
-          height: 32rem;
+          height: 50rem;
 
           background-color: var(--darkBlueGray);
           border-radius: 1rem;
@@ -779,7 +935,7 @@ const Container = styled.div`
               height: 100%;
               content: "";
               background: url(${NoiseBg});
-              animation: ${noiseAnimation} 0.5s infinite linear;
+              /* animation: ${noiseAnimation} 0.5s infinite linear; */
               mix-blend-mode: overlay;
             }
 
@@ -889,11 +1045,14 @@ const Container = styled.div`
         }
       }
 
-      .secret-section {
+      .secret-content {
         flex: 1;
 
         h2:before {
           background-image: url(${MsgrSvg});
+        }
+
+        &-text {
         }
       }
     }
@@ -901,6 +1060,7 @@ const Container = styled.div`
 `;
 
 const ListContent = styled.li`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -913,21 +1073,66 @@ const ListContent = styled.li`
 
   padding: 2rem 1rem;
 
+  .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    span {
+      position: absolute;
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+
+      background: var(--midBlue);
+      background-color: #656572;
+
+      &:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+      &:nth-child(2) {
+        top: 0;
+        right: 0;
+      }
+      &:nth-child(3) {
+        bottom: 0;
+        left: 0;
+      }
+      &:nth-child(4) {
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+
   & > a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    width: 100%;
-    aspect-ratio: 1/1;
+    flex-shrink: 0;
+
     padding: 2rem;
+    aspect-ratio: 1/1;
 
     border-radius: 50%;
     background: var(--dark);
 
     box-shadow: 0 1rem 0 var(--black);
     transition: all 0.2s;
+
+    &:has(em) {
+      width: 12.5rem;
+      height: 12.5rem;
+    }
 
     &:hover,
     &:active,
@@ -937,7 +1142,7 @@ const ListContent = styled.li`
     }
   }
 
-  .sns-icon-wrap {
+  .icon-wrap {
     flex-shrink: 0;
     width: 5rem;
     height: 5rem;
@@ -949,7 +1154,7 @@ const ListContent = styled.li`
     display: inline-block;
     font-size: 1.5rem;
     font-weight: 600;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 `;
 
@@ -980,12 +1185,148 @@ const SubTitle = styled.h2`
   }
 
   &:before {
+    flex-shrink: 0;
     width: 3rem;
     height: 3rem;
 
     margin-right: 1rem;
     content: "";
     background: no-repeat center / contain;
+  }
+`;
+
+const OpenDoorTrigger = styled.button`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  z-index: 10;
+
+  &.none {
+    display: none;
+  }
+
+  &.opened {
+    .left-door {
+      animation: ${OpenLeftDoor} 1s forwards linear;
+    }
+    .right-door {
+      animation: ${OpenRightDoor} 1s forwards linear;
+    }
+
+    .lock-icon,
+    .close-info {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .lock-icon {
+      box-shadow: 0 0.2rem 0 var(--black);
+      transform: translateY(0.8rem);
+
+      img {
+        filter: invert(82%) sepia(100%) saturate(0%) hue-rotate(47deg) brightness(105%)
+          contrast(104%);
+      }
+    }
+
+    .close-info {
+      width: 13rem;
+    }
+  }
+
+  .left-door,
+  .right-door {
+    flex-shrink: 0;
+    width: 50%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--dark),
+      var(--dark) 10px,
+      #2d2d36 0,
+      #2d2d36 12px
+    );
+
+    border: 1rem solid var(--dark);
+  }
+
+  .left-door {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      right: -1rem;
+      width: 2px;
+      height: 100%;
+      content: "";
+      background: var(--darkBlueGray);
+    }
+    /* border-left: 1px solid var(--darkBlueGray); */
+  }
+
+  .right-door {
+    /* transform: translate3d(-100%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg)
+        rotateZ(0deg) skew(0deg, 0deg); */
+  }
+
+  .lock-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    content: "";
+
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: 1px solid var(--darkBlueGray);
+
+    background: var(--dark);
+    box-shadow: 0 1rem 0 var(--black);
+    transition: all 0.2s;
+    padding: 0.5rem 1rem;
+
+    margin-top: -2.5rem;
+    margin-left: -2.5rem;
+  }
+
+  .close-info {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 4rem;
+
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    background-color: var(--dark);
+    transition: all 0.2s;
+
+    b {
+      color: #ffffff80;
+      margin-right: 1rem;
+      white-space: nowrap;
+    }
+
+    .info-icon {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+    }
   }
 `;
 
