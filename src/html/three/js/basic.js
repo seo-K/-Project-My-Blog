@@ -25,7 +25,6 @@ class App {
 
     requestAnimationFrame(this.render.bind(this));
   }
-
   // three.js 가 3차원 그래픽을 출력할 영역에 대한 가로/세로 깊이
   _setupCamera() {
     const width = this._divContainer.clientWidth;
@@ -45,10 +44,28 @@ class App {
     this._scene.add(light); // scene 객체에 구성요소로 추가
   }
 
+  // const texture = new THREE.TextureLoader().load("../image/moon_texture.jpeg");
+  // texture.wrapS = THREE.RepeatWrapping;
+  // texture.wrapT = THREE.RepeatWrapping;
+  // texture.repeat.set(4, 4);
+
   // 모델 생성
   _setupModel() {
+    const textureLoader = new THREE.TextureLoader();
+    const map = textureLoader.load("../image/moon_texture.jpeg", (texture) => {
+      texture.repeat.x = 4;
+      texture.repeat.y = 4;
+
+      texture.wrapS = THREE.MirroredRepeatWrapping;
+      texture.wrapT = THREE.MirroredRepeatWrapping;
+
+      texture.offset.x = 0;
+      texture.offset.y = 0;
+    });
+
     const geometry = new THREE.BoxGeometry(1, 1, 1); // (가로, 세로, 깊이)
-    const material = new THREE.MeshPhongMaterial({ color: 0x44a88 }); // 재질
+    // const material = new THREE.MeshPhongMaterial({ color: 0x44a88 }); // 재질
+    const material = new THREE.MeshPhongMaterial({ map: map }); // 재질
     const cube = new THREE.Mesh(geometry, material);
 
     this._scene.add(cube);

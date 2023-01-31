@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
+import axios from "axios";
 
 // img
 import SearchSvg from "../../assets/images/icon/search.svg";
@@ -13,6 +14,39 @@ export default function DefaultPage() {
   // };
 
   const [searchActive, setSearchActive] = useState(false);
+
+  // const URL = "https://openapi.naver.com/v1/search/blog?query=";
+
+  // const response = axios.get(URL, {
+  //     params: {
+  //       serviceKey: process.env.REACT_APP_CLIENT_ID,
+  //     }
+  // });
+
+  // ADD :: START
+  // const [articles, setArticles] = useState(null);
+  // const apiGet = async (param) => {
+  //   const apiUrl = "https://openapi.naver.com/v1/search/blog?query=" + param;
+  //   const resp = await fetch(apiUrl, {
+  //     method: "GET",
+  //     headers: {
+  //       // "Content-Type": "application/json",
+  //       "X-Naver-Client-Id": process.env.REACT_APP_CLIENT_ID,
+  //       "X-Naver-Client-Secret": process.env.REACT_APP_CLIENT_SECRET,
+  //     },
+  //   });
+  //   resp.json().then((data) => {
+  //     setArticles(data.items);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   apiGet("news", "코스피");
+  // }, []);
+
+  // console.log(process.env.REACT_APP_CLIENT_ID, "나왓");
+
+  //ADD :: END
 
   return (
     <Container>

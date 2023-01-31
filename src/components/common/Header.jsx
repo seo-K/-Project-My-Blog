@@ -38,7 +38,7 @@ export default function Header() {
             </span>
             Post
           </NavLink>
-          <NavLink to="/mypage">
+          <NavLink to="/my">
             <span className="icon-wrap">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#9d9d9d" viewBox="0 0 30 30">
                 <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z" />

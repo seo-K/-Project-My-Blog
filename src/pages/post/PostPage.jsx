@@ -41,10 +41,11 @@ const Container = styled.section`
   .post-list-wrap {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    /* justify-content: center; */
+    gap: 1.5rem 1rem;
 
     & > li {
-      border: 1px solid red;
+      flex: 0 0 calc((100% - 3rem) / 4);
     }
   }
 `;
