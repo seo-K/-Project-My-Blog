@@ -9,9 +9,6 @@ import { PostData } from "../../MockData";
 
 export default function MainPage() {
   const navigate = useNavigate();
-  // const goWhere = () => {
-  //   return navigate("/company/registerPost");
-  // };
 
   return (
     <Container>
