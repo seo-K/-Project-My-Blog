@@ -9,44 +9,6 @@ import SearchSvg from "../../assets/images/icon/search.svg";
 
 export default function DefaultPage() {
   const navigate = useNavigate();
-  // const goWhere = () => {
-  //   return navigate("/company/registerPost");
-  // };
-
-  const [searchActive, setSearchActive] = useState(false);
-
-  // const URL = "https://openapi.naver.com/v1/search/blog?query=";
-
-  // const response = axios.get(URL, {
-  //     params: {
-  //       serviceKey: process.env.REACT_APP_CLIENT_ID,
-  //     }
-  // });
-
-  // ADD :: START
-  // const [articles, setArticles] = useState(null);
-  // const apiGet = async (param) => {
-  //   const apiUrl = "https://openapi.naver.com/v1/search/blog?query=" + param;
-  //   const resp = await fetch(apiUrl, {
-  //     method: "GET",
-  //     headers: {
-  //       // "Content-Type": "application/json",
-  //       "X-Naver-Client-Id": process.env.REACT_APP_CLIENT_ID,
-  //       "X-Naver-Client-Secret": process.env.REACT_APP_CLIENT_SECRET,
-  //     },
-  //   });
-  //   resp.json().then((data) => {
-  //     setArticles(data.items);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   apiGet("news", "코스피");
-  // }, []);
-
-  // console.log(process.env.REACT_APP_CLIENT_ID, "나왓");
-
-  //ADD :: END
 
   return (
     <Container>
@@ -70,6 +32,8 @@ const Container = styled.div`
   display: flex;
   height: 100vh;
 
+  padding: 1rem;
+
   main {
     display: flex;
     flex-direction: column;
@@ -77,9 +41,9 @@ const Container = styled.div`
     flex: 1;
     height: calc(100vh - 2rem);
 
-    margin: 1rem;
+    /* margin: 1rem; */
 
-    background-color: var(--white);
+    /* background-color: var(--white); */
 
     .main-wrap {
       width: 100%;

@@ -47,7 +47,7 @@ export default function Header() {
             Mypage
           </NavLink>
         </nav>
-        <div className="aaa">&copy;seoYeong</div>
+        <div className="copyright">&copy;seoYeong</div>
       </div>
     </Container>
   );
@@ -55,15 +55,14 @@ export default function Header() {
 
 const Container = styled.header`
   flex-shrink: 0;
-  width: 25%;
-  min-width: 15rem;
-  max-width: 20rem;
+  width: clamp(20rem, 25%, 25rem);
   height: 100vh;
 
   display: flex;
   flex-direction: column;
 
-  padding: 1rem;
+  /* padding: 1rem; */
+  overflow: hidden;
 
   .logo {
     margin-bottom: 5rem;
@@ -89,7 +88,7 @@ const Container = styled.header`
       }
 
       figcaption {
-        font-size: 1rem;
+        font-size: 1.5rem;
         font-weight: bold;
       }
 
@@ -104,20 +103,24 @@ const Container = styled.header`
         align-items: center;
         text-align: center;
 
-        font-size: 1.2rem;
+        font-size: 1.8rem;
         color: var(--darkGray);
 
-        padding: 1rem;
+        padding: 1.5rem 2rem;
 
         .icon-wrap {
           display: flex;
           align-items: center;
 
           flex-shrink: 0;
-          width: 1.5rem;
-          height: 1.5rem;
+          width: 2.5rem;
+          height: 2.5rem;
 
           margin-right: 0.5rem;
+        }
+
+        & + a {
+          margin-top: 1rem;
         }
       }
 
@@ -125,7 +128,10 @@ const Container = styled.header`
         font-weight: bold;
         color: var(--black);
 
-        &:after {
+        background-color: var(--gray);
+        border-radius: 10rem 0 0 10rem;
+
+        /* &:after {
           position: absolute;
           top: 50%;
           left: 0;
@@ -137,6 +143,29 @@ const Container = styled.header`
           background-color: var(--mainYellow);
 
           transform: translateY(-50%);
+        } */
+
+        &:after,
+        &:before {
+          position: absolute;
+          right: 0;
+          content: "";
+          width: 2rem;
+          height: 2rem;
+
+          z-index: 0;
+        }
+
+        &:after {
+          bottom: 100%;
+          border-bottom-right-radius: 2rem;
+          box-shadow: 0.7rem 0.7rem 0 0.7rem var(--gray);
+        }
+
+        &:before {
+          top: 100%;
+          border-top-right-radius: 2rem;
+          box-shadow: 0.7rem -0.7rem 0 0.7rem var(--gray);
         }
 
         .icon-wrap svg {
@@ -145,7 +174,7 @@ const Container = styled.header`
       }
     }
 
-    .aaa {
+    .copyright {
       text-align: center;
 
       margin-top: auto;

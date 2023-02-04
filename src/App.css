@@ -8,6 +8,22 @@
 
   --mainYellow: #e5f33c;
   --mainGreen: #00565b;
+  --black: #fff;
+  --gray: #3b3b3b;
+  --darkGray: #a5a5a5;
+  --beige: #e2decd;
+  --white: #25252f;
+  --deepDarkGray: #131313;
+}
+
+:root[color-theme="dark"] {
+  --dark: #25252f;
+  --darkBlueGray: #1c1c25;
+  --darkBlue: #0d334b;
+  --midBlue: #113f5d;
+
+  --mainYellow: #e5f33c;
+  --mainGreen: #00565b;
   --black: #010101;
   --gray: #f6f6f6;
   --darkGray: #a5a5a5;
@@ -15,10 +31,6 @@
   --white: #fff;
   --deepDarkGray: #929292;
 }
-
-/* :root[color-theme="dark"] {
-  --mainYellow: #e5f33c;
-} */
 
 @font-face {
   font-family: "Pre";
@@ -157,278 +169,44 @@
   font-display: fallback;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: middle;
-  box-sizing: border-box;
-}
-
-html,
-body,
-div,
-span,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-blockquote,
-p,
-address,
-pre,
-cite,
-form,
-fieldset,
-input,
-textarea,
-select,
-table,
-th,
-td,
-button {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 100%;
-  font-weight: normal;
-  letter-spacing: normal;
-}
-
-fieldset,
-abbr {
-  border: 0 none;
-}
-
-ul,
-ol,
-dl {
-  list-style: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border: 0 none;
-}
-
-caption,
-th,
-td {
-  text-align: left;
-  font-weight: normal;
-  border: 0;
-}
-
-address,
-strong,
-em,
-cite {
-  font-weight: normal;
-  font-style: normal;
-}
-
-caption {
-  font-style: normal;
-}
-
-ins {
-  text-decoration: none;
-}
-
-del {
-  text-decoration: line-through;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-}
-
-blockquote,
-q {
-  quotes: "" "";
-}
-
-hr {
-  display: none;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-
-img,
-video {
-  border: 0;
-}
-
-audio,
-canvas,
-video {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-}
-
-img {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  image-rendering: -moz-auto;
-  /*firefox*/
-  image-rendering: -o-auto;
-  /*opera*/
-  image-rendering: -webkit-optimize-contrast;
-  /*webkit*/
-  image-rendering: auto;
-  -ms-interpolation-mode: nearest-neighbor;
-  -webkit-perspective: 1;
-}
-
-a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-input[type="text"],
-input[type="tel"],
-input[type="button"],
-input[type="password"],
-input[type="email"],
-input[type="search"],
-textarea,
-button {
-  -webkit-appearance: none;
-  appearance: none;
-  -moz-appearance: none;
-  border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-}
-
+* { margin: 0; padding: 0; border: 0; vertical-align: middle; box-sizing: border-box; } 
+html,body,div,span,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,blockquote,p,address,pre,cite,form,fieldset,input,textarea,select,table,th,td { margin: 0; padding: 0; background: transparent; } 
+h1,h2,h3,h4,h5,h6 { font-size: 100%; font-weight: normal; letter-spacing: normal; } 
+fieldset,abbr,img,video { border: 0 none; } 
+ul,ol { list-style: none; } 
+table { border-collapse: collapse; border-spacing: 0; border: 0 none; } 
+caption,th,td { text-align: left; font-weight: normal; border: 0; }
+address,caption,strong,em,cite { font-weight: normal; font-style: normal; }
+caption { font-style: normal; }
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+blockquote:before,blockquote:after,q:before,q:after { content: ""; }
+blockquote,q { quotes: "" ""; }
+hr { display: none; }
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display: block; }
+audio,canvas,video { display: inline-block; *display: inline; *zoom: 1; }
+img { display: inline-block; width: 100%; height: 100%; object-fit: cover;image-rendering: -moz-auto; /*firefox*/image-rendering: -o-auto; /*opera*/image-rendering: -webkit-optimize-contrast; /*webkit*/image-rendering: auto; -ms-interpolation-mode: nearest-neighbor; -webkit-perspective: 1; }
+a { display: block; text-decoration: none; color: inherit; } 
+input:is([type="text"],[type="tel"],[type="button"],[type="password"],[type="email"],[type="search"]),textarea,button { -webkit-appearance: none; appearance: none; -moz-appearance: none; border-radius: 0; -webkit-border-radius: 0; -moz-border-radius: 0; } 
 input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; } 
+input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; } 
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+/* Firefox */
+input[type="number"] { -moz-appearance: textfield; }
+input[type="checkbox"] + label,input[type="radio"] + label { cursor: pointer; }
+/* Chorme internal-autofill-selected */
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,input:-webkit-autofill:active { -webkit-box-shadow: 0 0 0 30px #fff inset; }
+input,select,textarea,button { font-size: 100%; font-weight: normal; letter-spacing: normal; background: transparent; }
+button,input { line-height: normal; }
+button,select { text-transform: none; }
+button::-moz-focus-inner,input::-moz-focus-inner { border: 0; padding: 0; }
+button:not(:disabled),input[type="button"]:not(:disabled),input[type="reset"]:not(:disabled),input[type="submit"]:not(:disabled) { -webkit-appearance: button; cursor: pointer; *overflow: visible; }
+select { -webkit-appearance: none; /* 네이티브 외형 감추기*/ -moz-appearance: none; appearance: none; cursor: pointer; }/* IE 10, 11의 네이티브 화살표 숨기기 */select::-ms-expand { display: none; }
+textarea { overflow: auto; resize: none; box-shadow: none; }
+details summary::-webkit-details-marker { display: none; } 
 
-input[type="search"] {
-  -webkit-appearance: textfield;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="checkbox"] + label,
-input[type="radio"] + label {
-  cursor: pointer;
-}
-
-/* Chorme internal-autofill-selected  */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px var(--lightPurple) inset;
-}
-
-input,
-select,
-textarea,
-button {
-  font-size: 100%;
-  font-weight: normal;
-  letter-spacing: normal;
-}
-
-button,
-input {
-  line-height: normal;
-}
-
-button,
-select {
-  text-transform: none;
-  color: var(--black);
-}
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
-  *overflow: visible;
-}
-
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  cursor: pointer;
-}
-
-select::-ms-expand {
-  display: none;
-}
-
-textarea {
-  overflow: auto;
-  resize: none;
-  -webkit-appearance: none;
-  box-shadow: none;
-  -webkit-border-radius: 0;
-}
-
-address {
-  font-style: normal;
-}
-
-details summary::-webkit-details-marker {
-  display: none;
-}
 
 /* 초기 셋팅 값 */
 html,
@@ -439,11 +217,11 @@ body {
   letter-spacing: normal;
   -webkit-tap-highlight-color: transparent;
 
-  font: 400 62.5%/1.2 "Poppins", "Pre", sans-serif;
-
-  background-color: var(--white);
+  background-color: #222;
   color: var(--black);
   scroll-behavior: smooth;
+
+  font: 400 62.5%/1.2 "Pre", sans-serif;
 }
 
 input,
@@ -451,9 +229,7 @@ select,
 textarea,
 button {
   font-family: "Pre", sans-serif;
-  font-size: 100%;
-  font-weight: normal;
-  letter-spacing: normal;
+  color: var(--black);
 }
 
 input,
@@ -542,6 +318,10 @@ textarea::placeholder {
 }
 
 @media all and (max-width: 768px) {
+  body {
+    font-size: 0.8rem;
+  }
+
   .pc-only,
   .tablet-only {
     display: none;
