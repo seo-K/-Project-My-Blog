@@ -12,19 +12,25 @@ export default function MainPage() {
 
   return (
     <Container>
-      <section className="dashboard-article">
-        <h3 className="title">Dashboard</h3>
-        <div className="content-wrap">
-          <div className="content">
+      <article className="background">
+        <h3 className="title">My Blog</h3>
+        <div className="background__content">
+          <p>서영이의 블로그입니다</p>
+        </div>
+      </article>
+      <article className="info">
+        <h3 className="title">info</h3>
+        <div className="info__content-wrap">
+          <div className="info__content">
             <p>Name: SeoYeong kang</p>
             <p>email: dkasid@naver.com</p>
             <p>Name</p>
           </div>
         </div>
-      </section>
-      <section className="post-article">
+      </article>
+      <article className="post">
         <h3 className="title">Post</h3>
-        <ul className="content-wrap">
+        <ul className="post__content-wrap">
           {PostData?.filter((item, index) => index < 3).map((list) => {
             return (
               <li key={"postList" + list.id}>
@@ -33,21 +39,21 @@ export default function MainPage() {
             );
           })}
         </ul>
-      </section>
-      <section className="git-article">
+      </article>
+      {/* <article className="git-article">
         <h3 className="title">Git Status</h3>
         <div className="content-wrap">
           <div className="git-status-wrap">
             <img src="https://ghchart.rshah.org/00565b/seo-K" alt="git 잔디 이미지" />
           </div>
         </div>
-      </section>
-      <section className="area-article">
+      </article>
+      <article className="area-article">
         <h3 className="title">Area</h3>
         <div className="content-wrap map-area">
           <Map />
         </div>
-      </section>
+      </article> */}
     </Container>
   );
 }
@@ -58,125 +64,24 @@ const Container = styled.div`
 
   display: grid;
   width: 100%;
+  height: 100%;
   gap: 1rem;
 
-  grid-template-columns: repeat(3, 1fr);
-  /* grid-auto-rows: minmax(37rem, auto); */
-  /* grid-template-rows: auto; */
-  /* grid-template-rows: revert; */
-  /* grid-template-rows: repeat(2, auto); */
-  /* grid-template-rows: repeat(2, minmax(40rem, auto)); */
+  grid-template-rows: repeat(auto-fit, minmax(50rem, 1fr));
+  grid-template-columns: 1fr 2fr;
   grid-template-areas:
-    "dashboard post post"
-    "git git area";
+    "background background"
+    "info post";
 
-  section {
-    border: 2px solid lightcyan;
+  article {
+    position: relative;
+    padding: 2rem;
 
-    &.dashboard-article {
-      grid-area: dashboard;
+    background-color: var(--whiteOpacity);
+    backdrop-filter: blur(1rem);
+    border-radius: 2rem;
 
-      .content-wrap {
-        position: relative;
-        height: 20rem;
-      }
-
-      .content {
-        position: absolute;
-        width: 110%;
-        height: 100%;
-
-        right: 0;
-        top: 0;
-        content: "";
-
-        background-color: var(--black);
-        border-radius: 10px;
-
-        padding: 1.8rem 2rem;
-
-        & p {
-          color: #fff;
-          font-size: 1.4rem;
-
-          + p {
-            margin-top: 0.8rem;
-          }
-        }
-
-        &:after {
-          position: absolute;
-          bottom: 0.5rem;
-          right: 1.5rem;
-          content: "D";
-
-          font-size: 12rem;
-          font-weight: 800;
-          line-height: 1;
-
-          color: rgba(255, 255, 255, 0.1);
-        }
-
-        &:before {
-          position: absolute;
-          bottom: 0.5rem;
-          right: 0.5rem;
-          content: "a";
-
-          font-size: 6rem;
-          font-weight: 800;
-          line-height: 1;
-
-          color: rgba(255, 255, 255, 0.2);
-        }
-      }
-    }
-
-    &.post-article {
-      grid-area: post;
-
-      .content-wrap {
-        display: flex;
-        gap: 2%;
-
-        > li {
-          flex: 1;
-          min-height: 35rem;
-
-          border-radius: 50px 10px 10px 10px;
-          background-color: var(--white);
-        }
-      }
-    }
-
-    &.git-article {
-      grid-area: git;
-
-      background-color: var(--white);
-      border-radius: 10px;
-
-      padding: 1.5rem;
-
-      .content-wrap {
-        .git-status-wrap {
-          width: 100%;
-        }
-      }
-    }
-
-    &.area-article {
-      grid-area: area;
-
-      background-color: var(--white);
-      border-radius: 10px;
-
-      padding: 1.5rem;
-
-      .content-wrap {
-      }
-    }
-
-    .title {
+    & .title {
       font-size: 2.4rem;
       font-weight: 600;
 
@@ -184,26 +89,96 @@ const Container = styled.div`
     }
   }
 
-  /* map */
-  .map-area {
-    position: relative;
-    width: 100%;
-    /* aspect-ratio: 1/1; */
-    height: 20rem;
-
-    margin-top: auto;
+  & .background {
+    grid-area: background;
 
     &:after {
       position: absolute;
-      top: -0.375rem;
-      left: -0.375rem;
+      left: 10%;
+      top: 90%;
+      width: 20rem;
+      height: 20rem;
       content: "";
 
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
+      background-color: var(--mainGreen);
+      box-shadow: 0 0 0 2rem var(--mainYellow);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    &:before {
+      position: absolute;
+      right: 0;
+      top: 80%;
+      width: 15rem;
+      height: 15rem;
+      content: "";
 
       background-color: var(--mainYellow);
+      border-radius: 50%;
+    }
+  }
+
+  & .info {
+    grid-area: info;
+
+    &__content {
+      height: 100%;
+      padding: 1.8rem 2rem;
+
+      background-color: var(--black);
+      border-radius: 10px;
+      transform: translateX(-10%);
+
+      & p {
+        color: #fff;
+        font-size: 1.4rem;
+
+        + p {
+          margin-top: 0.8rem;
+        }
+      }
+
+      &:after {
+        position: absolute;
+        bottom: 0.5rem;
+        right: 1.5rem;
+        content: "D";
+
+        font-size: 12rem;
+        font-weight: 800;
+        line-height: 1;
+
+        color: rgba(255, 255, 255, 0.1);
+      }
+
+      &:before {
+        position: absolute;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        content: "a";
+
+        font-size: 6rem;
+        font-weight: 800;
+        line-height: 1;
+
+        color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  & .post {
+    grid-area: post;
+
+    &__content-wrap {
+      gap: 2%;
+
+      > li {
+        flex: 1;
+
+        border-radius: 50px 10px 10px 10px;
+        background-color: var(--white);
+      }
     }
   }
 `;

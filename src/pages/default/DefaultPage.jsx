@@ -13,9 +13,10 @@ export default function DefaultPage() {
   return (
     <Container>
       <Header />
-      <main>
-        <div className="main-wrap">
-          <div className="search-wrap">
+      <main className="main">
+        <div className="main__inner">
+          {/* 검색 */}
+          <div className="main__search-wrap">
             <button type="submit" className="icon-wrap">
               <img src={SearchSvg} alt="검색" />
             </button>
@@ -32,52 +33,46 @@ const Container = styled.div`
   display: flex;
   height: 100vh;
 
-  padding: 1rem;
-
-  main {
-    display: flex;
-    flex-direction: column;
-
+  & .main {
     flex: 1;
-    height: calc(100vh - 2rem);
 
-    /* margin: 1rem; */
+    border-top-left-radius: 2rem;
+    background-color: var(--gray);
+    padding: 2rem 1rem;
 
-    /* background-color: var(--white); */
-
-    .main-wrap {
+    &__inner {
       width: 100%;
       max-width: 150rem;
 
-      background-color: var(--gray);
       border-radius: 10px;
-
-      padding: 1rem 1.5rem;
       margin: 0 auto;
     }
 
-    .search-wrap {
+    &__search-wrap {
       display: flex;
       align-items: center;
 
-      width: 25rem;
+      width: 35rem;
       max-width: 100%;
 
       border-radius: 50px;
-      border: 1px solid var(--darkGray);
+      background-color: var(--white);
+      border: 2px solid var(--mainYellow);
 
-      padding: 0 1rem;
+      padding: 1rem 2rem;
       margin-bottom: 2rem;
 
       .icon-wrap {
-        width: 1.5rem;
-        height: 1.5rem;
+        flex-shrink: 0;
+        width: 2rem;
+        height: 2rem;
 
-        margin-right: 0.5rem;
+        margin-right: 1rem;
       }
 
       input {
-        width: calc(100% - 2rem);
+        flex: 1;
+        font-size: 1.4rem;
 
         padding: 0.5rem 0;
       }

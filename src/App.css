@@ -8,12 +8,14 @@
 
   --mainYellow: #e5f33c;
   --mainGreen: #00565b;
-  --black: #fff;
-  --gray: #3b3b3b;
-  --darkGray: #a5a5a5;
+  --black: #010101;
+  --gray: #f6f6f6;
+  --activeColor: #a5a5a5;
   --beige: #e2decd;
-  --white: #25252f;
-  --deepDarkGray: #131313;
+  --white: #fff;
+  --whiteOpacity: rgba(255,255,255,0.3);
+  --deepDarkGray: #929292;
+
 }
 
 :root[color-theme="dark"] {
@@ -24,12 +26,13 @@
 
   --mainYellow: #e5f33c;
   --mainGreen: #00565b;
-  --black: #010101;
-  --gray: #f6f6f6;
-  --darkGray: #a5a5a5;
-  --beige: #e2decd;
-  --white: #fff;
-  --deepDarkGray: #929292;
+  --black: #fff;
+  --gray: #1a2233;
+  --activeColor: #2d3d59;
+  --beige: #f5f6f7;
+  --white: #25252f;
+  --deepDarkGray: #131313;
+
 }
 
 @font-face {
@@ -217,7 +220,7 @@ body {
   letter-spacing: normal;
   -webkit-tap-highlight-color: transparent;
 
-  background-color: #222;
+  background-color: var(--white);
   color: var(--black);
   scroll-behavior: smooth;
 
@@ -234,7 +237,8 @@ button {
 
 input,
 textarea {
-  color: #444;
+  color: var(--black);
+  font-size: 1.2rem;
 }
 
 input::placeholder,

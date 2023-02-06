@@ -61,7 +61,7 @@ const Container = styled.header`
   display: flex;
   flex-direction: column;
 
-  /* padding: 1rem; */
+  padding-left: 2rem;
   overflow: hidden;
 
   .logo {
@@ -92,7 +92,7 @@ const Container = styled.header`
         font-weight: bold;
       }
 
-      margin-bottom: 2rem;
+      margin-bottom: 5rem;
     }
 
     .menu-container {
@@ -104,9 +104,9 @@ const Container = styled.header`
         text-align: center;
 
         font-size: 1.8rem;
-        color: var(--darkGray);
+        color: var(--black);
 
-        padding: 1.5rem 2rem;
+        padding: 2rem;
 
         .icon-wrap {
           display: flex;
@@ -116,7 +116,7 @@ const Container = styled.header`
           width: 2.5rem;
           height: 2.5rem;
 
-          margin-right: 0.5rem;
+          margin-right: 1.5rem;
         }
 
         & + a {
@@ -128,22 +128,8 @@ const Container = styled.header`
         font-weight: bold;
         color: var(--black);
 
-        background-color: var(--gray);
+        background-color: var(--mainYellow);
         border-radius: 10rem 0 0 10rem;
-
-        /* &:after {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          content: "";
-
-          width: 0.5rem;
-          height: 50%;
-          border-radius: 0 5px 5px 0;
-          background-color: var(--mainYellow);
-
-          transform: translateY(-50%);
-        } */
 
         &:after,
         &:before {
@@ -159,13 +145,13 @@ const Container = styled.header`
         &:after {
           bottom: 100%;
           border-bottom-right-radius: 2rem;
-          box-shadow: 0.7rem 0.7rem 0 0.7rem var(--gray);
+          box-shadow: 0.7rem 0.7rem 0 0.7rem var(--mainYellow);
         }
 
         &:before {
           top: 100%;
           border-top-right-radius: 2rem;
-          box-shadow: 0.7rem -0.7rem 0 0.7rem var(--gray);
+          box-shadow: 0.7rem -0.7rem 0 0.7rem var(--mainYellow);
         }
 
         .icon-wrap svg {
