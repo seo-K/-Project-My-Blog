@@ -36,9 +36,9 @@ const Container = styled.div`
   & .main {
     flex: 1;
 
-    border-top-left-radius: 2rem;
-    background-color: var(--gray);
-    padding: 2rem 1rem;
+    padding: 3rem;
+    border-radius: 5rem 0 0 5rem;
+    background-color: var(--beige);
 
     &__inner {
       width: 100%;

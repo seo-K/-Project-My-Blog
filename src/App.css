@@ -6,7 +6,16 @@
   --darkBlue: #0d334b;
   --midBlue: #113f5d;
 
-  --mainYellow: #e5f33c;
+  --mainYellow: #8bb8a2;
+  --mainGreen: #636c78;
+  --deepDarkGray: #59616f;
+  --black: #010101;
+  --gray: #f6f6f6;
+  --activeColor: #f2f2f2;
+  --beige: #f2f2f2;
+  --white: #fff;
+  --whiteOpacity: rgba(255,255,255,0.3);
+  /* --mainYellow: #e5f33c;
   --mainGreen: #00565b;
   --black: #010101;
   --gray: #f6f6f6;
@@ -14,7 +23,7 @@
   --beige: #e2decd;
   --white: #fff;
   --whiteOpacity: rgba(255,255,255,0.3);
-  --deepDarkGray: #929292;
+  --deepDarkGray: #929292; */
 
 }
 
@@ -172,6 +181,43 @@
   font-display: fallback;
 }
 
+
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa"), url("./assets/fonts/comfortaa/Comfortaa-Light.ttf") format("truetype");
+  font-weight: 200;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa"), url("./assets/fonts/comfortaa/Comfortaa-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa"), url("./assets/fonts/comfortaa/Comfortaa-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa"), url("./assets/fonts/comfortaa/Comfortaa-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa"), url("./assets/fonts/comfortaa/Comfortaa-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: fallback;
+}
+
+
 * { margin: 0; padding: 0; border: 0; vertical-align: middle; box-sizing: border-box; } 
 html,body,div,span,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,blockquote,p,address,pre,cite,form,fieldset,input,textarea,select,table,th,td { margin: 0; padding: 0; background: transparent; } 
 h1,h2,h3,h4,h5,h6 { font-size: 100%; font-weight: normal; letter-spacing: normal; } 
@@ -220,18 +266,18 @@ body {
   letter-spacing: normal;
   -webkit-tap-highlight-color: transparent;
 
-  background-color: var(--white);
+  background-color: transparent;
   color: var(--black);
   scroll-behavior: smooth;
 
-  font: 400 62.5%/1.2 "Pre", sans-serif;
+  font: 400 62.5%/1.2 "Pre", "Poppins", sans-serif;
 }
 
 input,
 select,
 textarea,
 button {
-  font-family: "Pre", sans-serif;
+  font-family: "Pre", "Poppins", sans-serif;
   color: var(--black);
 }
 

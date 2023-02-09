@@ -15,15 +15,15 @@ export default function MainPage() {
       <article className="background">
         <h3 className="title">My Blog</h3>
         <div className="background__content">
-          <p>서영이의 블로그입니다</p>
+          <p>ㅇㅇ이의 블로그입니다</p>
         </div>
       </article>
       <article className="info">
         <h3 className="title">info</h3>
         <div className="info__content-wrap">
           <div className="info__content">
-            <p>Name: SeoYeong kang</p>
-            <p>email: dkasid@naver.com</p>
+            <p>Name: ㅇㅇ kang</p>
+            <p>email: ㅇㅇ@naver.com</p>
             <p>Name</p>
           </div>
         </div>
