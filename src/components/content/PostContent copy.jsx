@@ -29,6 +29,12 @@ export default function PostContent({ data }) {
           <p className="post__desc">{desc}</p>
         </div>
       </div>
+      {/* <button className="read-more-button">
+        <span>Read More</span>
+        <span className="read-more-icon">
+          <img src="assets/images/icon/more.svg" alt="더보기" />
+        </span>
+      </button> */}
     </Container>
   );
 }
@@ -47,7 +53,7 @@ const Container = styled(Link)`
 
     figure {
       flex-shrink: 0;
-      width: clamp(5rem, 20%, 8rem);
+      width: clamp(10rem, 20%, 25rem);
       aspect-ratio: 1 / 1;
 
       margin-right: 2.2rem;

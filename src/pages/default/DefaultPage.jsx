@@ -35,6 +35,7 @@ const Container = styled.div`
 
   & .main {
     flex: 1;
+    min-height: 100vh;
 
     padding: 3rem;
     border-radius: 5rem 0 0 5rem;
