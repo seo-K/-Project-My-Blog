@@ -56,7 +56,6 @@ const Container = styled.div`
       max-width: 100%;
 
       border-radius: 50px;
-      background-color: var(--white);
       border: 2px solid var(--mainYellow);
 
       padding: 1rem 2rem;

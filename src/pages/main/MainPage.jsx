@@ -15,7 +15,56 @@ export default function MainPage() {
       <article className="background">
         <h3 className="title">My Blog</h3>
         <div className="background__content">
-          <p>ㅇㅇ이의 블로그입니다</p>
+          <hgroup>
+            <h3>
+              My Blog
+              <br />
+              Folders
+            </h3>
+            <p>Learn List</p>
+          </hgroup>
+          <ul className="folder">
+            <li>
+              <a href="#" className="folder__link">
+                <p className="folder__num">01</p>
+                <div className="folder__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#fff"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                  >
+                    <title>html5</title>
+                    <path d="M11.677 13.196l-0.289-3.387 12.536 0.004 0.287-3.268-16.421-0.004 0.87 9.983h11.374l-0.406 4.27-3.627 1.002-3.683-1.009-0.234-2.63h-3.252l0.411 5.198 6.757 1.807 6.704-1.798 0.927-10.166h-11.954zM2.914 1.045h26.172l-2.38 26.874-10.734 3.037-10.673-3.038z" />
+                  </svg>
+                </div>
+                <p className="folder__title">HTML</p>
+                <i className="folder__count">3 value</i>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="folder__link">
+                <p className="folder__num">01</p>
+                <div className="folder__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#fff"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                  >
+                    <title>html5</title>
+                    <path d="M11.677 13.196l-0.289-3.387 12.536 0.004 0.287-3.268-16.421-0.004 0.87 9.983h11.374l-0.406 4.27-3.627 1.002-3.683-1.009-0.234-2.63h-3.252l0.411 5.198 6.757 1.807 6.704-1.798 0.927-10.166h-11.954zM2.914 1.045h26.172l-2.38 26.874-10.734 3.037-10.673-3.038z" />
+                  </svg>
+                </div>
+                <p className="folder__title">HTML</p>
+                <i className="folder__count">3 value</i>
+              </a>
+            </li>
+          </ul>
         </div>
       </article>
       <article className="info">
@@ -116,6 +165,67 @@ const Container = styled.div`
 
       background-color: var(--mainYellow);
       border-radius: 50%;
+    }
+
+    &__content {
+      display: flex;
+
+      hgroup {
+        width: 40%;
+        flex-shrink: 0;
+
+        h3 {
+          font-size: 3rem;
+          line-height: 1.6;
+          font-weight: 800;
+          margin-bottom: 5rem;
+        }
+        p {
+          font-size: 1.5rem;
+        }
+      }
+
+      .folder {
+        display: flex;
+        flex: 1;
+
+        > li + li {
+          margin-left: 4rem;
+        }
+
+        &__link {
+          display: flex;
+          flex-direction: column;
+          width: 18rem;
+          height: 25rem;
+
+          background-color: var(--mainGreen);
+          color: var(--white);
+          border-radius: 3rem;
+
+          padding: 2.5rem 2rem;
+        }
+        &__num {
+          position: relative;
+          font-size: 1.6rem;
+        }
+        &__icon {
+          width: 6rem;
+          height: 5rem;
+          margin-bottom: 2rem;
+
+          margin-top: auto;
+        }
+        &__title {
+          font-size: 2rem;
+          font-weight: 600;
+        }
+        &__count {
+          font-size: 1.4rem;
+          font-weight: 100;
+          margin-top: 1rem;
+        }
+      }
     }
   }
 
