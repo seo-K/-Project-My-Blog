@@ -15,10 +15,10 @@ export default function PostPage() {
       <h2 className="blind">포스트 리스트</h2>
 
       <ul className="post-list-wrap">
-        {PostData?.map((list, index) => {
+        {PostData?.map((list) => {
           return (
             <li key={"postList" + list.id}>
-              <PostContent />
+              <PostContent data={list} />
             </li>
           );
         })}

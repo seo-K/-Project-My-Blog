@@ -9,7 +9,7 @@ export default function PostContent({ data }) {
   const { id, postImg, category, title, desc } = data || {};
 
   return (
-    <Container to="/post/:id">
+    <Container to="/post/0">
       <div className="post">
         {postImg ? (
           <figure>
