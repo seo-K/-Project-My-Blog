@@ -13,8 +13,6 @@ import MyPage from "./routes/my/MyPage";
 import PortfolioPage from "./routes/portfolio/PortfolioPage";
 
 // react 공홈
-import Root from "./routes/root";
-import Contact from "./routes/contact";
 import ErrorPage from "./error-page";
 // import Home, { loader as homeLoader } from './routes/home';
 // import Post, { loader as postLoader } from './routes/post';
@@ -34,7 +32,7 @@ const router = createBrowserRouter([
         element: <PostPage />,
       },
       {
-        path: 'post/:postId"',
+        path: "post/:id",
         element: <PostViewPage />,
       },
       {
