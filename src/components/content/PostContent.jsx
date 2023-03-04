@@ -20,14 +20,14 @@ export default function PostContent({ data }) {
             <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
           </figure>
         )}
-        <div>
+        <hgroup>
           <h4 className="post__title">
             &#91;{category}&#93;
             <br />
             {title}
           </h4>
           <p className="post__desc">{desc}</p>
-        </div>
+        </hgroup>
       </div>
     </Container>
   );
@@ -36,12 +36,11 @@ export default function PostContent({ data }) {
 const Container = styled(Link)`
   width: 100%;
   height: 100%;
-
-  padding: 1.5rem 0;
+  padding: 0 2rem;
 
   .post {
     display: flex;
-
+    padding: 1rem 0;
     width: 100%;
     margin: 0 auto;
 
@@ -83,10 +82,8 @@ const Container = styled(Link)`
       &.empty-img-wrap {
         display: grid;
         place-content: center;
-
         background-color: rgba(255, 255, 255, 0.1);
         border-radius: 3rem 1rem 1rem 1rem;
-
         img {
           width: 5rem;
           height: 5rem;

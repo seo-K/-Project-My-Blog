@@ -162,7 +162,12 @@ const Container = styled.header`
       background-color: var(--beige);
       border-radius: 10rem 0 0 10rem;
       /* transform: translateY(${(props) => props.transform}); */
-      transform: ${(props) => `translateY(${props.transform * 240}px)`};
+
+      ${({ transform }) => {
+        return transform
+          ? `margin-left: calc(100vw * (11/ 1920));`
+          : `margin-left: calc(100vw * (16/ 1920));`;
+      }}
       transition: transform 0.5s;
       z-index: 0;
       &:after,
