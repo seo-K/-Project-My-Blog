@@ -6,6 +6,7 @@ import axios from "axios";
 
 // img
 import SearchSvg from "../../assets/images/icon/search.svg";
+import ArrowIconSvg from "../../assets/images/common/icon_arrow_down.svg";
 
 export default function DefaultPage() {
   const navigate = useNavigate();
@@ -16,11 +17,22 @@ export default function DefaultPage() {
       <main className="main">
         <div className="main__inner">
           {/* 검색 */}
-          <div className="main__search-wrap">
-            <button type="submit" className="icon-wrap">
-              <img src={SearchSvg} alt="검색" />
-            </button>
-            <input type="search" placeholder="검색어를 입력해주세요." />
+          <div className="search">
+            <div className="search__select-box">
+              <select name="" id="">
+                <option value="Html">Html</option>
+                <option value="Css">Css</option>
+                <option value="Js">Js</option>
+                <option value="React">React</option>
+                <option value="etc">etc</option>
+              </select>
+            </div>
+            <div className="search__search-wrap">
+              <button type="submit" className="icon-wrap">
+                <img src={SearchSvg} alt="검색" />
+              </button>
+              <input type="search" placeholder="검색어를 입력해주세요." />
+            </div>
           </div>
           <Outlet />
         </div>
@@ -33,7 +45,7 @@ const Container = styled.div`
   display: flex;
   height: 100vh;
 
-  & .main {
+  .main {
     flex: 1;
     min-height: 100vh;
 
@@ -48,6 +60,27 @@ const Container = styled.div`
       border-radius: 10px;
       margin: 0 auto;
     }
+  }
+  .search {
+    display: flex;
+    margin-bottom: 2rem;
+
+    &__select-box {
+      flex-shrink: 0;
+      width: 10rem;
+
+      margin-right: 1rem;
+
+      select {
+        width: 100%;
+        height: 100%;
+        font-size: 1.4rem;
+        text-align: center;
+        border-radius: 50px;
+        border: 2px solid var(--mainYellow);
+        background: url(${ArrowIconSvg}) no-repeat 85% center / 1rem 1rem;
+      }
+    }
 
     &__search-wrap {
       display: flex;
@@ -60,7 +93,6 @@ const Container = styled.div`
       border: 2px solid var(--mainYellow);
 
       padding: 1rem 2rem;
-      margin-bottom: 2rem;
 
       .icon-wrap {
         flex-shrink: 0;

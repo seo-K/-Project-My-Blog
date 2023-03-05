@@ -13,7 +13,6 @@ export default function PostPage() {
   return (
     <Container>
       <h2 className="blind">포스트 리스트</h2>
-
       <ul className="post-list-wrap">
         {PostData?.map((list) => {
           return (
@@ -32,8 +31,7 @@ const Container = styled.section`
   .post-list-wrap {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
-    gap: 1.5rem 1rem;
+    gap: 3rem 1rem;
 
     & > li {
       flex: 0 0 calc((100% - 3rem) / 4);

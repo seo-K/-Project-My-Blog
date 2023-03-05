@@ -10,7 +10,7 @@ export default function PostContent({ data }) {
 
   return (
     <Container to={`/post/${id}`}>
-      <div className="post">
+      <div className="post-content">
         {postImg ? (
           <figure>
             <img src={postImg} alt="포스트 이미지" />
@@ -21,12 +21,12 @@ export default function PostContent({ data }) {
           </figure>
         )}
         <hgroup>
-          <h4 className="post__title">
+          <h4 className="post-content__title">
             &#91;{category}&#93;
             <br />
             {title}
           </h4>
-          <p className="post__desc">{desc}</p>
+          <p className="post-content__desc">{desc}</p>
         </hgroup>
       </div>
     </Container>
@@ -34,11 +34,32 @@ export default function PostContent({ data }) {
 }
 
 const Container = styled(Link)`
+  position: relative;
   width: 100%;
   height: 100%;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  :after {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 7rem;
+    height: 1.5rem;
+    content: "";
+    border-top-left-radius: 1rem;
+    background-color: var(--white);
+  }
+  :before {
+    position: absolute;
+    bottom: 100%;
+    left: 6.5rem;
+    content: "";
+    border-bottom: 1.5rem solid var(--white);
+    border-right: 1.5rem solid transparent;
+    border-left: 0.75rem solid var(--white);
+  }
 
-  .post {
+  .post-content {
     display: flex;
     padding: 1rem 0;
     width: 100%;
@@ -48,31 +69,24 @@ const Container = styled(Link)`
       flex-shrink: 0;
       width: clamp(5rem, 20%, 8rem);
       aspect-ratio: 1 / 1;
-
       margin-right: 2.2rem;
 
       &:not(.empty-img-wrap) {
         position: relative;
-
         &:after {
           position: absolute;
           top: -0.5rem;
           left: -0.5rem;
-
           content: "";
-
           width: 100%;
           height: 100%;
           border-radius: 3rem 1rem 1rem 1rem;
           box-shadow: 1rem 1rem 0 var(--mainGreen);
-
           background-color: var(--mainYellow);
           filter: opacity(0.8);
         }
-
         img {
           position: relative;
-
           border-radius: 3rem 1rem 1rem 1rem;
           overflow: hidden;
           z-index: 1;
@@ -94,15 +108,14 @@ const Container = styled(Link)`
     &__title {
       font-size: 1.5rem;
       font-weight: 500;
-
       margin-bottom: 1.5rem;
 
       /* 두줄처리 */
       text-overflow: ellipsis;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 2; //텍스트를 몇줄까지 보이게 할 것인가
-      -webkit-box-orient: vertical; //콘텐츠의 정렬 방향
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       word-wrap: break-word;
     }
 
@@ -111,8 +124,8 @@ const Container = styled(Link)`
       text-overflow: ellipsis;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 2; //텍스트를 몇줄까지 보이게 할 것인가
-      -webkit-box-orient: vertical; //콘텐츠의 정렬 방향
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       word-wrap: break-word;
     }
   }
