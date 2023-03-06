@@ -11,6 +11,11 @@ import ArrowIconSvg from "../../assets/images/common/icon_arrow_down.svg";
 export default function DefaultPage() {
   const navigate = useNavigate();
 
+  const [searchWord, setSearchWord] = useState(""); // 검색어 값
+  //검색 할때 실행되는 함수
+  const handleSearch = () => {
+    navigate(`/post/search/${searchWord}`);
+  };
   return (
     <Container>
       <Header />
@@ -28,10 +33,41 @@ export default function DefaultPage() {
               </select>
             </div>
             <div className="search__search-wrap">
-              <button type="submit" className="icon-wrap">
+              <button
+                type="submit"
+                className="icon-wrap"
+                onClick={() => {
+                  if (searchWord.length > 0) {
+                    handleSearch();
+                  } else {
+                    alert("검색어를 입력하세요!");
+                  }
+                }}
+              >
                 <img src={SearchSvg} alt="검색" />
               </button>
-              <input type="search" placeholder="검색어를 입력해주세요." />
+              <input
+                onChange={(e) => {
+                  if (e.target.value.length === 0) {
+                    setSearchWord("");
+                  }
+                  if (e.target.value.length > 0) {
+                    setSearchWord(e.target.value);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    if (e.target.value.length > 0) {
+                      handleSearch();
+                    } else {
+                      alert("검색어를 입력하세요!");
+                    }
+                  }
+                }}
+                type="search"
+                placeholder="검색어를 입력해주세요."
+                value={searchWord}
+              />
             </div>
           </div>
           <Outlet />
@@ -68,7 +104,6 @@ const Container = styled.div`
     &__select-box {
       flex-shrink: 0;
       width: 10rem;
-
       margin-right: 1rem;
 
       select {
@@ -85,13 +120,10 @@ const Container = styled.div`
     &__search-wrap {
       display: flex;
       align-items: center;
-
       width: 35rem;
       max-width: 100%;
-
       border-radius: 50px;
       border: 2px solid var(--mainYellow);
-
       padding: 1rem 2rem;
 
       .icon-wrap {
@@ -105,7 +137,6 @@ const Container = styled.div`
       input {
         flex: 1;
         font-size: 1.4rem;
-
         padding: 0.5rem 0;
       }
     }

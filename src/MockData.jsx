@@ -11,7 +11,8 @@ const PostData = [
     postImg: PostImg01,
     title: "블로그01블로그01블로그01블로그01",
     desc: "[Description] 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-06",
+    like: "9",
     comment: [
       {
         id: 0,
@@ -23,7 +24,8 @@ const PostData = [
     category: "react",
     title: "블로그01",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 2,
@@ -31,7 +33,8 @@ const PostData = [
     postImg: PostImg03,
     title: "A530",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 3,
@@ -39,14 +42,16 @@ const PostData = [
     postImg: PostImg04,
     title: "블로그01",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 4,
     category: "swiper",
     title: "FiA530laments",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 5,
@@ -54,7 +59,8 @@ const PostData = [
     postImg: PostImg01,
     title: "A530",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 6,
@@ -62,7 +68,8 @@ const PostData = [
     postImg: PostImg02,
     title: "블로그01",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 7,
@@ -70,7 +77,8 @@ const PostData = [
     postImg: PostImg03,
     title: "FiA530laments",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 8,
@@ -78,7 +86,8 @@ const PostData = [
     postImg: PostImg04,
     title: "A530",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
   {
     id: 9,
@@ -86,7 +95,8 @@ const PostData = [
     postImg: PostImg02,
     title: "A530",
     desc: "[Description] 설명이 들어가는 장소입니다.",
-    like: "9,900,000",
+    date: "2023-03-10",
+    like: "9",
   },
 ];
 
