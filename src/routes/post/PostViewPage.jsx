@@ -69,6 +69,7 @@ const Container = styled.div`
     }
     figure {
       max-width: 100%;
+      width: auto;
       height: 20rem;
       object-fit: contain;
       margin-bottom: 2rem;

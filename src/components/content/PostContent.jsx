@@ -39,6 +39,7 @@ const Container = styled(Link)`
   height: 100%;
   padding: 1rem 2rem;
   background-color: var(--white);
+  border-radius: 0 1rem 1rem 1rem;
   :after {
     position: absolute;
     bottom: 100%;

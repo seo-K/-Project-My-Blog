@@ -25,6 +25,7 @@ export default function DefaultPage() {
           <div className="search">
             <div className="search__select-box">
               <select name="" id="">
+                <option value="All">All</option>
                 <option value="Html">Html</option>
                 <option value="Css">Css</option>
                 <option value="Js">Js</option>
@@ -110,6 +111,7 @@ const Container = styled.div`
         width: 100%;
         height: 100%;
         font-size: 1.4rem;
+        text-indent: -0.7rem;
         text-align: center;
         border-radius: 50px;
         border: 2px solid var(--mainYellow);

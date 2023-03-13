@@ -275,20 +275,17 @@ const Container = styled.div`
             bottom: 0;
           }
         }
-
         &__link {
           display: flex;
           flex-direction: column;
           width: 100%;
           height: 100%;
-
           background-color: var(--mainYellow);
           color: var(--white);
           border-radius: 3rem;
-
           padding: 2.5rem 2rem;
+          transition: all 0.2s;
         }
-
         &__num {
           position: relative;
           font-size: 1.6rem;
@@ -305,7 +302,6 @@ const Container = styled.div`
             height: 2rem;
           }
         }
-
         &__icon {
           width: 6rem;
           height: 5rem;
@@ -313,12 +309,10 @@ const Container = styled.div`
 
           margin-top: auto;
         }
-
         &__title {
           font-size: 2rem;
           font-weight: 600;
         }
-
         &__count {
           font-size: 1.4rem;
           font-weight: 100;

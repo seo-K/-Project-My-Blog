@@ -285,6 +285,9 @@ const Container = styled.div`
       &.rotate {
         transform: rotate(50deg);
       }
+      &:hover {
+        transform: translateY(1rem);
+      }
     }
     &__link:after {
       position: absolute;
