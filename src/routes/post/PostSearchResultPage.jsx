@@ -7,7 +7,7 @@ import axios from "axios";
 // mock data
 import { PostData } from "../../MockData";
 
-export default function PostPage() {
+export default function PostSearchResultPage() {
   const navigate = useNavigate();
 
   const [category, setCategory] = useState(0);

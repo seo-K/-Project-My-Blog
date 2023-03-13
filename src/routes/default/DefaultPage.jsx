@@ -23,7 +23,7 @@ export default function DefaultPage() {
         <div className="main__inner">
           {/* 검색 */}
           <div className="search">
-            <div className="search__select-box">
+            {/* <div className="search__select-box">
               <select name="" id="">
                 <option value="All">All</option>
                 <option value="Html">Html</option>
@@ -32,7 +32,7 @@ export default function DefaultPage() {
                 <option value="React">React</option>
                 <option value="etc">etc</option>
               </select>
-            </div>
+            </div> */}
             <div className="search__search-wrap">
               <button
                 type="submit"

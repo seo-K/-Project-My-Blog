@@ -9,6 +9,7 @@ import DefaultPage from "./routes/default/DefaultPage";
 import MainPage from "./routes/main/MainPage";
 import PostPage from "./routes/post/PostPage";
 import PostViewPage from "./routes/post/PostViewPage";
+import PostSearchResultPage from "./routes/post/PostSearchResultPage";
 import MyPage from "./routes/my/MyPage";
 import PortfolioPage from "./routes/portfolio/PortfolioPage";
 
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
         element: <PostPage />,
       },
       {
-        path: "post/:id",
+        path: "post/search/:searchWord",
+        element: <PostSearchResultPage />,
+      },
+      {
+        path: "post/detail/:id",
         element: <PostViewPage />,
       },
       {
