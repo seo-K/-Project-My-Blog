@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
 import axios from "axios";
@@ -12,10 +12,29 @@ export default function DefaultPage() {
   const navigate = useNavigate();
 
   const [searchWord, setSearchWord] = useState(""); // 검색어 값
+  // useSearchParams = 현재 위치에 대한 url의 쿼리 문자열을 읽고 수정하는 데 사용
+  // 현재 위치의 검색 매개변수와 이를 업데이트하는데 사용할 수 있는 함수라는 두 값의 배열을 반환
+  // serializeFormQuery form 태그와 함께사용
+  let [searchParams, setSearchParams] = useSearchParams();
   //검색 할때 실행되는 함수
-  const handleSearch = () => {
+  // const logSearchParams = () => {
+  //   console.log(searchParams.get("samplekey"));  // url is assumed as https://.....com?samplekey="dummy"
+  //   navigate(`/post/search/${searchWord}`);
+  // };
+  // logSearchParams();
+
+  const handleSearch = (e) => {
+    // let params = serializeFormQuery(e.target);
+    // setSearchParams(params);
     navigate(`/post/search/${searchWord}`);
   };
+
+  // const handleSearch = (e) => {
+  //   let params = serializeFormQuery(e.target);
+  //   setSearchParams(params);
+  //   navigate(`/post/search/${searchWord}`);
+  //   console.log(params);
+  // };
   return (
     <Container>
       <Header />
@@ -37,9 +56,9 @@ export default function DefaultPage() {
               <button
                 type="submit"
                 className="icon-wrap"
-                onClick={() => {
+                onClick={(e) => {
                   if (searchWord.length > 0) {
-                    handleSearch();
+                    handleSearch(e);
                   } else {
                     alert("검색어를 입력하세요!");
                   }
@@ -59,7 +78,7 @@ export default function DefaultPage() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     if (e.target.value.length > 0) {
-                      handleSearch();
+                      handleSearch(e);
                     } else {
                       alert("검색어를 입력하세요!");
                     }

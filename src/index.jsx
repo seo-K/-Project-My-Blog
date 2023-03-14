@@ -18,6 +18,18 @@ import ErrorPage from "./error-page";
 // import Home, { loader as homeLoader } from './routes/home';
 // import Post, { loader as postLoader } from './routes/post';
 
+// useEffect(()=> {
+//   const requestOptions = {
+//     method: 'GET',
+//     redirect: 'follow'
+//   };
+
+//   fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
+//   .then(response => response.json())
+//   .then(result => setPhotos(result))
+//   .catch(error => console.log('error'. error))
+// }, [])
+
 const router = createBrowserRouter([
   {
     path: "/",
