@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export default function BasicButton({ data }) {
   const { link, onClick, text } = data || "";
@@ -8,7 +8,7 @@ export default function BasicButton({ data }) {
   return (
     <React.Fragment>
       {link ? (
-        <BasicBtn to={link}>{text}</BasicBtn>
+        <BasicLink to={link}>{text}</BasicLink>
       ) : (
         <BasicBtn type="button" onClick={onClick}>
           {text}
@@ -18,4 +18,23 @@ export default function BasicButton({ data }) {
   );
 }
 
-const Container = styled.header``;
+const buttonStyle = css`
+  display: inline-block;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  background-color: var(--mainYellow);
+  color: #fff;
+  padding: 0.7rem 2rem;
+  border-radius: 5rem;
+
+  &:hover {
+    background-color: var(--mainGreen);
+  }
+`;
+const BasicBtn = styled.button`
+  ${buttonStyle}
+`;
+const BasicLink = styled(Link)`
+  ${buttonStyle}
+`;

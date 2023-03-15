@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// component
 import PostContent from "../../components/content/PostContent";
+import BasicButton from "../../components/common/BasicButton";
+
 import axios from "axios";
 
 // mock data
@@ -38,6 +41,14 @@ export default function PostPage() {
     },
   ];
 
+  const onClick = () => {
+    navigate("/new");
+  };
+  const buttonData = {
+    link: true,
+    text: "Create",
+    onClick: onClick,
+  };
   // useEffect(() => {
   //   if ( status === 'All' && keyword === '') {
   //     setBoard(PostData.slice((page - 1) * 6, page * 6));
@@ -75,6 +86,9 @@ export default function PostPage() {
             </li>
           ))}
         </ul>
+        <div className="button-wrap">
+          <BasicButton data={buttonData} />
+        </div>
         <ul className="post-list-wrap">
           {PostData?.map((list) => {
             return (
@@ -96,7 +110,7 @@ const Container = styled.section`
     align-items: center;
     justify-content: flex-start;
     flex-direction: row-reverse;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
     li {
       position: relative;
     }
@@ -132,10 +146,14 @@ const Container = styled.section`
       background-color: var(--beige);
     }
   }
+  .button-wrap {
+    text-align: right;
+  }
   .post-list-wrap {
     display: flex;
     flex-wrap: wrap;
     gap: 3rem 1rem;
+    margin-top: 3rem;
     > li {
       flex: 0 0 calc((100% - 3rem) / 4);
     }
