@@ -22,7 +22,7 @@ export default function PostViewPage() {
             <b>{PostData[id].category}</b>
             {PostData[id].title}
           </h2>
-          <time datetime={PostData[id].date}>{PostData[id].date}</time>
+          <time dateTime={PostData[id].date}>{PostData[id].date}</time>
         </hgroup>
         <hr />
         {PostData[id].postImg ? (

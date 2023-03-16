@@ -49,6 +49,39 @@ export default function PostPage() {
     text: "Create",
     onClick: onClick,
   };
+
+  // async function postUser() {
+  //   try {
+  //   // POST 요청은 body에 실어 보냄
+  //     await axios.post('/user', {
+  //         firstName: 'Fred',
+  //         lastName: 'Flintstone'
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
+
+  // photos, setPost 비구조화 할당
+  let [postList, setPost] = useState([]);
+
+  // 통신 메서드
+  function searchApi() {
+    const url = "https://api.mockaroo.com/api/types?key=d577b690";
+    axios
+      .get(url)
+      .then(function (response) {
+        setPost(response.data);
+        // console.log("성공");
+        console.log(postList);
+      })
+      .catch(function (error) {
+        console.log("실패");
+      });
+  }
+
+  // searchApi();
+
   // useEffect(() => {
   //   if ( status === 'All' && keyword === '') {
   //     setBoard(PostData.slice((page - 1) * 6, page * 6));
@@ -79,7 +112,7 @@ export default function PostPage() {
           {categoryList.map((list, index) => (
             <li
               key={list.id}
-              className={category == index && "active"}
+              className={category == index ? "active" : undefined}
               onClick={() => setCategory(index)}
             >
               <button type="button">{list.status}</button>

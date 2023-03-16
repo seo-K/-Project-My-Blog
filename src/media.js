@@ -1,5 +1,8 @@
 import { css } from "styled-components";
 
+// eslint-disable-next-line quotes
+// const fonts = { mono: "'Menlo', monospace" }
+
 const breakPoints = {
   mobile: "375",
   tablet: "768",

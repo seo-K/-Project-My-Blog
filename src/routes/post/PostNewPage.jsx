@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// component
 import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
+
 import axios from "axios";
 
 // mock data
 import { PostData } from "../../MockData";
 
-export default function PostSearchResultPage() {
+export default function PostNewPage() {
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState(0); // category
+  const [category, setCategory] = useState(0);
   const categoryList = [
     {
       id: 0,
@@ -39,13 +41,14 @@ export default function PostSearchResultPage() {
     },
   ];
 
-  let { searchWord } = useParams(); // 검색 단어
-  const searchList = PostData.filter((word) => {
-    return word.title.toLowerCase().includes(searchWord.toLowerCase());
-  });
-
-  // https://mjn5027.tistory.com/32
-  // https://goddino.tistory.com/296
+  const onClick = () => {
+    navigate("/new");
+  };
+  const buttonData = {
+    link: true,
+    text: "Create",
+    onClick: onClick,
+  };
   // useEffect(() => {
   //   if ( status === 'All' && keyword === '') {
   //     setBoard(PostData.slice((page - 1) * 6, page * 6));
@@ -71,30 +74,7 @@ export default function PostSearchResultPage() {
   return (
     <Container>
       <h2 className="blind">포스트 리스트</h2>
-      <div className="content-wrap">
-        <ul className="tab-list">
-          {categoryList.map((list, index) => (
-            <li
-              key={list.id}
-              className={category == index ? "active" : undefined}
-              onClick={() => setCategory(index)}
-            >
-              <button type="button">{list.status}</button>
-            </li>
-          ))}
-        </ul>
-        {searchList.length > 0 ? (
-          <ul className="post-list-wrap">
-            {searchList.map((list, index) => (
-              <li key={"postList" + list.id}>
-                <PostContent data={list} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="empty-content">포스트가 없습니다.</p>
-        )}
-      </div>
+      <div className="content-wrap"></div>
       <a href="src/html/three/index.html">three js로 가기</a>
     </Container>
   );
@@ -106,7 +86,7 @@ const Container = styled.section`
     align-items: center;
     justify-content: flex-start;
     flex-direction: row-reverse;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
     li {
       position: relative;
     }
@@ -142,10 +122,14 @@ const Container = styled.section`
       background-color: var(--beige);
     }
   }
+  .button-wrap {
+    text-align: right;
+  }
   .post-list-wrap {
     display: flex;
     flex-wrap: wrap;
     gap: 3rem 1rem;
+    margin-top: 3rem;
     > li {
       flex: 0 0 calc((100% - 3rem) / 4);
     }

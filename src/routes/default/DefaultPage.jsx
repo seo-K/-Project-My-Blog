@@ -27,14 +27,11 @@ export default function DefaultPage() {
     // let params = serializeFormQuery(e.target);
     // setSearchParams(params);
     navigate(`/post/search/${searchWord}`);
+    setSearchWord(e.target.value);
+    // setSearchParams({ searchWord: e.target.value });
+    // setSearchParams(e.target.value);
   };
 
-  // const handleSearch = (e) => {
-  //   let params = serializeFormQuery(e.target);
-  //   setSearchParams(params);
-  //   navigate(`/post/search/${searchWord}`);
-  //   console.log(params);
-  // };
   return (
     <Container>
       <Header />
@@ -90,7 +87,7 @@ export default function DefaultPage() {
               />
             </div>
           </div>
-          <Outlet />
+          <Outlet searchWord={searchWord} />
         </div>
       </main>
     </Container>
