@@ -10,7 +10,7 @@ import { PostData } from "../../MockData";
 
 export default function PostSearchResultPage() {
   const navigate = useNavigate();
-
+  const [post, setPost] = useState([]);
   const [category, setCategory] = useState(0); // category
   const categoryList = [
     {
@@ -40,33 +40,28 @@ export default function PostSearchResultPage() {
   ];
 
   let { searchWord } = useParams(); // 검색 단어
-  const searchList = PostData.filter((word) => {
+
+  console.log(searchWord);
+
+  // 통신 메서드
+  useEffect(() => {
+    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    axios
+      .get(url)
+      .then((response) => response.data)
+      .then((responseData) => {
+        setPost(responseData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const results = post.filter((word) => {
     return word.title.toLowerCase().includes(searchWord.toLowerCase());
   });
 
-  // https://mjn5027.tistory.com/32
-  // https://goddino.tistory.com/296
-  // useEffect(() => {
-  //   if ( status === 'All' && keyword === '') {
-  //     setBoard(PostData.slice((page - 1) * 6, page * 6));
-  //     setBoardsCount(PostData.length);
-  //   } else {
-  //     const filteredList = PostData.reduce<PostProps[]>((acc, cur) => {
-  //       const tagCondition = tag !== '전체' ? cur.tag === tag : true;
-  //       const statusCondition = status !== 'ALL' ? cur.status === status : true;
-  //       const keywordCondition = keyword.length > 0 ? cur.title.includes(keyword) : true;
-
-  //       if (tagCondition && statusCondition && keywordCondition) {
-  //         acc.push(cur);
-  //       }
-
-  //       return acc;
-  //     }, []);
-
-  //     setBoard(filteredList.slice((page - 1) * 6, page * 6));
-  //     setBoardsCount(filteredList.length);
-  //   }
-  // }, [PostData, page, tag, status, keyword]);
+  console.log(results);
 
   return (
     <Container>
@@ -83,9 +78,9 @@ export default function PostSearchResultPage() {
             </li>
           ))}
         </ul>
-        {searchList.length > 0 ? (
+        {results.length > 0 ? (
           <ul className="post-list-wrap">
-            {searchList.map((list, index) => (
+            {results.map((list, index) => (
               <li key={"postList" + list.id}>
                 <PostContent data={list} />
               </li>

@@ -13,7 +13,56 @@ import { PostData } from "../../MockData";
 export default function PostPage() {
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState(0);
+  const onClick = () => {
+    navigate("/new");
+  };
+  const buttonData = {
+    link: true,
+    text: "Create",
+    onClick: onClick,
+  };
+
+  // async function postUser() {
+  //   try {
+  //   // POST 요청은 body에 실어 보냄
+  //     await axios.post('/user', {
+  //         firstName: 'Fred',
+  //         lastName: 'Flintstone'
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
+
+  // photos, setPost 비구조화 할당
+  const [posts, setPost] = useState([]);
+  const [category, setCategory] = useState([
+    {
+      id: 0,
+      status: "All",
+    },
+    {
+      id: 1,
+      status: "Html",
+    },
+    {
+      id: 2,
+      status: "Css",
+    },
+    {
+      id: 3,
+      status: "Js",
+    },
+    {
+      id: 4,
+      status: "React",
+    },
+    {
+      id: 5,
+      status: "etc",
+    },
+  ]);
+  const [filteredPosts, setFilteredPosts] = useState();
   const categoryList = [
     {
       id: 0,
@@ -40,31 +89,6 @@ export default function PostPage() {
       status: "etc",
     },
   ];
-
-  const onClick = () => {
-    navigate("/new");
-  };
-  const buttonData = {
-    link: true,
-    text: "Create",
-    onClick: onClick,
-  };
-
-  // async function postUser() {
-  //   try {
-  //   // POST 요청은 body에 실어 보냄
-  //     await axios.post('/user', {
-  //         firstName: 'Fred',
-  //         lastName: 'Flintstone'
-  //     });
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
-
-  // photos, setPost 비구조화 할당
-  let [postList, setPost] = useState([]);
-
   // const searchList = PostData.filter((word) => {
   //   return word.title.toLowerCase().includes(searchWord.toLowerCase());
   // });
@@ -76,13 +100,19 @@ export default function PostPage() {
       .get(url)
       .then(function (response) {
         setPost(response.data);
-        // console.log("성공");
-        console.log(postList);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log("실패");
       });
   }, []);
+
+  // 필터링
+  // useEffect(() => {
+  //   const filtered = posts.filter((post) => post.category === category);
+  //   setPost(filtered);
+  //   console.log(category);
+  // }, [posts, category]);
 
   // searchApi();
 
@@ -113,7 +143,7 @@ export default function PostPage() {
       <h2 className="blind">포스트 리스트</h2>
       <div className="content-wrap">
         <ul className="tab-list">
-          {categoryList.map((list, index) => (
+          {category.map((list, index) => (
             <li
               key={list.id}
               className={category == index ? "active" : undefined}
@@ -127,9 +157,9 @@ export default function PostPage() {
           <BasicButton data={buttonData} />
         </div>
         <ul className="post-list-wrap">
-          {postList?.map((list) => {
+          {posts?.map((list) => {
             return (
-              <li key={"postList" + list.id}>
+              <li key={list.id}>
                 <PostContent data={list} />
               </li>
             );
