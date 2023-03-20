@@ -65,9 +65,13 @@ export default function PostPage() {
   // photos, setPost 비구조화 할당
   let [postList, setPost] = useState([]);
 
+  // const searchList = PostData.filter((word) => {
+  //   return word.title.toLowerCase().includes(searchWord.toLowerCase());
+  // });
+
   // 통신 메서드
-  function searchApi() {
-    const url = "https://api.mockaroo.com/api/types?key=d577b690";
+  useEffect(() => {
+    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
     axios
       .get(url)
       .then(function (response) {
@@ -78,7 +82,7 @@ export default function PostPage() {
       .catch(function (error) {
         console.log("실패");
       });
-  }
+  }, []);
 
   // searchApi();
 
@@ -123,7 +127,7 @@ export default function PostPage() {
           <BasicButton data={buttonData} />
         </div>
         <ul className="post-list-wrap">
-          {PostData?.map((list) => {
+          {postList?.map((list) => {
             return (
               <li key={"postList" + list.id}>
                 <PostContent data={list} />
