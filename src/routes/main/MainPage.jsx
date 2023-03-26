@@ -20,8 +20,6 @@ import ReactIconSvg from "../../assets/images/icon/tool_react.svg";
 
 export default function MainPage() {
   const navigate = useNavigate();
-  // swiper animation
-  const [slideActive, setSlideActive] = useState(false);
 
   const blogListData = [
     {
@@ -84,16 +82,17 @@ export default function MainPage() {
               {blogListData.map((list, index) => {
                 return (
                   <SwiperSlide key={list.id}>
-                    <a
-                      href="#"
-                      className={slideActive == true ? "folder__link rotate" : "folder__link"}
-                    >
-                      <p className="folder__num">{list.index}</p>
+                    <a href="#" className="folder__link">
+                      <p className="folder__num">{index}</p>
                       <div className="folder__icon">
                         <img src={list.icon} alt="" />
                       </div>
                       <p className="folder__title">{list.title}</p>
                       <i className="folder__count">{list.value} value</i>
+                      <div className="folder__shadows">
+                        <span></span>
+                        <span></span>
+                      </div>
                     </a>
                   </SwiperSlide>
                 );
@@ -132,9 +131,9 @@ export default function MainPage() {
           </div>
         </div>
       </section>
-      <section className="post">
+      <section className="new-post">
         <h3 className="title">New Post</h3>
-        <ul className="post__content-wrap">
+        <ul className="new-post__content-wrap">
           {PostData?.filter((item, index) => index < 3).map((list) => {
             return (
               <li key={"postList" + list.id}>
@@ -216,7 +215,7 @@ const Container = styled.div`
       margin-bottom: 3rem;
     }
   }
-
+  /* CONTENT LIST (WITH FOLDER) */
   .content-list {
     grid-area: content-list;
 
@@ -252,7 +251,7 @@ const Container = styled.div`
       }
     }
   }
-
+  /* FOLDER */
   .folder {
     width: 60%;
     flex-shrink: 0;
@@ -276,15 +275,11 @@ const Container = styled.div`
       flex-direction: column;
       width: 100%;
       height: 100%;
-
       background-color: var(--mainYellow);
       color: var(--white);
       border-radius: 0 3rem 3rem 3rem;
       padding: 2.5rem 2rem;
       transition: transform 0.5s;
-      &.rotate {
-        transform: rotate(50deg);
-      }
       &:hover {
         transform: translateY(1rem);
       }
@@ -348,8 +343,33 @@ const Container = styled.div`
       font-weight: 100;
       margin-top: 1rem;
     }
+    &__shadows {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      span {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0 3rem 3rem 3rem;
+        z-index: -1;
+      }
+      span:nth-child(1) {
+        transform: translateY(-2rem) scale(0.98);
+        background-color: var(--mainGreen);
+      }
+      span:nth-child(2) {
+        transform: translateY(-4rem) scale(0.95);
+        background-color: var(--deepDarkGray);
+      }
+    }
   }
-
+  /* INFO */
   .info {
     grid-area: info;
 
@@ -397,16 +417,14 @@ const Container = styled.div`
       }
     }
   }
-
-  & .post {
+  /* NEW POST */
+  .new-post {
     grid-area: post;
     &__content-wrap {
+      display: flex;
       gap: 2%;
       > li {
         flex: 1;
-      }
-      > li + li {
-        margin-top: 3rem;
       }
     }
   }

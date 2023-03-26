@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { keyframes, css } from "styled-components";
 
-// image
 // icon
 import LogoSvg from "../../assets/images/portfolio/logo.svg";
 import NoiseBg from "../../assets/images/portfolio/bg_noise.png";

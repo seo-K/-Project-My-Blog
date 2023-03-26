@@ -62,33 +62,33 @@ export default function PostPage() {
       status: "etc",
     },
   ]);
-  const [filteredPosts, setFilteredPosts] = useState();
-  const categoryList = [
-    {
-      id: 0,
-      status: "All",
-    },
-    {
-      id: 1,
-      status: "Html",
-    },
-    {
-      id: 2,
-      status: "Css",
-    },
-    {
-      id: 3,
-      status: "Js",
-    },
-    {
-      id: 4,
-      status: "React",
-    },
-    {
-      id: 5,
-      status: "etc",
-    },
-  ];
+  // const [filteredPosts, setFilteredPosts] = useState();
+  // const categoryList = [
+  //   {
+  //     id: 0,
+  //     status: "All",
+  //   },
+  //   {
+  //     id: 1,
+  //     status: "Html",
+  //   },
+  //   {
+  //     id: 2,
+  //     status: "Css",
+  //   },
+  //   {
+  //     id: 3,
+  //     status: "Js",
+  //   },
+  //   {
+  //     id: 4,
+  //     status: "React",
+  //   },
+  //   {
+  //     id: 5,
+  //     status: "etc",
+  //   },
+  // ];
   // const searchList = PostData.filter((word) => {
   //   return word.title.toLowerCase().includes(searchWord.toLowerCase());
   // });

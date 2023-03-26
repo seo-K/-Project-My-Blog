@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 // img
 import UserJpg from "../../assets/images/mock/user.jpg";
 import LogoPng from "../../assets/images/common/logo.png";
@@ -70,7 +70,7 @@ export default function Header(props) {
             </span>
             <span>Mypage</span>
           </NavLink>
-          <div className="menu__background" transform={menuActive}></div>
+          <div className="menu__background" transform={2}></div>
         </nav>
         <div className="copyright">&copy;seoYeong</div>
       </div>
@@ -161,13 +161,34 @@ const Container = styled.header`
       content: "";
       background-color: var(--beige);
       border-radius: 10rem 0 0 10rem;
+      transform: translateY(${(props) => 6.5 * props.transform}rem);
+      /* transform: translateY(${(props) => 6.5 * props.transform} rem); */
       /* transform: translateY(${(props) => props.transform}); */
-
-      ${({ transform }) => {
+      /* ${(props) => {
+        switch (props.transform) {
+          case "0":
+            return css`
+              transform: translateY(0);
+            `;
+          case "1":
+            return css`
+              transform: translateY(50px);
+            `;
+          case "2":
+            return css`
+              transform: translateY(100px);
+            `;
+          default:
+            return css`
+              transform: translateY(0);
+            `;
+        }
+      }} */
+      /* ${({ transform }) => {
         return transform
           ? `margin-left: calc(100vw * (11/ 1920));`
           : `margin-left: calc(100vw * (16/ 1920));`;
-      }}
+      }} */
       transition: transform 0.5s;
       z-index: 0;
       &:after,
