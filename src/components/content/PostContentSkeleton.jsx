@@ -5,32 +5,34 @@ import styled from "styled-components";
 // img
 import ImgSvg from "../../assets/images/icon/image.svg";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 export default function PostContent({ data }) {
   const { id, postImg, category, title, desc } = data || {};
 
   return (
     <Container to={`/post/detail/${id}`}>
       <div className="post-content">
-        {postImg ? (
-          <figure>
-            <img src={postImg} alt="포스트 이미지" />
-          </figure>
-        ) : (
-          <figure className="empty-img-wrap">
-            <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
-          </figure>
-        )}
+        <Skeleton className="figure" />
         <hgroup>
-          <h4 className="post-content__title">
-            &#91;{category}&#93;
-            <br />
-            {title}
-          </h4>
-          <p className="post-content__desc">{desc}</p>
+          <Skeleton className="post-content__title" />
+          <Skeleton className="post-content__desc" />
         </hgroup>
       </div>
     </Container>
   );
+}
+
+{
+  /* <div className={styles.postItem}>
+  <Skeleton className={styles.postImageWrap} />
+  <Skeleton className={styles.postTitle} />
+  <div className={styles.postInfo}>
+    <Skeleton width={"50px"} />
+    <Skeleton width={"100px"} />
+  </div>
+</div> */
 }
 
 const Container = styled(Link)`

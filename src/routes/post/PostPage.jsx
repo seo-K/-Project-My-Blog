@@ -4,6 +4,7 @@ import styled from "styled-components";
 // component
 import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
+import PostContentSkeleton from "../../components/content/PostContentSkeleton";
 
 import axios from "axios";
 
@@ -14,25 +15,15 @@ export default function PostPage() {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate("/new");
-  };
-  const buttonData = {
-    link: true,
-    text: "Create",
-    onClick: onClick,
+    navigate("new");
   };
 
-  // async function postUser() {
-  //   try {
-  //   // POST 요청은 body에 실어 보냄
-  //     await axios.post('/user', {
-  //         firstName: 'Fred',
-  //         lastName: 'Flintstone'
-  //     });
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
+  const [loading, setLoading] = useState(true);
+
+  const buttonData = {
+    link: "new",
+    text: "Create",
+  };
 
   // photos, setPost 비구조화 할당
   const [posts, setPost] = useState([]);
@@ -62,6 +53,35 @@ export default function PostPage() {
       status: "etc",
     },
   ]);
+
+  // 통신 메서드
+  useEffect(() => {
+    setLoading(true);
+    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    const url = "https://jsonplaceholder.typicode.com/photos";
+    axios
+      .get(url)
+      .then(function (response) {
+        setLoading(false);
+        setPost(response.data);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log("실패");
+      });
+  }, []);
+
+  // async function postUser() {
+  //   try {
+  //   // POST 요청은 body에 실어 보냄
+  //     await axios.post('/user', {
+  //         firstName: 'Fred',
+  //         lastName: 'Flintstone'
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
   // const [filteredPosts, setFilteredPosts] = useState();
   // const categoryList = [
   //   {
@@ -92,20 +112,6 @@ export default function PostPage() {
   // const searchList = PostData.filter((word) => {
   //   return word.title.toLowerCase().includes(searchWord.toLowerCase());
   // });
-
-  // 통신 메서드
-  useEffect(() => {
-    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
-    axios
-      .get(url)
-      .then(function (response) {
-        setPost(response.data);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log("실패");
-      });
-  }, []);
 
   // 필터링
   // useEffect(() => {
@@ -157,13 +163,21 @@ export default function PostPage() {
           <BasicButton data={buttonData} />
         </div>
         <ul className="post-list-wrap">
-          {posts?.map((list) => {
-            return (
-              <li key={list.id}>
-                <PostContent data={list} />
-              </li>
-            );
-          })}
+          {loading
+            ? new Array(10).fill(1).map((_, i) => {
+                return (
+                  <li key={i}>
+                    <PostContentSkeleton />
+                  </li>
+                );
+              })
+            : posts?.map((list) => {
+                return (
+                  <li key={list.id}>
+                    <PostContent data={list} />
+                  </li>
+                );
+              })}
         </ul>
       </div>
       <a href="src/html/three/index.html">three js로 가기</a>

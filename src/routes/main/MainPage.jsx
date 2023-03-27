@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import PostContent from "../../components/content/PostContent";
+import PostContent from "../../components/content/PostContentSkeleton";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";

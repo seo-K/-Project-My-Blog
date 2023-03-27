@@ -9,12 +9,17 @@ import ImgSvg from "../../assets/images/icon/image.svg";
 // mock data
 import { PostData } from "../../MockData";
 
+import axios from "axios";
+
 export default function PostViewPage() {
   const { id } = useParams();
   // let 찾은상품 = props.shoes.find(function(상품){
   //   return 상품.id == id
   // });
   console.log(id);
+
+  const [loading, setLoading] = useState(true);
+  const [posts, setPost] = useState([]);
 
   const editButtonData = {
     link: "edit",
@@ -25,9 +30,64 @@ export default function PostViewPage() {
     text: "삭제",
   };
 
+  useEffect(() => {
+    setLoading(true);
+    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    const url = `https://jsonplaceholder.typicode.com/photos/${id}`;
+    axios
+      .get(url)
+      .then(function (response) {
+        setLoading(false);
+        setPost(response.data);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log("실패");
+      });
+  }, []);
+
   return (
     <Container>
       <div className="post-detail">
+        <hgroup>
+          <h2>{posts.albumId}</h2>
+          <button className="post-detail__share" type="button">
+            <span className="blind">공유</span>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M8.68445 10.6578L13 8.50003M15.3157 16.6578L11 14.5M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"
+                  stroke="#59616f"
+                  stroke-width="1.5"
+                ></path>
+              </g>
+            </svg>
+          </button>
+        </hgroup>
+        {posts.thumbnailUrl ? (
+          <figure>
+            <img src={posts.url} alt="포스트 이미지" />
+          </figure>
+        ) : (
+          <figure className="empty-img-wrap">
+            <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
+          </figure>
+        )}
+
+        <h3>{posts.title}</h3>
+
+        <hr />
+        <p className="post-text">{posts.url}설명</p>
+        {/* <time dateTime={posts.date}>{PostData[id].date}</time> */}
+      </div>
+
+      <div className="util-wrap">
+        <BasicButton data={editButtonData} />
+        <BasicButton data={deleteButtonData} />
+      </div>
+      {/* <div className="post-detail">
         <hgroup>
           <h2>{PostData[id].category}</h2>
           <button className="post-detail__share" type="button">
@@ -65,7 +125,7 @@ export default function PostViewPage() {
       <div className="util-wrap">
         <BasicButton data={editButtonData} />
         <BasicButton data={deleteButtonData} />
-      </div>
+      </div> */}
     </Container>
   );
 }
