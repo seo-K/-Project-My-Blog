@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // component
 import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
-
+// editor, colorPicker, axios
+// https://nhn.github.io/tui.editor/latest/ToastUIEditorCore
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/i18n/ko-kr"; // 언어설정 kor
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+import "tui-color-picker/dist/tui-color-picker.css";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import axios from "axios";
 
 // mock data
@@ -41,13 +48,13 @@ export default function PostNewPage() {
     },
   ];
 
-  const onClick = () => {
-    navigate("/new");
-  };
-  const buttonData = {
-    link: true,
-    text: "Create",
-    onClick: onClick,
+  // 서버에 마크다운 형식 데이터 그대로 전송하기
+  const editorRef = useRef();
+  // editorRef.current.getInstance().getMarkdown();
+
+  const submitData = {
+    link: "/posts",
+    text: "Submit",
   };
   // useEffect(() => {
   //   if ( status === 'All' && keyword === '') {
@@ -74,8 +81,34 @@ export default function PostNewPage() {
   return (
     <Container>
       <h2 className="blind">포스트 리스트</h2>
-      <div className="content-wrap"></div>
-      <a href="src/html/three/index.html">three js로 가기</a>
+      <div className="content-wrap">
+        {/* <Editor
+          initialValue="Write Here!"
+          previewStyle="vertical"
+          height="600px"
+          initialEditType="markdown"
+          useCommandShortcut={true}
+        /> */}
+        <Editor
+          initialValue="에디터"
+          previewStyle="vertical"
+          height="600px"
+          initialEditType="wysiwyg"
+          useCommandShortcut={false}
+          plugins={[colorSyntax]}
+          language="ko-KR"
+          toolbarItems={[
+            // 툴바 옵션 설정
+            ["heading", "bold", "italic", "strike"],
+            ["hr", "quote"],
+            ["ul", "ol", "task", "indent", "outdent"],
+            ["table", "image", "link"],
+            ["code", "codeblock"],
+          ]}
+        />
+
+        <BasicButton data={submitData} />
+      </div>
     </Container>
   );
 }
