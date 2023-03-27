@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+
 // component
 import BasicButton from "../../components/common/BasicButton";
+
 // img
 import ImgSvg from "../../assets/images/icon/image.svg";
 
+// editor, axios
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import { Viewer } from "@toast-ui/react-editor";
+import axios from "axios";
+
 // mock data
 import { PostData } from "../../MockData";
-
-import axios from "axios";
 
 export default function PostViewPage() {
   const { id } = useParams();
@@ -18,14 +23,20 @@ export default function PostViewPage() {
   // });
   console.log(id);
 
+  // editor 마크다운 화면 렌더링
+  const markdown = "## 마크다운 헤더";
+  const html = '<h3> html 헤더 <span style="color:blue;">파란색</span></h3>';
+
   const [loading, setLoading] = useState(true);
   const [posts, setPost] = useState([]);
 
   const editButtonData = {
+    // 수정버튼 데이터
     link: "edit",
     text: "수정",
   };
   const deleteButtonData = {
+    // 삭제버튼 데이터
     link: "delete",
     text: "삭제",
   };
@@ -80,6 +91,9 @@ export default function PostViewPage() {
 
         <hr />
         <p className="post-text">{posts.url}설명</p>
+        <Viewer initialValue={markdown} />
+        <Viewer initialValue={html} />
+        {/* <Viewer initialValue={contents  || ""} /> */}
         {/* <time dateTime={posts.date}>{PostData[id].date}</time> */}
       </div>
 

@@ -47,15 +47,30 @@ export default function PostNewPage() {
       status: "etc",
     },
   ];
+  // Markdown mode
+  const rangeInfo = Editor.getRangeInfoOfNode();
+
+  console.log(rangeInfo); // { range: [[startLineOffset, startCurorOffset], [endLineOffset, endCurorOffset]], type: 'emph' }
+
+  // WYSIWYG mode
+  const rangeInfo2 = Editor.getRangeInfoOfNode();
+
+  console.log(rangeInfo2); // { range: [startCursorOffset, endCursorOffset], type: 'emph' }
 
   // 서버에 마크다운 형식 데이터 그대로 전송하기
   const editorRef = useRef();
-  // editorRef.current.getInstance().getMarkdown();
+  const [text, setText] = useState("");
+  const handleClick = () => {
+    setText(editorRef.current.getInstance().getMarkdown());
+    console.log("작동함", text);
+  };
 
   const submitData = {
-    link: "/posts",
+    // Submit 버튼 데이터
     text: "Submit",
+    onClick: handleClick,
   };
+
   // useEffect(() => {
   //   if ( status === 'All' && keyword === '') {
   //     setBoard(PostData.slice((page - 1) * 6, page * 6));
