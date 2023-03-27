@@ -6,16 +6,21 @@ import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
 // editor, colorPicker, axios
 // https://nhn.github.io/tui.editor/latest/ToastUIEditorCore
+// https://curryyou.tistory.com/473 image 업로드 방법 참고
+// https://hayeondev.gatsbyjs.io/221021-tui-editor/ 플러그인 설명
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/i18n/ko-kr"; // 언어설정 kor
-import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+import "prismjs/themes/prism.css"; // npm i prismjs = 구문 갖조 표시기
+import Prism from "prismjs"; // prism 테마 추가
+import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight"; // npm install @toast-ui/editor-plugin-code-syntax-highlight
+import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+// import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight"; // code highlighter
+// import "prismjs/themes/prism.css"; // code highlighter css
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax"; // color picker
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import axios from "axios";
-
-// mock data
-import { PostData } from "../../MockData";
 
 export default function PostNewPage() {
   const navigate = useNavigate();
@@ -48,14 +53,14 @@ export default function PostNewPage() {
     },
   ];
   // Markdown mode
-  const rangeInfo = Editor.getRangeInfoOfNode();
+  // const rangeInfo = editor.getRangeInfoOfNode();
 
-  console.log(rangeInfo); // { range: [[startLineOffset, startCurorOffset], [endLineOffset, endCurorOffset]], type: 'emph' }
+  // console.log(rangeInfo); // { range: [[startLineOffset, startCurorOffset], [endLineOffset, endCurorOffset]], type: 'emph' }
 
   // WYSIWYG mode
-  const rangeInfo2 = Editor.getRangeInfoOfNode();
+  // const rangeInfo2 = editor.getRangeInfoOfNode();
 
-  console.log(rangeInfo2); // { range: [startCursorOffset, endCursorOffset], type: 'emph' }
+  // console.log(rangeInfo2); // { range: [startCursorOffset, endCursorOffset], type: 'emph' }
 
   // 서버에 마크다운 형식 데이터 그대로 전송하기
   const editorRef = useRef();
@@ -106,12 +111,15 @@ export default function PostNewPage() {
         /> */}
         <Editor
           initialValue="에디터"
-          previewStyle="vertical"
+          // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
+          previewStyle="vertical" // tab, vertical
           height="600px"
-          initialEditType="wysiwyg"
+          initialEditType="wysiwyg" // wysiwyg & markdown
+          // what you see is what you get = 보는대로 얻는다 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다
           useCommandShortcut={false}
-          plugins={[colorSyntax]}
+          plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
           language="ko-KR"
+          theme="dark"
           toolbarItems={[
             // 툴바 옵션 설정
             ["heading", "bold", "italic", "strike"],
@@ -121,6 +129,21 @@ export default function PostNewPage() {
             ["code", "codeblock"],
           ]}
         />
+
+        {/* {editorRef && (
+        <Editor
+          ref={editorRef}
+          initialValue={content || ' '} // 글 수정 시 사용
+          initialEditType="markdown" // wysiwyg & markdown
+          previewStyle={window.innerWidth > 1000 ? 'vertical' : 'tab'} // tab, vertical
+          hideModeSwitch={true}
+          height="calc(100% - 10rem)"
+          theme={''} // '' & 'dark'
+          usageStatistics={false}
+          toolbarItems={toolbarItems}
+          useCommandShortcut={true}
+          plugins={[colorSyntax]}
+        /> */}
 
         <BasicButton data={submitData} />
       </div>
