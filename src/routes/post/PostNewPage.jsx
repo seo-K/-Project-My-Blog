@@ -26,6 +26,9 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 
 import axios from "axios";
 
+// img
+import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
+
 export default function PostNewPage() {
   const navigate = useNavigate();
 
@@ -139,40 +142,52 @@ export default function PostNewPage() {
           <fieldset>
             <legend className="blind">새 글 쓰기</legend>
             <div className="content-box">
-              <div class="input-wrap">
-                <label for="title">제목</label>
-                <input
-                  id="title"
-                  type="text"
-                  maxlength="50"
-                  name="title"
-                  data-name="title"
-                  // value={title}
-                  placeholder="Your title"
-                  required
+              <div className="content-box__title-wrap">
+                <select name="" id="">
+                  <option value="Html">Html</option>
+                  <option value="Css">Css</option>
+                  <option value="Js">Js</option>
+                  <option value="React">React</option>
+                  <option value="etc">etc</option>
+                </select>
+                <div className="input-wrap">
+                  <label className="blind" for="title">
+                    제목
+                  </label>
+                  <input
+                    id="title"
+                    type="text"
+                    maxlength="50"
+                    name="title"
+                    data-name="title"
+                    // value={title}
+                    placeholder="Your title"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="content-box__editor">
+                <Editor
+                  initialValue="에디터"
+                  // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
+                  previewStyle="vertical" // tab, vertical
+                  height="100%"
+                  initialEditType="wysiwyg" // wysiwyg & markdown
+                  // what you see is what you get = 보는대로 얻는다 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다
+                  useCommandShortcut={false}
+                  plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
+                  language="ko-KR"
+                  theme="dark"
+                  toolbarItems={[
+                    // 툴바 옵션 설정
+                    ["heading", "bold", "italic", "strike"],
+                    ["hr", "quote"],
+                    ["ul", "ol", "task", "indent", "outdent"],
+                    ["table", "image", "link"],
+                    ["code", "codeblock"],
+                  ]}
                 />
               </div>
-
-              <Editor
-                initialValue="에디터"
-                // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
-                previewStyle="vertical" // tab, vertical
-                height="600px"
-                initialEditType="wysiwyg" // wysiwyg & markdown
-                // what you see is what you get = 보는대로 얻는다 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다
-                useCommandShortcut={false}
-                plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
-                language="ko-KR"
-                theme="dark"
-                toolbarItems={[
-                  // 툴바 옵션 설정
-                  ["heading", "bold", "italic", "strike"],
-                  ["hr", "quote"],
-                  ["ul", "ol", "task", "indent", "outdent"],
-                  ["table", "image", "link"],
-                  ["code", "codeblock"],
-                ]}
-              />
             </div>
             {/* {editorRef && (
         <Editor
@@ -189,8 +204,10 @@ export default function PostNewPage() {
           plugins={[colorSyntax]}
         /> */}
             <div className="util-box">
-              <BasicButton data={submitButton} />
-              <BasicButton data={cancelButton} />
+              <div className="util-box__button-wrap">
+                <BasicButton data={cancelButton} />
+                <BasicButton data={submitButton} />
+              </div>
             </div>
           </fieldset>
         </form>
@@ -241,19 +258,54 @@ const Container = styled.section`
       background-color: var(--beige);
     }
   }
-  .button-wrap {
-    text-align: right;
-  }
-  .post-list-wrap {
+  fieldset {
     display: flex;
-    flex-wrap: wrap;
-    gap: 3rem 1rem;
-    margin-top: 3rem;
-    > li {
-      flex: 0 0 calc((100% - 3rem) / 4);
+    gap: 3rem;
+  }
+  .content-box {
+    flex-shrink: 0;
+    width: 70%;
+    &__title-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-bottom: none;
     }
-    > li:hover a {
-      box-shadow: 0 0 0 10px var(--mainYellow);
+    select {
+      flex-shrink: 0;
+      width: 15rem;
+      height: 100%;
+      font-size: 1.4rem;
+      text-indent: -0.7rem;
+      text-align: center;
+      background: var(--beige) url(${ArrowIconSvg}) no-repeat 85% center / 1rem 1rem;
+      padding: 2rem 0;
+    }
+    .input-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    input {
+      width: 100%;
+      font-size: 1.4rem;
+      padding: 2rem;
+      background-color: var(--white);
+      border-left: 1px solid var(--border);
+    }
+    &__editor {
+      height: 70vh;
+    }
+  }
+
+  .util-box {
+    flex: 1;
+    &__button-wrap {
+      display: flex;
+      gap: 1rem;
+    }
+    &__button-wrap button {
+      flex: 1;
     }
   }
 `;

@@ -19,15 +19,20 @@ export default function BasicButton({ data }) {
 }
 
 const buttonStyle = css`
-  display: inline-block;
-  text-align: center;
-  font-size: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
   font-weight: 500;
   background-color: var(--mainYellow);
   color: #fff;
-  padding: 0.7rem 2rem;
+  padding: 1rem 2rem;
   border-radius: 5rem;
-
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+  }
   &:hover {
     background-color: var(--mainGreen);
   }

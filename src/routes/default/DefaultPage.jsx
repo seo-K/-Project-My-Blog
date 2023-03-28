@@ -6,7 +6,7 @@ import axios from "axios";
 
 // img
 import SearchSvg from "../../assets/images/icon/search.svg";
-import ArrowIconSvg from "../../assets/images/common/icon_arrow_down.svg";
+import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
 
 export default function DefaultPage() {
   const navigate = useNavigate();

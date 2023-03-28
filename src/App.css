@@ -24,6 +24,7 @@
   --white: #fff;
   --whiteOpacity: rgba(255,255,255,0.3);
   --deepDarkGray: #929292; */
+  --border : #dadde6;
 }
 :root[color-theme="dark"] {
   --dark: #25252f;

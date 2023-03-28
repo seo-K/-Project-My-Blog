@@ -10,6 +10,8 @@ import axios from "axios";
 
 // mock data
 import { PostData } from "../../MockData";
+// img
+import AddSvg from "../../assets/images/icon/add.svg";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -22,7 +24,12 @@ export default function PostPage() {
 
   const buttonData = {
     link: "new",
-    text: "Create",
+    text: (
+      <>
+        <img src={AddSvg} alt="" />
+        Create
+      </>
+    ),
   };
 
   // photos, setPost 비구조화 할당
