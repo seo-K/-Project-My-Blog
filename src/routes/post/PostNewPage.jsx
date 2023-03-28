@@ -4,6 +4,8 @@ import styled from "styled-components";
 // component
 import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
+import BasicModal from "../../components/common/BasicModal";
+import ModalHook from "../../util/ModalHook";
 // editor, colorPicker, axios
 // https://nhn.github.io/tui.editor/latest/ToastUIEditorCore
 // https://curryyou.tistory.com/473 image 업로드 방법 참고
@@ -11,15 +13,17 @@ import BasicButton from "../../components/common/BasicButton";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/i18n/ko-kr"; // 언어설정 kor
-import "prismjs/themes/prism.css"; // npm i prismjs = 구문 갖조 표시기
-import Prism from "prismjs"; // prism 테마 추가
-import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight"; // npm install @toast-ui/editor-plugin-code-syntax-highlight
-import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
-// import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight"; // code highlighter
-// import "prismjs/themes/prism.css"; // code highlighter css
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax"; // color picker
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+// code highlighter
+// npm i prismjs = 구문 강조 표시기
+// npm install @toast-ui/editor-plugin-code-syntax-highlight = code highlighter
+import "prismjs/themes/prism.css";
+import Prism from "prismjs";
+import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
+import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+
 import axios from "axios";
 
 export default function PostNewPage() {
@@ -65,15 +69,36 @@ export default function PostNewPage() {
   // 서버에 마크다운 형식 데이터 그대로 전송하기
   const editorRef = useRef();
   const [text, setText] = useState("");
-  const handleClick = () => {
+  const onClickSubmit = () => {
     setText(editorRef.current.getInstance().getMarkdown());
     console.log("작동함", text);
   };
+  const onClickCancel = () => {};
 
-  const submitData = {
-    // Submit 버튼 데이터
+  // 팝업 열기
+  const [isActiveModal, setIsActiveModal] = useState(false);
+  const onClickCancelModalOpen = () => {
+    setIsActiveModal(true);
+    ModalHook.modalOpen();
+  };
+  const CancelModal = {
+    isState: {
+      state: isActiveModal,
+      setState: setIsActiveModal,
+    },
+    text: "정말 취소하시겠습니까?",
+    desc: "내용은 저장되지 않습니다.",
+  };
+
+  // 버튼
+  const submitButton = {
+    submit: true,
     text: "Submit",
-    onClick: handleClick,
+    onClick: onClickSubmit,
+  };
+  const cancelButton = {
+    text: "Cancel",
+    onClick: onClickCancelModalOpen,
   };
 
   // useEffect(() => {
@@ -100,6 +125,7 @@ export default function PostNewPage() {
 
   return (
     <Container>
+      {isActiveModal && <BasicModal data={CancelModal} />}
       <h2 className="blind">포스트 리스트</h2>
       <div className="content-wrap">
         {/* <Editor
@@ -109,28 +135,46 @@ export default function PostNewPage() {
           initialEditType="markdown"
           useCommandShortcut={true}
         /> */}
-        <Editor
-          initialValue="에디터"
-          // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
-          previewStyle="vertical" // tab, vertical
-          height="600px"
-          initialEditType="wysiwyg" // wysiwyg & markdown
-          // what you see is what you get = 보는대로 얻는다 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다
-          useCommandShortcut={false}
-          plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
-          language="ko-KR"
-          theme="dark"
-          toolbarItems={[
-            // 툴바 옵션 설정
-            ["heading", "bold", "italic", "strike"],
-            ["hr", "quote"],
-            ["ul", "ol", "task", "indent", "outdent"],
-            ["table", "image", "link"],
-            ["code", "codeblock"],
-          ]}
-        />
+        <form action="">
+          <fieldset>
+            <legend className="blind">새 글 쓰기</legend>
+            <div className="content-box">
+              <div class="input-wrap">
+                <label for="title">제목</label>
+                <input
+                  id="title"
+                  type="text"
+                  maxlength="50"
+                  name="title"
+                  data-name="title"
+                  // value={title}
+                  placeholder="Your title"
+                  required
+                />
+              </div>
 
-        {/* {editorRef && (
+              <Editor
+                initialValue="에디터"
+                // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
+                previewStyle="vertical" // tab, vertical
+                height="600px"
+                initialEditType="wysiwyg" // wysiwyg & markdown
+                // what you see is what you get = 보는대로 얻는다 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다
+                useCommandShortcut={false}
+                plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
+                language="ko-KR"
+                theme="dark"
+                toolbarItems={[
+                  // 툴바 옵션 설정
+                  ["heading", "bold", "italic", "strike"],
+                  ["hr", "quote"],
+                  ["ul", "ol", "task", "indent", "outdent"],
+                  ["table", "image", "link"],
+                  ["code", "codeblock"],
+                ]}
+              />
+            </div>
+            {/* {editorRef && (
         <Editor
           ref={editorRef}
           initialValue={content || ' '} // 글 수정 시 사용
@@ -144,8 +188,12 @@ export default function PostNewPage() {
           useCommandShortcut={true}
           plugins={[colorSyntax]}
         /> */}
-
-        <BasicButton data={submitData} />
+            <div className="util-box">
+              <BasicButton data={submitButton} />
+              <BasicButton data={cancelButton} />
+            </div>
+          </fieldset>
+        </form>
       </div>
     </Container>
   );

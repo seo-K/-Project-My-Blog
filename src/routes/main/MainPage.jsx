@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import PostContent from "../../components/content/PostContentSkeleton";
-
-// swiper
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper";
+import PostContent from "../../components/content/PostContent";
+import PostContentSkeleton from "../../components/content/PostContentSkeleton";
 
 // image
 import { PostData } from "../../MockData";
@@ -18,9 +13,18 @@ import CssIconSvg from "../../assets/images/icon/tool_css.svg";
 import JsIconSvg from "../../assets/images/icon/tool_js.svg";
 import ReactIconSvg from "../../assets/images/icon/tool_react.svg";
 
+// swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
+import axios from "axios";
+
 export default function MainPage() {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(true);
+  const [posts, setPost] = useState([]);
   const blogListData = [
     {
       id: 0,
@@ -47,6 +51,23 @@ export default function MainPage() {
       value: 3,
     },
   ];
+
+  useEffect(() => {
+    setLoading(true);
+    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    // const url = `https://jsonplaceholder.typicode.com/photos/${id}`;
+    axios
+      .get(url)
+      .then(function (response) {
+        setLoading(false);
+        setPost(response.data);
+      })
+      .catch(function (error) {
+        console.log("실패");
+      });
+
+    console.log(loading);
+  }, []);
 
   return (
     <Container>
@@ -134,13 +155,24 @@ export default function MainPage() {
       <section className="new-post">
         <h3 className="title">New Post</h3>
         <ul className="new-post__content-wrap">
-          {PostData?.filter((item, index) => index < 3).map((list) => {
-            return (
-              <li key={"postList" + list.id}>
-                <PostContent data={list} />
-              </li>
-            );
-          })}
+          {loading
+            ? new Array(3).fill(1).map((_, i) => {
+                return (
+                  <li key={i}>
+                    <PostContentSkeleton />
+                  </li>
+                );
+              })
+            : posts
+                .filter((item, index) => index < 3)
+                .map((list) => {
+                  console.log(list);
+                  return (
+                    <li key={"postList" + list.id}>
+                      <PostContent data={list} />
+                    </li>
+                  );
+                })}
         </ul>
       </section>
       {/* <section className="git-section">

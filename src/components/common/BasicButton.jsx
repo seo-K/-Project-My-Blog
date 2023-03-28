@@ -3,14 +3,14 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export default function BasicButton({ data }) {
-  const { link, onClick, text } = data || "";
+  const { link, submit, onClick, text } = data || "";
 
   return (
     <React.Fragment>
       {link ? (
         <BasicLink to={link}>{text}</BasicLink>
       ) : (
-        <BasicBtn type="button" onClick={onClick}>
+        <BasicBtn type={submit ? "submit" : "button"} onClick={onClick}>
           {text}
         </BasicBtn>
       )}

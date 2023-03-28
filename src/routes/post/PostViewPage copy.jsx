@@ -59,7 +59,7 @@ export default function PostViewPage() {
 
   return (
     <Container>
-      {/* <div className="post-detail">
+      <div className="post-detail">
         <hgroup>
           <h2>{posts.albumId}</h2>
           <button className="post-detail__share" type="button">
@@ -93,14 +93,15 @@ export default function PostViewPage() {
         <p className="post-text">{posts.url}설명</p>
         <Viewer initialValue={markdown} />
         <Viewer initialValue={html} />
-        <Viewer initialValue={contents  || ""} />
+        {/* <Viewer initialValue={contents  || ""} /> */}
+        {/* <time dateTime={posts.date}>{PostData[id].date}</time> */}
       </div>
 
       <div className="util-wrap">
         <BasicButton data={editButtonData} />
         <BasicButton data={deleteButtonData} />
-      </div> */}
-      <div className="post-detail">
+      </div>
+      {/* <div className="post-detail">
         <hgroup>
           <h2>{PostData[id].category}</h2>
           <button className="post-detail__share" type="button">
@@ -137,11 +138,8 @@ export default function PostViewPage() {
 
       <div className="util-wrap">
         <BasicButton data={editButtonData} />
-        <Viewer initialValue={markdown} />
-        <Viewer initialValue={html} />
-        {/* <Viewer initialValue={contents  || ""} /> */}
         <BasicButton data={deleteButtonData} />
-      </div>
+      </div> */}
     </Container>
   );
 }

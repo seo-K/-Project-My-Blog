@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // component
-import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
+import PostContent from "../../components/content/PostContent";
 import PostContentSkeleton from "../../components/content/PostContentSkeleton";
 
 import axios from "axios";
@@ -57,8 +57,8 @@ export default function PostPage() {
   // 통신 메서드
   useEffect(() => {
     setLoading(true);
-    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
-    const url = "https://jsonplaceholder.typicode.com/photos";
+    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    // const url = "https://jsonplaceholder.typicode.com/photos";
     axios
       .get(url)
       .then(function (response) {

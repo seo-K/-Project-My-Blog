@@ -28,6 +28,10 @@ export default function DefaultPage() {
     // setSearchParams(params);
     navigate(`/post/search/${searchWord}`);
     setSearchWord(e.target.value);
+
+    //   this.setSearchWord({
+    //     message:''
+    // });
     // setSearchParams({ searchWord: e.target.value });
     // setSearchParams(e.target.value);
   };
