@@ -36,29 +36,37 @@ export default function PostNewPage() {
   const categoryList = [
     {
       id: 0,
-      status: "All",
+      category: "All",
     },
     {
       id: 1,
-      status: "Html",
+      category: "Html",
     },
     {
       id: 2,
-      status: "Css",
+      category: "Css",
     },
     {
       id: 3,
-      status: "Js",
+      category: "Js",
     },
     {
       id: 4,
-      status: "React",
+      category: "React",
     },
     {
       id: 5,
-      status: "etc",
+      category: "etc",
     },
   ];
+
+  // form
+  const [form, setForm] = useState({
+    title: "",
+    category: categoryList[0],
+    value: "",
+  });
+
   // Markdown mode
   // const rangeInfo = editor.getRangeInfoOfNode();
 
@@ -70,15 +78,33 @@ export default function PostNewPage() {
   // console.log(rangeInfo2); // { range: [startCursorOffset, endCursorOffset], type: 'emph' }
 
   // 서버에 마크다운 형식 데이터 그대로 전송하기
-  const editorRef = useRef();
-  const [text, setText] = useState("");
-  const onClickSubmit = () => {
-    setText(editorRef.current.getInstance().getMarkdown());
-    console.log("작동함", text);
-  };
-  const onClickCancel = () => {};
+  // const editorRef = useRef();
+  // const [text, setText] = useState("");
+  // const onClickSubmit = () => {
+  //   setText(editorRef.current.getInstance().getMarkdown());
+  //   console.log("작동함", text);
+  // };
 
-  // 팝업 열기
+  // 전송
+  const onClickSubmit = (e) => {
+    e.preventDefault();
+    console.log("전송할데이터", JSON.stringify(form), form);
+    // axios.post(`${process.env.REACT_APP_API}/mail`, form, {
+    //   headers: {
+    //     'Content-type' : 'application/json',
+    //     Accept : 'application/json',
+    //   },
+    // } )
+    // .then(response => {
+    //   console.log('result' , response.data);
+    //   navigate(`complete`)
+    // })
+    // .catch(response => {
+    //   console.log('Error!', response)
+    // })
+  };
+
+  // 취소 모달
   const [isActiveModal, setIsActiveModal] = useState(false);
   const onClickCancelModalOpen = () => {
     setIsActiveModal(true);
@@ -143,21 +169,21 @@ export default function PostNewPage() {
             <legend className="blind">새 글 쓰기</legend>
             <div className="content-box">
               <div className="content-box__title-wrap">
-                <select name="" id="">
-                  <option value="Html">Html</option>
-                  <option value="Css">Css</option>
-                  <option value="Js">Js</option>
-                  <option value="React">React</option>
-                  <option value="etc">etc</option>
+                <select name="postCategory" id="" onChange={(e) => setCategory(e.target.value)}>
+                  {categoryList.map((item) => (
+                    <option key={item.id} value={item.category}>
+                      {item.category}
+                    </option>
+                  ))}
                 </select>
                 <div className="input-wrap">
-                  <label className="blind" for="title">
+                  <label className="blind" htmlFor="title">
                     제목
                   </label>
                   <input
                     id="title"
                     type="text"
-                    maxlength="50"
+                    maxLength="150"
                     name="title"
                     data-name="title"
                     // value={title}
@@ -186,6 +212,7 @@ export default function PostNewPage() {
                     ["table", "image", "link"],
                     ["code", "codeblock"],
                   ]}
+                  onChange={(e) => console.log(e.value)}
                 />
               </div>
             </div>
@@ -289,7 +316,7 @@ const Container = styled.section`
     input {
       width: 100%;
       font-size: 1.4rem;
-      padding: 2rem;
+      padding: 1.4rem 2rem;
       background-color: var(--white);
       border-left: 1px solid var(--border);
     }

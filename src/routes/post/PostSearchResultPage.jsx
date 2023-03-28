@@ -15,27 +15,27 @@ export default function PostSearchResultPage() {
   const categoryList = [
     {
       id: 0,
-      status: "All",
+      category: "All",
     },
     {
       id: 1,
-      status: "Html",
+      category: "Html",
     },
     {
       id: 2,
-      status: "Css",
+      category: "Css",
     },
     {
       id: 3,
-      status: "Js",
+      category: "Js",
     },
     {
       id: 4,
-      status: "React",
+      category: "React",
     },
     {
       id: 5,
-      status: "etc",
+      category: "etc",
     },
   ];
 
@@ -74,7 +74,7 @@ export default function PostSearchResultPage() {
               className={category == index ? "active" : undefined}
               onClick={() => setCategory(index)}
             >
-              <button type="button">{list.status}</button>
+              <button type="button">{list.category}</button>
             </li>
           ))}
         </ul>
