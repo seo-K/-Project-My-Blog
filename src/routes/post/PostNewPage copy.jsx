@@ -68,44 +68,73 @@ export default function PostNewPage() {
     date: new Date(),
   });
 
-  const editorRef = useRef();
-  // const onChange = (e) => {
-  //   const editorData = editorRef.current.getInstance().getHTML();
-  //   const { name, value } = e.target;
-  //   if (name === "desc") {
-  //     setFormData({
-  //       ...formData,
-  //       desc: editorData,
-  //     });
-  //   } else {
-  //     setFormData({
-  //       ...formData,
-  //       [name]: value,
-  //     });
-  //   }
+  // Markdown mode
+  // const rangeInfo = editor.getRangeInfoOfNode();
+
+  // console.log(rangeInfo); // { range: [[startLineOffset, startCurorOffset], [endLineOffset, endCurorOffset]], type: 'emph' }
+
+  // WYSIWYG mode
+  // const rangeInfo2 = editor.getRangeInfoOfNode();
+
+  // console.log(rangeInfo2); // { range: [startCursorOffset, endCursorOffset], type: 'emph' }
+
+  // 서버에 마크다운 형식 데이터 그대로 전송하기
+  // const editorRef = useRef();
+  // const [text, setText] = useState("");
+  // const handleSubmit = () => {
+  //   setText(editorRef.current.getInstance().getMarkdown());
+  //   console.log("작동함", text);
   // };
 
+  const editorRef = useRef();
+  // html형식으로 텍스트를 가져오려면, getHTML()
+  // 마크다운 형식으로 텍스트를 가져오려면, getMarkdown()
   const onChange = (e) => {
-    // const editorData = editorRef?.current?.getInstance().getHTML();
-    // const name = e.target.name;
-    // const value = e.target.value;
-    // if (name !== "desc") {
-    //   setFormData((prevState) => ({
-    //     ...prevState,
-    //     [name]: value,
-    //   }));
-    // } else {
-    //   setFormData((prevState) => ({
-    //     ...prevState,
-    //     [name]: JSON.stringify(editorData),
-    //   }));
-    // }
+    const editorData = editorRef?.current.getInstance().getHTML();
+
+    setFormData({
+      category: categoryList[0],
+      postImg: "",
+      title: "",
+      desc: JSON.stringify(editorData),
+      date: new Date(),
+      // ...formData,
+      // [e.target.name]: e.target.value,
+      // desc: JSON.stringify(editorData),
+      // [e.target.name]: e.target.name == "desc" ? JSON.stringify(editorData) : e.target.value,
+    });
+    console.log(formData);
   };
+
+  // const handleChange = e => {
+  //   setFrData({
+  //     ...frData,
+  //     [e.target.name]: e.target.name == 'newsletter' ? e.target.checked : e.target.value,
+  //   });
+  // };
 
   // 전송
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+
+    // const editorData = editorRef.current.getInstance().getHTML();
+
+    // console.log("전송할데이터", JSON.stringify(formData), formData);
+    // console.log("작동함", text);
+    // axios.post(`${process.env.REACT_APP_API}/mail`, form, {
+    //   headers: {
+    //     'Content-type' : 'application/json',
+    //     Accept : 'application/json',
+    //   },
+    // } )
+    // .then(response => {
+    //   console.log('result' , response.data);
+    //   navigate(`complete`)
+    // })
+    // .catch(response => {
+    //   console.log('Error!', response)
+    // })
   };
 
   // 취소 모달
@@ -127,11 +156,34 @@ export default function PostNewPage() {
   const submitButton = {
     submit: true,
     text: "Submit",
+    onClick: handleSubmit,
   };
   const cancelButton = {
     text: "Cancel",
     onClick: onClickCancelModalOpen,
   };
+
+  // useEffect(() => {
+  //   if ( status === 'All' && keyword === '') {
+  //     setBoard(PostData.slice((page - 1) * 6, page * 6));
+  //     setBoardsCount(PostData.length);
+  //   } else {
+  //     const filteredList = PostData.reduce<PostProps[]>((acc, cur) => {
+  //       const tagCondition = tag !== '전체' ? cur.tag === tag : true;
+  //       const statusCondition = status !== 'ALL' ? cur.status === status : true;
+  //       const keywordCondition = keyword.length > 0 ? cur.title.includes(keyword) : true;
+
+  //       if (tagCondition && statusCondition && keywordCondition) {
+  //         acc.push(cur);
+  //       }
+
+  //       return acc;
+  //     }, []);
+
+  //     setBoard(filteredList.slice((page - 1) * 6, page * 6));
+  //     setBoardsCount(filteredList.length);
+  //   }
+  // }, [PostData, page, tag, status, keyword]);
 
   return (
     <Container>
@@ -145,12 +197,12 @@ export default function PostNewPage() {
           initialEditType="markdown"
           useCommandShortcut={true}
         /> */}
-        <form action="" onSubmit={handleSubmit}>
+        <form action="">
           <fieldset>
             <legend className="blind">새 글 쓰기</legend>
             <div className="content-box">
               <div className="content-box__title-wrap">
-                <select name="category" value={formData.category} onChange={onChange}>
+                <select name="category" id="" value={formData.inquiry} onChange={onChange}>
                   {categoryList.map((item) => (
                     <option key={item.id} value={item.category}>
                       {item.category}
@@ -169,8 +221,8 @@ export default function PostNewPage() {
                     data-name="title"
                     placeholder="Your title"
                     required
-                    value={formData.title}
                     onChange={onChange}
+                    value={formData.title}
                   />
                 </div>
               </div>

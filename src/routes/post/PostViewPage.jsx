@@ -12,6 +12,11 @@ import ImgSvg from "../../assets/images/icon/image.svg";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
 import axios from "axios";
+// code highlighter
+import "prismjs/themes/prism.css";
+import Prism from "prismjs";
+import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
+import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
 
 // mock data
 import { PostData } from "../../MockData";
@@ -137,7 +142,11 @@ export default function PostViewPage() {
 
       <div className="util-wrap">
         <BasicButton data={editButtonData} />
-        <Viewer initialValue={markdown} />
+        <Viewer initialValue={markdown} />\
+        {/* <Viewer
+          initialValue={content || ''}
+          plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+        /> */}
         <Viewer initialValue={html} />
         {/* <Viewer initialValue={contents  || ""} /> */}
         <BasicButton data={deleteButtonData} />
