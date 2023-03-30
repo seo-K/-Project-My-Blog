@@ -32,80 +32,43 @@ import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
 export default function PostNewPage() {
   const navigate = useNavigate();
 
-  const categoryList = [
-    {
-      id: 0,
-      category: "All",
-    },
-    {
-      id: 1,
-      category: "Html",
-    },
-    {
-      id: 2,
-      category: "Css",
-    },
-    {
-      id: 3,
-      category: "Js",
-    },
-    {
-      id: 4,
-      category: "React",
-    },
-    {
-      id: 5,
-      category: "etc",
-    },
-  ];
+  const categoryList = ["All", "Html", "Css", "Js", "React", "etc"];
 
   // form
   const [formData, setFormData] = useState({
     category: categoryList[0],
     postImg: "",
-    title: "",
+    title: "ddd",
     desc: "",
     date: new Date(),
   });
 
   const editorRef = useRef();
-  // const onChange = (e) => {
-  //   const editorData = editorRef.current.getInstance().getHTML();
-  //   const { name, value } = e.target;
-  //   if (name === "desc") {
-  //     setFormData({
-  //       ...formData,
-  //       desc: editorData,
-  //     });
-  //   } else {
-  //     setFormData({
-  //       ...formData,
-  //       [name]: value,
-  //     });
-  //   }
-  // };
-
   const onChange = (e) => {
-    // const editorData = editorRef?.current?.getInstance().getHTML();
-    // const name = e.target.name;
-    // const value = e.target.value;
-    // if (name !== "desc") {
-    //   setFormData((prevState) => ({
-    //     ...prevState,
-    //     [name]: value,
-    //   }));
-    // } else {
-    //   setFormData((prevState) => ({
-    //     ...prevState,
-    //     [name]: JSON.stringify(editorData),
-    //   }));
-    // }
+    console.log(formData);
   };
 
   // 전송
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const editorData = editorRef?.current?.getInstance().getHTML();
+
+    axios
+      .post("http://localhost:4000/posts", {
+        category: formData.category,
+        // postImg: formData.postImg,
+        title: formData.title,
+        desc: formData.desc,
+        date: formData.date,
+        editorData: editorData,
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/post");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   // 취소 모달
@@ -151,9 +114,9 @@ export default function PostNewPage() {
             <div className="content-box">
               <div className="content-box__title-wrap">
                 <select name="category" value={formData.category} onChange={onChange}>
-                  {categoryList.map((item) => (
-                    <option key={item.id} value={item.category}>
-                      {item.category}
+                  {categoryList.map((item, index) => (
+                    <option key={"category" + index} value={item}>
+                      {item}
                     </option>
                   ))}
                 </select>

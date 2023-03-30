@@ -32,32 +32,7 @@ import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
 export default function PostNewPage() {
   const navigate = useNavigate();
 
-  const categoryList = [
-    {
-      id: 0,
-      category: "All",
-    },
-    {
-      id: 1,
-      category: "Html",
-    },
-    {
-      id: 2,
-      category: "Css",
-    },
-    {
-      id: 3,
-      category: "Js",
-    },
-    {
-      id: 4,
-      category: "React",
-    },
-    {
-      id: 5,
-      category: "etc",
-    },
-  ];
+  const categoryList = ["All", "Html", "Css", "Js", "React", "etc"];
 
   // form
   const [formData, setFormData] = useState({
@@ -68,73 +43,29 @@ export default function PostNewPage() {
     date: new Date(),
   });
 
-  // Markdown mode
-  // const rangeInfo = editor.getRangeInfoOfNode();
-
-  // console.log(rangeInfo); // { range: [[startLineOffset, startCurorOffset], [endLineOffset, endCurorOffset]], type: 'emph' }
-
-  // WYSIWYG mode
-  // const rangeInfo2 = editor.getRangeInfoOfNode();
-
-  // console.log(rangeInfo2); // { range: [startCursorOffset, endCursorOffset], type: 'emph' }
-
-  // 서버에 마크다운 형식 데이터 그대로 전송하기
-  // const editorRef = useRef();
-  // const [text, setText] = useState("");
-  // const handleSubmit = () => {
-  //   setText(editorRef.current.getInstance().getMarkdown());
-  //   console.log("작동함", text);
-  // };
-
   const editorRef = useRef();
-  // html형식으로 텍스트를 가져오려면, getHTML()
-  // 마크다운 형식으로 텍스트를 가져오려면, getMarkdown()
   const onChange = (e) => {
-    const editorData = editorRef?.current.getInstance().getHTML();
-
     setFormData({
-      category: categoryList[0],
-      postImg: "",
-      title: "",
-      desc: JSON.stringify(editorData),
-      date: new Date(),
-      // ...formData,
-      // [e.target.name]: e.target.value,
-      // desc: JSON.stringify(editorData),
-      // [e.target.name]: e.target.name == "desc" ? JSON.stringify(editorData) : e.target.value,
+      category: e.target.value,
+      title: e.target.value,
     });
+    // const editorData = editorRef?.current?.getInstance().getHTML();
+    // setFormData({
+    //   category: e.target.category.value,
+    //   // category: e.currentTarget.category.value,
+    //   title: e.currentTarget.title.value,
+    //   desc: JSON.stringify(editorData),
+    // });
     console.log(formData);
   };
-
-  // const handleChange = e => {
-  //   setFrData({
-  //     ...frData,
-  //     [e.target.name]: e.target.name == 'newsletter' ? e.target.checked : e.target.value,
-  //   });
-  // };
 
   // 전송
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const editorData = editorRef?.current?.getInstance().getHTML();
+
     console.log(formData);
-
-    // const editorData = editorRef.current.getInstance().getHTML();
-
-    // console.log("전송할데이터", JSON.stringify(formData), formData);
-    // console.log("작동함", text);
-    // axios.post(`${process.env.REACT_APP_API}/mail`, form, {
-    //   headers: {
-    //     'Content-type' : 'application/json',multipart/form-data
-    //     Accept : 'application/json',
-    //   },
-    // } )
-    // .then(response => {
-    //   console.log('result' , response.data);
-    //   navigate(`complete`)
-    // })
-    // .catch(response => {
-    //   console.log('Error!', response)
-    // })
   };
 
   // 취소 모달
@@ -156,34 +87,11 @@ export default function PostNewPage() {
   const submitButton = {
     submit: true,
     text: "Submit",
-    onClick: handleSubmit,
   };
   const cancelButton = {
     text: "Cancel",
     onClick: onClickCancelModalOpen,
   };
-
-  // useEffect(() => {
-  //   if ( status === 'All' && keyword === '') {
-  //     setBoard(PostData.slice((page - 1) * 6, page * 6));
-  //     setBoardsCount(PostData.length);
-  //   } else {
-  //     const filteredList = PostData.reduce<PostProps[]>((acc, cur) => {
-  //       const tagCondition = tag !== '전체' ? cur.tag === tag : true;
-  //       const statusCondition = status !== 'ALL' ? cur.status === status : true;
-  //       const keywordCondition = keyword.length > 0 ? cur.title.includes(keyword) : true;
-
-  //       if (tagCondition && statusCondition && keywordCondition) {
-  //         acc.push(cur);
-  //       }
-
-  //       return acc;
-  //     }, []);
-
-  //     setBoard(filteredList.slice((page - 1) * 6, page * 6));
-  //     setBoardsCount(filteredList.length);
-  //   }
-  // }, [PostData, page, tag, status, keyword]);
 
   return (
     <Container>
@@ -197,15 +105,15 @@ export default function PostNewPage() {
           initialEditType="markdown"
           useCommandShortcut={true}
         /> */}
-        <form action="">
+        <form action="" onSubmit={handleSubmit}>
           <fieldset>
             <legend className="blind">새 글 쓰기</legend>
             <div className="content-box">
               <div className="content-box__title-wrap">
-                <select name="category" id="" value={formData.inquiry} onChange={onChange}>
-                  {categoryList.map((item) => (
-                    <option key={item.id} value={item.category}>
-                      {item.category}
+                <select name="category" value={formData.category} onChange={onChange}>
+                  {categoryList.map((item, index) => (
+                    <option key={"category" + index} value={item}>
+                      {item}
                     </option>
                   ))}
                 </select>
@@ -221,13 +129,13 @@ export default function PostNewPage() {
                     data-name="title"
                     placeholder="Your title"
                     required
-                    onChange={onChange}
                     value={formData.title}
+                    onChange={onChange}
                   />
                 </div>
               </div>
               <div className="content-box__editor">
-                <Editor
+                {/* <Editor
                   ref={editorRef}
                   initialValue="에디터"
                   // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
@@ -250,7 +158,7 @@ export default function PostNewPage() {
                     ["scrollSync"],
                   ]}
                   onChange={onChange}
-                />
+                /> */}
               </div>
             </div>
             {/* {editorRef && (
