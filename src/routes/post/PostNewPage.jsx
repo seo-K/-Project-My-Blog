@@ -6,7 +6,7 @@ import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
 import BasicModal from "../../components/common/BasicModal";
 import ModalHook from "../../util/ModalHook";
-// editor, colorPicker, axios
+// editor, colorPicker, axios, moment
 // https://nhn.github.io/tui.editor/latest/ToastUIEditorCore
 // https://curryyou.tistory.com/473 image 업로드 방법 참고
 // https://hayeondev.gatsbyjs.io/221021-tui-editor/ 플러그인 설명
@@ -16,13 +16,12 @@ import "@toast-ui/editor/dist/i18n/ko-kr"; // 언어설정 kor
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax"; // color picker
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-// code highlighter
-// npm i prismjs = 구문 강조 표시기
-// npm install @toast-ui/editor-plugin-code-syntax-highlight = code highlighter
 import "prismjs/themes/prism.css";
 import Prism from "prismjs";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+import moment from "moment";
+import "moment/locale/ko"; //선언하지 않아도, 디바이스 혹은 locale의 시간을 불러온다.
 
 import axios from "axios";
 
@@ -38,29 +37,40 @@ export default function PostNewPage() {
   const [formData, setFormData] = useState({
     category: categoryList[0],
     postImg: "",
-    title: "ddd",
+    title: "",
     desc: "",
-    date: new Date(),
+    date: "0000.00.00.",
   });
 
   const editorRef = useRef();
   const onChange = (e) => {
-    console.log(formData);
+    // console.log(formData);
+    console.log(e.target);
+
+    const editorData = editorRef?.current?.getInstance().getHTML();
+
+    // setFormData({
+    //   ...formData,
+    // //      [e.target.name]: e.target.value }
+    //   category: e.target.value,
+    //   // postImg: formData.postImg,
+    //   title: e.target.value,
+    //   desc: editorData,
+    //   date: moment().format("YYYY.MM.DD"),
+    // });
   };
 
   // 전송
   const handleSubmit = (e) => {
     e.preventDefault();
-    const editorData = editorRef?.current?.getInstance().getHTML();
-
     axios
       .post("http://localhost:4000/posts", {
-        category: formData.category,
-        // postImg: formData.postImg,
-        title: formData.title,
-        desc: formData.desc,
-        date: formData.date,
-        editorData: editorData,
+        // category: formData.category,
+        // // postImg: formData.postImg,
+        // title: formData.title,
+        // desc: editorData,
+        // date: moment().format("DD MMMM YYYY"),
+        formData,
       })
       .then((response) => {
         console.log(response);

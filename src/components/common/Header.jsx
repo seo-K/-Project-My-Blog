@@ -217,7 +217,7 @@ const Container = styled.header`
       /* transform: translateY(calc(100% * ${(transform) => transform || "0"})); */
       /* transform: translateY(calc(100% * ${(props) => props.transform || "0"})); */
       /* width: ${(props) => props.transform}; */
-      background-color: red;
+      /* background-color: red; */
     }
 
     > a {

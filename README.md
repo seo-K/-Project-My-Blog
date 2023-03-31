@@ -1,8 +1,32 @@
 # Blog
 
-- react-router 6.8.1
+- 개인 블로그 작성
 
-* createBrowserRouter 사용하여 작업
+# npm
+
+### - react-router 6.8.1
+
+- createBrowserRouter 사용하여 작업
+
+### - TOAST UI Editor
+
+- npm i @toast-ui/react-editor
+
+  #### 1. Editor color picker
+
+  - npm i @toast-ui/editor-plugin-color-syntax
+
+  #### 2. highlight (code highlighter)
+
+  - npm i @toast-ui/editor-plugin-code-syntax-highlight
+
+  #### 3. prisimjs (구문 강조 표시기)
+
+  - npm i prismjs
+
+### - moment (닐찌, 시간 포맷)
+
+- npm i moment
 
 ```
   const router = createBrowserRouter([

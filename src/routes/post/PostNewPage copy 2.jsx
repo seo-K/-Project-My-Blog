@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // component
-import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
 import BasicModal from "../../components/common/BasicModal";
 import ModalHook from "../../util/ModalHook";
@@ -45,26 +44,13 @@ export default function PostNewPage() {
 
   const editorRef = useRef();
   const onChange = (e) => {
-    setFormData({
-      category: e.target.value,
-      title: e.target.value,
-    });
-    // const editorData = editorRef?.current?.getInstance().getHTML();
-    // setFormData({
-    //   category: e.target.category.value,
-    //   // category: e.currentTarget.category.value,
-    //   title: e.currentTarget.title.value,
-    //   desc: JSON.stringify(editorData),
-    // });
     console.log(formData);
   };
 
   // 전송
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const editorData = editorRef?.current?.getInstance().getHTML();
-
     console.log(formData);
   };
 
@@ -98,13 +84,7 @@ export default function PostNewPage() {
       {isActiveModal && <BasicModal data={CancelModal} />}
       <h2 className="blind">포스트 리스트</h2>
       <div className="content-wrap">
-        {/* <Editor
-          initialValue="Write Here!"
-          previewStyle="vertical"
-          height="600px"
-          initialEditType="markdown"
-          useCommandShortcut={true}
-        /> */}
+       
         <form action="" onSubmit={handleSubmit}>
           <fieldset>
             <legend className="blind">새 글 쓰기</legend>
@@ -135,14 +115,12 @@ export default function PostNewPage() {
                 </div>
               </div>
               <div className="content-box__editor">
-                {/* <Editor
+                <Editor
                   ref={editorRef}
                   initialValue="에디터"
-                  // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
                   previewStyle="vertical" // tab, vertical
                   height="100%"
                   initialEditType="wysiwyg" // wysiwyg & markdown
-                  // what you see is what you get = 보는대로 얻는다 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다
                   useCommandShortcut={false}
                   plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                   theme={""} // '' & 'dark'
@@ -158,23 +136,9 @@ export default function PostNewPage() {
                     ["scrollSync"],
                   ]}
                   onChange={onChange}
-                /> */}
+                />
               </div>
             </div>
-            {/* {editorRef && (
-        <Editor
-          ref={editorRef}
-          initialValue={content || ' '} // 글 수정 시 사용
-          initialEditType="markdown" // wysiwyg & markdown
-          previewStyle={window.innerWidth > 1000 ? 'vertical' : 'tab'} // tab, vertical
-          hideModeSwitch={true}
-          height="calc(100% - 10rem)"
-          theme={''} // '' & 'dark'
-          usageStatistics={false}
-          toolbarItems={toolbarItems}
-          useCommandShortcut={true}
-          plugins={[colorSyntax]}
-        /> */}
             <div className="util-box">
               <div className="util-box__button-wrap">
                 <BasicButton data={cancelButton} />

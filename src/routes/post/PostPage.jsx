@@ -64,7 +64,8 @@ export default function PostPage() {
   // 통신 메서드
   useEffect(() => {
     setLoading(true);
-    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    const url = "http://localhost:4000/posts";
+    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
     // const url = "https://jsonplaceholder.typicode.com/photos";
     axios
       .get(url)

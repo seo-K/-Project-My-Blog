@@ -33,7 +33,7 @@ export default function PostViewPage() {
   const html = '<h3> html 헤더 <span style="color:blue;">파란색</span></h3>';
 
   const [loading, setLoading] = useState(true);
-  const [posts, setPost] = useState([]);
+  const [post, setPost] = useState("");
 
   const editButtonData = {
     // 수정버튼 데이터
@@ -48,7 +48,8 @@ export default function PostViewPage() {
 
   useEffect(() => {
     setLoading(true);
-    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    const url = `http://localhost:4000/posts/${id}`;
     // const url = `https://jsonplaceholder.typicode.com/photos/${id}`;
     axios
       .get(url)
@@ -107,7 +108,7 @@ export default function PostViewPage() {
       </div> */}
       <div className="post-detail">
         <hgroup>
-          <h2>{PostData[id].category}</h2>
+          <h2>{post.category}</h2>
           <button className="post-detail__share" type="button">
             <span className="blind">공유</span>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,32 +124,31 @@ export default function PostViewPage() {
             </svg>
           </button>
         </hgroup>
-        {PostData[id].postImg ? (
+        {post.postImg ? (
           <figure>
-            <img src={PostData[id].postImg} alt="포스트 이미지" />
+            <img src={post.postImg} alt="포스트 이미지" />
           </figure>
         ) : (
           <figure className="empty-img-wrap">
             <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
           </figure>
         )}
-
-        <h3>{PostData[id].title}</h3>
-
+        <h3>{post.title}</h3>
         <hr />
-        <p className="post-text">{PostData[id].desc} 설명</p>
-        <time dateTime={PostData[id].date}>{PostData[id].date}</time>
+        <p className="post-text">{post.desc} 설명</p>
+        <div className="editor-viewer">
+          <Viewer
+            initialValue={post.desc || ""}
+            plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+          />
+        </div>
+        {/* <Viewer initialValue={markdown} />
+        <Viewer initialValue={html} /> */}
+        <time dateTime={post.date}>{post.date}</time>
       </div>
 
       <div className="util-wrap">
         <BasicButton data={editButtonData} />
-        <Viewer initialValue={markdown} />\
-        {/* <Viewer
-          initialValue={content || ''}
-          plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
-        /> */}
-        <Viewer initialValue={html} />
-        {/* <Viewer initialValue={contents  || ""} /> */}
         <BasicButton data={deleteButtonData} />
       </div>
     </Container>
@@ -193,10 +193,10 @@ const Container = styled.div`
       overflow: hidden;
       margin-bottom: 2rem;
     }
-    .post-text {
+    .editor-viewer {
       padding-bottom: 3rem;
-      font-size: 1.4rem;
-      line-height: 1.5;
+      /* font-size: 1.4rem;
+      line-height: 1.5; */
     }
     time {
       width: 100%;
