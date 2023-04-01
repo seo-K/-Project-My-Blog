@@ -6,7 +6,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // ROUTER
-import DefaultPage from "./routes/default/DefaultPage";
+import Layout from "./routes/layout/Layout";
 import MainPage from "./routes/main/MainPage";
 import PostPage from "./routes/post/PostPage";
 import PostViewPage from "./routes/post/PostViewPage";
@@ -35,7 +35,7 @@ import ErrorPage from "./error-page";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DefaultPage />,
+    element: <Layout />,
 
     children: [
       {
