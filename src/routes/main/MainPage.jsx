@@ -111,7 +111,7 @@ export default function MainPage() {
                       <p className="folder__title">{list.title}</p>
                       <i className="folder__count">{list.value} value</i>
                       <div className="folder__shadows">
-                        <span></span>
+                        {/* <span></span> */}
                         <span></span>
                       </div>
                     </a>
@@ -290,6 +290,7 @@ const Container = styled.div`
 
     &__swiper {
       --swiper-pagination-color: #636c78;
+      perspective: 1000;
       padding: 2rem 0 6rem;
       .swiper-slide {
         flex-shrink: 0;
@@ -307,14 +308,16 @@ const Container = styled.div`
       flex-direction: column;
       width: 100%;
       height: 100%;
-      background-color: var(--mainYellow);
       color: var(--white);
       border-radius: 0 3rem 3rem 3rem;
       padding: 2.5rem 2rem;
-      transition: transform 0.5s;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       &:hover {
         transform: translateY(1rem);
       }
+    }
+    .swiper-slide-active .folder__link {
+      transform: rotateY(0);
     }
     &__link:after {
       position: absolute;
@@ -389,16 +392,20 @@ const Container = styled.div`
         width: 100%;
         height: 100%;
         border-radius: 0 3rem 3rem 3rem;
+        background-color: var(--mainYellow);
+        transform: rotateY(-10deg);
+        transform-origin: left;
+        transition: transform 0.5s;
         z-index: -1;
       }
-      span:nth-child(1) {
+      /* span:nth-child(1) {
         transform: translateY(-2rem) scale(0.98);
         background-color: var(--mainGreen);
       }
       span:nth-child(2) {
         transform: translateY(-4rem) scale(0.95);
         background-color: var(--deepDarkGray);
-      }
+      } */
     }
   }
   /* INFO */
