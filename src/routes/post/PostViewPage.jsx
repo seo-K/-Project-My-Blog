@@ -151,17 +151,17 @@ export default function PostViewPage() {
         <Viewer initialValue={html} /> */}
         <time dateTime={post.date}>{post.date}</time>
         <div className="comment">
-          <div className="comment__input-wrap">
-            <input type="text" placeholder="댓글을 입력해주세요." />
-            <button type="submit">
-              <img src={AddSvg} alt="댓글 추가" />
-            </button>
-          </div>
           <ul className="comment__list-wrap">
             {post?.comment?.map((list) => (
               <li key={list.id}>{list.text}</li>
             ))}
           </ul>
+          <div className="comment__input-wrap">
+            <input type="text" placeholder="댓글을 입력해주세요." value={post.comment} />
+            <button type="submit">
+              <img src={AddSvg} alt="댓글 추가" />
+            </button>
+          </div>
         </div>
       </div>
 
