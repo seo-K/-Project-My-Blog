@@ -32,7 +32,6 @@ export default function PostNewPage() {
   const navigate = useNavigate();
 
   const categoryList = ["All", "Html", "Css", "Js", "React", "etc"];
-
   // form
   const [formData, setFormData] = useState({
     category: categoryList[0],
@@ -41,23 +40,21 @@ export default function PostNewPage() {
     desc: "",
     date: "0000.00.00.",
   });
+  // const [formData, setFormData] = useState({
+  //   category: categoryList[0],
+  //   postImg: "",
+  //   title: "",
+  //   desc: "",
+  //   date: "0000.00.00.",
+  // });
 
   const editorRef = useRef();
   const onChange = (e) => {
-    // console.log(formData);
-    console.log(e.target);
-
     const editorData = editorRef?.current?.getInstance().getHTML();
-
-    // setFormData({
-    //   ...formData,
-    // //      [e.target.name]: e.target.value }
-    //   category: e.target.value,
-    //   // postImg: formData.postImg,
-    //   title: e.target.value,
-    //   desc: editorData,
-    //   date: moment().format("YYYY.MM.DD"),
-    // });
+    setFormData({
+      date: new Date(),
+    });
+    console.log(formData);
   };
 
   // 전송
@@ -65,12 +62,7 @@ export default function PostNewPage() {
     e.preventDefault();
     axios
       .post("http://localhost:4000/posts", {
-        // category: formData.category,
-        // // postImg: formData.postImg,
-        // title: formData.title,
-        // desc: editorData,
-        // date: moment().format("DD MMMM YYYY"),
-        formData,
+        ...formData,
       })
       .then((response) => {
         console.log(response);
@@ -123,7 +115,16 @@ export default function PostNewPage() {
             <legend className="blind">새 글 쓰기</legend>
             <div className="content-box">
               <div className="content-box__title-wrap">
-                <select name="category" value={formData.category} onChange={onChange}>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={(e) => {
+                    setFormData((state) => ({
+                      ...state,
+                      category: e.target.value,
+                    }));
+                  }}
+                >
                   {categoryList.map((item, index) => (
                     <option key={"category" + index} value={item}>
                       {item}
@@ -143,14 +144,19 @@ export default function PostNewPage() {
                     placeholder="Your title"
                     required
                     value={formData.title}
-                    onChange={onChange}
+                    onChange={(e) => {
+                      setFormData((state) => ({
+                        ...state,
+                        title: e.target.value,
+                      }));
+                    }}
                   />
                 </div>
               </div>
               <div className="content-box__editor">
                 <Editor
                   ref={editorRef}
-                  initialValue="에디터"
+                  initialValue={formData?.desc || ""} // 글 수정 시 사용
                   // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
                   previewStyle="vertical" // tab, vertical
                   height="100%"
@@ -170,7 +176,13 @@ export default function PostNewPage() {
                     ["code", "codeblock"],
                     ["scrollSync"],
                   ]}
-                  onChange={onChange}
+                  onChange={() => {
+                    const editorData = editorRef?.current?.getInstance().getHTML();
+                    setFormData((state) => ({
+                      ...state,
+                      desc: editorData,
+                    }));
+                  }}
                 />
               </div>
             </div>
@@ -274,7 +286,7 @@ const Container = styled.section`
     input {
       width: 100%;
       font-size: 1.4rem;
-      padding: 1.4rem 2rem;
+      padding: 2rem;
       background-color: var(--white);
       border-left: 1px solid var(--border);
     }

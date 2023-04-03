@@ -21,12 +21,14 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 // mock data
 import { PostData } from "../../MockData";
 
+// img
+import AddSvg from "../../assets/images/icon/add.svg";
+
 export default function PostViewPage() {
   const { id } = useParams();
   // let 찾은상품 = props.shoes.find(function(상품){
   //   return 상품.id == id
   // });
-  console.log(id);
 
   // editor 마크다운 화면 렌더링
   const markdown = "## 마크다운 헤더";
@@ -62,6 +64,9 @@ export default function PostViewPage() {
         console.log("실패");
       });
   }, []);
+
+  console.log(id);
+  console.log(post.comment);
 
   return (
     <Container>
@@ -145,6 +150,19 @@ export default function PostViewPage() {
         {/* <Viewer initialValue={markdown} />
         <Viewer initialValue={html} /> */}
         <time dateTime={post.date}>{post.date}</time>
+        <div className="comment">
+          <div className="comment__input-wrap">
+            <input type="text" placeholder="댓글을 입력해주세요." />
+            <button type="submit">
+              <img src={AddSvg} alt="댓글 추가" />
+            </button>
+          </div>
+          <ul className="comment__list-wrap">
+            {post?.comment?.map((list) => (
+              <li key={list.id}>{list.text}</li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className="util-wrap">
