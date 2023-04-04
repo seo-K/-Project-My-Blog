@@ -15,7 +15,7 @@ export default function BasicModal({ data }) {
 
   // 확인 버튼
   const confirmButton = {
-    text: "confirm",
+    text: "확인",
     onClick: onClickClose,
   };
 
