@@ -26,7 +26,7 @@ export default function PostPage() {
     link: "new",
     text: (
       <>
-        <img src={AddSvg} alt="" />
+        <img src={AddSvg} alt="포스트 추가" />
         Create
       </>
     ),

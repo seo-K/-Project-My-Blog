@@ -114,8 +114,6 @@ export default function PostViewPage() {
       });
   }, []);
 
-  // console.log(id);
-
   return (
     <Container>
       {/* <div className="post-detail">
@@ -198,28 +196,6 @@ export default function PostViewPage() {
         {/* <Viewer initialValue={markdown} />
         <Viewer initialValue={html} /> */}
         <time dateTime={post.date}>{post.date}</time>
-        <div className="comment">
-          <ul className="comment__list-wrap">
-            {post?.comments?.map((list) => (
-              <li key={list.id}>
-                {list.text}
-                {list.date}
-              </li>
-            ))}
-          </ul>
-          <div className="comment__input-wrap">
-            <input
-              type="text"
-              placeholder="댓글을 입력해주세요."
-              value={commentInput}
-              onChange={onChange}
-            />
-            <BasicButton data={commentSubmitData} />
-            {/* <button type="submit">
-              <img src={AddSvg} alt="댓글 추가" />
-            </button> */}
-          </div>
-        </div>
       </div>
 
       <div className="util-wrap">
