@@ -12,21 +12,24 @@ import ImgSvg from "../../assets/images/icon/image.svg";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
 import axios from "axios";
-// code highlighter
-import "prismjs/themes/prism.css";
+import "prismjs/themes/prism.css"; // code highlighter
 import Prism from "prismjs";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+import moment from "moment";
+import "moment/locale/ko";
 
 // mock data
 import { PostData } from "../../MockData";
+
+// img
+import AddSvg from "../../assets/images/icon/add.svg";
 
 export default function PostViewPage() {
   const { id } = useParams();
   // let 찾은상품 = props.shoes.find(function(상품){
   //   return 상품.id == id
   // });
-  console.log(id);
 
   // editor 마크다운 화면 렌더링
   const markdown = "## 마크다운 헤더";
@@ -34,7 +37,55 @@ export default function PostViewPage() {
 
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState("");
+  const [commentInput, setCommentInput] = useState("");
 
+  const onChange = (e) => {
+    setCommentInput(e.target.value);
+    console.log(commentInput);
+  };
+
+  const handleCommentSubmit = () => {
+    axios
+      .post(`http://localhost:4000/posts/${id}`, {
+        comment: [
+          ...(post.comment || []),
+          {
+            id: post.comment ? post.comment.length : 0,
+            text: commentInput,
+            date: moment().format("l"),
+          },
+        ],
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    setCommentInput("");
+  };
+  // const handleCommentSubmit = () => {
+  //   setPost((prevPost) => {
+  //     const newComment = {
+  //       id: prevPost.comment ? prevPost.comment.length : 0,
+  //       text: commentInput,
+  //       date: moment().format("l"),
+  //     };
+  //     const updatedPost = {
+  //       ...prevPost, // 객체를 직접 수정하는 것 보다 예측 가능하고 안전함.
+  //       comment: prevPost.comment ? [...prevPost.comment, newComment] : [newComment],
+  //     };
+  //     return updatedPost;
+  //   });
+  //   setCommentInput("");
+  // };
+
+  const commentSubmitData = {
+    // 댓글 등록 버튼 데이터
+    submit: true,
+    text: "등록",
+    onClick: handleCommentSubmit,
+  };
   const editButtonData = {
     // 수정버튼 데이터
     link: "edit",
@@ -56,12 +107,14 @@ export default function PostViewPage() {
       .then(function (response) {
         setLoading(false);
         setPost(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(function (error) {
         console.log("실패");
       });
   }, []);
+
+  // console.log(id);
 
   return (
     <Container>
@@ -71,13 +124,13 @@ export default function PostViewPage() {
           <button className="post-detail__share" type="button">
             <span className="blind">공유</span>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
               <g id="SVGRepo_iconCarrier">
                 <path
                   d="M8.68445 10.6578L13 8.50003M15.3157 16.6578L11 14.5M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"
                   stroke="#59616f"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 ></path>
               </g>
             </svg>
@@ -112,13 +165,13 @@ export default function PostViewPage() {
           <button className="post-detail__share" type="button">
             <span className="blind">공유</span>
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
               <g id="SVGRepo_iconCarrier">
                 <path
                   d="M8.68445 10.6578L13 8.50003M15.3157 16.6578L11 14.5M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"
                   stroke="#59616f"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 ></path>
               </g>
             </svg>
@@ -145,6 +198,28 @@ export default function PostViewPage() {
         {/* <Viewer initialValue={markdown} />
         <Viewer initialValue={html} /> */}
         <time dateTime={post.date}>{post.date}</time>
+        <div className="comment">
+          <ul className="comment__list-wrap">
+            {post?.comments?.map((list) => (
+              <li key={list.id}>
+                {list.text}
+                {list.date}
+              </li>
+            ))}
+          </ul>
+          <div className="comment__input-wrap">
+            <input
+              type="text"
+              placeholder="댓글을 입력해주세요."
+              value={commentInput}
+              onChange={onChange}
+            />
+            <BasicButton data={commentSubmitData} />
+            {/* <button type="submit">
+              <img src={AddSvg} alt="댓글 추가" />
+            </button> */}
+          </div>
+        </div>
       </div>
 
       <div className="util-wrap">
@@ -203,6 +278,27 @@ const Container = styled.div`
       color: var(--deepDarkGray);
       font-size: 1.4rem;
       text-align: right;
+    }
+  }
+
+  .comment {
+    &__list-wrap {
+    }
+    &__input-wrap {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      input {
+        flex: 1;
+        font-size: 1.8rem;
+        padding: 1rem 2rem;
+        border: 1px solid var(--mainGreen);
+        border-radius: 4rem;
+      }
+      button {
+        margin-left: 1rem;
+      }
     }
   }
 
