@@ -12,32 +12,7 @@ export default function PostSearchResultPage() {
   const navigate = useNavigate();
   const [post, setPost] = useState([]);
   const [category, setCategory] = useState(0); // category
-  const categoryList = [
-    {
-      id: 0,
-      category: "All",
-    },
-    {
-      id: 1,
-      category: "Html",
-    },
-    {
-      id: 2,
-      category: "Css",
-    },
-    {
-      id: 3,
-      category: "Js",
-    },
-    {
-      id: 4,
-      category: "React",
-    },
-    {
-      id: 5,
-      category: "etc",
-    },
-  ];
+  const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"];
 
   let { searchWord } = useParams(); // 검색 단어
 
@@ -68,13 +43,13 @@ export default function PostSearchResultPage() {
       <h2 className="blind">포스트 리스트</h2>
       <div className="content-wrap">
         <ul className="tab-list">
-          {categoryList.map((list, index) => (
+          {categoryList.map((cate, index) => (
             <li
-              key={list.id}
+              key={index}
               className={category == index ? "active" : undefined}
               onClick={() => setCategory(index)}
             >
-              <button type="button">{list.category}</button>
+              <button type="button">{cate}</button>
             </li>
           ))}
         </ul>

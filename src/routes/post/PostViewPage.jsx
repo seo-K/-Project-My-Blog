@@ -51,7 +51,8 @@ export default function PostViewPage() {
       const newComment = {
         id: prevPost.comment ? prevPost.comment.length : 0,
         text: commentInput,
-        date: moment().format("l"),
+        date: new Date().toISOString().slice(0, 10),
+        // date: moment().format("l"),
       };
       console.log(newComment);
     });

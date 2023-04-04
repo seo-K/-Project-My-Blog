@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": 0,
-      "category": "javascript",
+      "category": "Javascript",
       "img": "https://placeimg.com/640/480/tech",
       "title": "블로그01블로그01블로그01블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다.",
@@ -28,7 +28,7 @@
     },
     {
       "id": 1,
-      "category": "react",
+      "category": "React",
       "img": "https://placeimg.com/640/480/tech",
       "title": "블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -46,7 +46,7 @@
     },
     {
       "id": 3,
-      "category": "css",
+      "category": "Css",
       "img": "https://placeimg.com/640/480/tech",
       "title": "블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -55,7 +55,7 @@
     },
     {
       "id": 4,
-      "category": "swiper",
+      "category": "Etc",
       "img": "https://placeimg.com/640/480/tech",
       "title": "FiA530laments",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -64,7 +64,7 @@
     },
     {
       "id": 5,
-      "category": "library",
+      "category": "Etc",
       "img": "https://placeimg.com/640/480/tech",
       "title": "A530",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -73,7 +73,7 @@
     },
     {
       "id": 6,
-      "category": "three.js",
+      "category": "Etc",
       "img": "https://placeimg.com/640/480/tech",
       "title": "블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -82,7 +82,7 @@
     },
     {
       "id": 7,
-      "category": "javascript",
+      "category": "Javascript",
       "img": "https://placeimg.com/640/480/tech",
       "title": "FiA530laments",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -91,7 +91,7 @@
     },
     {
       "id": 8,
-      "category": "javascript",
+      "category": "Javascript",
       "img": "https://placeimg.com/640/480/tech",
       "title": "A530",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -100,7 +100,7 @@
     },
     {
       "id": 9,
-      "category": "javascript",
+      "category": "Javascript",
       "img": "https://placeimg.com/640/480/tech",
       "title": "A530",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
@@ -108,7 +108,7 @@
       "like": "9"
     },
     {
-      "category": "Js",
+      "category": "Javascript",
       "img": "https://placeimg.com/640/480/tech",
       "postImg": "",
       "title": "제목ㅇ",
@@ -117,7 +117,7 @@
       "id": 10
     },
     {
-      "category": "Js",
+      "category": "Javascript",
       "img": "https://placeimg.com/640/480/tech",
       "postImg": "",
       "title": "제목ㅇ",
@@ -126,7 +126,7 @@
       "id": 11
     },
     {
-      "category": "Js",
+      "category": "Javascript",
       "img": "https://placeimg.com/640/480/tech",
       "postImg": "",
       "title": "ㄴㅇㄹ",
