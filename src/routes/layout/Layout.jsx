@@ -7,6 +7,7 @@ import axios from "axios";
 // img
 import SearchSvg from "../../assets/images/icon/search.svg";
 import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
+import 사랑스러운핀 from "../../assets/images/mock/귀여운핀.jpg";
 
 export default function DefaultPage() {
   const navigate = useNavigate();
@@ -109,6 +110,7 @@ const Container = styled.div`
     padding: 3rem;
     border-radius: 5rem 0 0 5rem;
     background-color: var(--beige);
+    background: url(${사랑스러운핀}) no-repeat center / cover;
 
     &__inner {
       width: 100%;

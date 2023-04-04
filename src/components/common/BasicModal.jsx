@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import ModalHook from "../../util/ModalHook";
 import BasicButton from "./BasicButton";
@@ -18,6 +18,38 @@ export default function BasicModal({ data }) {
     text: "확인",
     onClick: onClickClose,
   };
+
+  // useKeyEscClose.js
+  const keydownHandler = ({ key }) => {
+    switch (key) {
+      case "Escape":
+        onClickClose();
+        break;
+      default:
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", keydownHandler);
+    console.log("push esc");
+    return () => document.removeEventListener("keydown", keydownHandler);
+  });
+
+  // export const useKeyEscClose = (closeThing) => {
+  //   useEffect(() => {
+  //       const escKeyModalClose = (e) => {
+  //           if (e.keyCode === 27) {
+  //               closeThing();
+  //           }
+  //       };
+  //       window.addEventListener("keydown", escKeyModalClose);
+  //       return () => window.removeEventListener("keydown", escKeyModalClose);
+  //   }, []);
+  // };
+
+  // const closeThing = () => {
+  // 	setIsModalOpen(false)
+  // }
 
   return (
     <React.Fragment>

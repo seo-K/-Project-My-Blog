@@ -22,9 +22,6 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import moment from "moment";
 import "moment/locale/ko";
 
-// mock data
-import { PostData } from "../../MockData";
-
 export default function PostViewPage() {
   const { id } = useParams();
   // let 찾은상품 = props.shoes.find(function(상품){
@@ -159,9 +156,9 @@ export default function PostViewPage() {
             </svg>
           </button>
         </hgroup>
-        {post.postImg ? (
+        {post.img ? (
           <figure>
-            <img src={post.postImg} alt="포스트 이미지" />
+            <img src={post.img} alt="포스트 이미지" />
           </figure>
         ) : (
           <figure className="empty-img-wrap">

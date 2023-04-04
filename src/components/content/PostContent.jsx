@@ -6,14 +6,14 @@ import styled from "styled-components";
 import ImgSvg from "../../assets/images/icon/image.svg";
 
 export default function PostContent({ data }) {
-  const { id, postImg, category, title, desc } = data || {};
+  const { id, img, category, title, desc } = data || {};
 
   return (
     <Container to={`/post/detail/${id}`}>
       <div className="post-content">
-        {postImg ? (
+        {img ? (
           <figure>
-            <img src={postImg} alt="포스트 이미지" />
+            <img src={img} alt="포스트 이미지" />
           </figure>
         ) : (
           <figure className="empty-img-wrap">

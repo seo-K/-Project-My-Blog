@@ -5,7 +5,6 @@ import PostContent from "../../components/content/PostContent";
 import PostContentSkeleton from "../../components/content/PostContentSkeleton";
 
 // image
-import { PostData } from "../../MockData";
 import ArrowRightSvg from "../../assets/images/icon/arrow_right.svg";
 import TitleBgSvg from "../../assets/images/icon/titlebg.svg";
 import HtmlIconSvg from "../../assets/images/icon/tool_html.svg";
@@ -54,8 +53,8 @@ export default function MainPage() {
 
   useEffect(() => {
     setLoading(true);
-    const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
-    // const url = `https://jsonplaceholder.typicode.com/photos/${id}`;
+    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    const url = "http://localhost:4000/posts";
     axios
       .get(url)
       .then(function (response) {
@@ -166,7 +165,6 @@ export default function MainPage() {
             : posts
                 .filter((item, index) => index < 3)
                 .map((list) => {
-                  console.log(list);
                   return (
                     <li key={"postList" + list.id}>
                       <PostContent data={list} />
