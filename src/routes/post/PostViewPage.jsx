@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import ModalHook from "../../util/ModalHook";
 
 // component
 import BasicButton from "../../components/common/BasicButton";
+import BasicModal from "../../components/common/BasicModal";
 
 // img
 import ImgSvg from "../../assets/images/icon/image.svg";
+import AddSvg from "../../assets/images/icon/add.svg";
 
 // editor, axios
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
@@ -22,22 +25,24 @@ import "moment/locale/ko";
 // mock data
 import { PostData } from "../../MockData";
 
-// img
-import AddSvg from "../../assets/images/icon/add.svg";
-
 export default function PostViewPage() {
   const { id } = useParams();
   // let 찾은상품 = props.shoes.find(function(상품){
   //   return 상품.id == id
   // });
 
-  // editor 마크다운 화면 렌더링
-  const markdown = "## 마크다운 헤더";
-  const html = '<h3> html 헤더 <span style="color:blue;">파란색</span></h3>';
-
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState("");
   const [commentInput, setCommentInput] = useState("");
+  const [alertModal, setAlertModal] = useState(false);
+
+  const alertModalData = {
+    isState: {
+      state: alertModal,
+      setState: setAlertModal,
+    },
+    text: "검색어를 입력하세요",
+  };
 
   const onChange = (e) => {
     setCommentInput(e.target.value);
@@ -45,40 +50,16 @@ export default function PostViewPage() {
   };
 
   const handleCommentSubmit = () => {
-    axios
-      .post(`http://localhost:4000/posts/${id}`, {
-        comment: [
-          ...(post.comment || []),
-          {
-            id: post.comment ? post.comment.length : 0,
-            text: commentInput,
-            date: moment().format("l"),
-          },
-        ],
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    setPost((prevPost) => {
+      const newComment = {
+        id: prevPost.comment ? prevPost.comment.length : 0,
+        text: commentInput,
+        date: moment().format("l"),
+      };
+      console.log(newComment);
+    });
     setCommentInput("");
   };
-  // const handleCommentSubmit = () => {
-  //   setPost((prevPost) => {
-  //     const newComment = {
-  //       id: prevPost.comment ? prevPost.comment.length : 0,
-  //       text: commentInput,
-  //       date: moment().format("l"),
-  //     };
-  //     const updatedPost = {
-  //       ...prevPost, // 객체를 직접 수정하는 것 보다 예측 가능하고 안전함.
-  //       comment: prevPost.comment ? [...prevPost.comment, newComment] : [newComment],
-  //     };
-  //     return updatedPost;
-  //   });
-  //   setCommentInput("");
-  // };
 
   const commentSubmitData = {
     // 댓글 등록 버튼 데이터
@@ -107,10 +88,10 @@ export default function PostViewPage() {
       .then(function (response) {
         setLoading(false);
         setPost(response.data);
-        // console.log(response.data);
       })
       .catch(function (error) {
         console.log("실패");
+        console.log(error);
       });
   }, []);
 
@@ -118,6 +99,7 @@ export default function PostViewPage() {
 
   return (
     <Container>
+      <BasicModal data={alertModalData} />
       {/* <div className="post-detail">
         <hgroup>
           <h2>{posts.albumId}</h2>
@@ -195,8 +177,6 @@ export default function PostViewPage() {
             plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
           />
         </div>
-        {/* <Viewer initialValue={markdown} />
-        <Viewer initialValue={html} /> */}
         <time dateTime={post.date}>{post.date}</time>
         <div className="comment">
           <ul className="comment__list-wrap">
@@ -213,6 +193,16 @@ export default function PostViewPage() {
               placeholder="댓글을 입력해주세요."
               value={commentInput}
               onChange={onChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  if (e.target.value.length > 0) {
+                    handleCommentSubmit(e);
+                  } else {
+                    setAlertModal(true);
+                    ModalHook.modalOpen();
+                  }
+                }
+              }}
             />
             <BasicButton data={commentSubmitData} />
             {/* <button type="submit">
