@@ -31,7 +31,7 @@ import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
 export default function PostNewPage() {
   const navigate = useNavigate();
 
-  const categoryList = ["All", "Html", "Css", "Js", "React", "etc"];
+  const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"];
   // form
   const [formData, setFormData] = useState({
     category: categoryList[0],
@@ -178,6 +178,7 @@ export default function PostNewPage() {
                   ]}
                   onChange={() => {
                     const editorData = editorRef?.current?.getInstance().getHTML();
+                    // const editorData = editorRef?.current?.getInstance().getMarkdown();
                     setFormData((state) => ({
                       ...state,
                       desc: editorData,

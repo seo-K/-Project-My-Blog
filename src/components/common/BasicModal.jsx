@@ -29,9 +29,9 @@ export default function BasicModal({ data }) {
     }
   };
 
+  // Esc Close
   useEffect(() => {
     document.addEventListener("keydown", keydownHandler);
-    console.log("push esc");
     return () => document.removeEventListener("keydown", keydownHandler);
   });
 
