@@ -12,17 +12,50 @@
 
 - npm i @toast-ui/react-editor
 
-  #### 1. Editor color picker
+// 이미지 드래그 업로드 막기
+useEffect(() => {
+// 이미지 업로드 막기
+editorRef.current.getInstance().removeHook('addImageBlobHook');
+}, []);
 
-  - npm i @toast-ui/editor-plugin-color-syntax
+##### 이슈 발생
 
-  #### 2. highlight (code highlighter)
+- 이미지 삽입 시, img 태그 src에 이미지 데이터 전체가 base64로 인코딩 되어 주입.
+- DB 저장 시, 레코드 한줄마다 몇 Mb씩 차지하는 상황 발생
+- Toast-UI Editor 에서 첨부한 이미지를 File 객체에 담아서 다뤄야함!
+- addImageBlobHook 훅 사용. ( 첨부된 이미지를 file 객체로 받고, img 태그의 src와 alt 속성을 설정해 화면에 표시하는 역할)
 
-  - npm i @toast-ui/editor-plugin-code-syntax-highlight
+*
 
-  #### 3. prisimjs (구문 강조 표시기)
+```
+type HookCallback = (url: string, text?: string) => void;
 
-  - npm i prismjs
+export type HookMap = {
+  addImageBlobHook?: (blob: Blob | File, callback: HookCallback) => void;
+};
+
+// 인자로 받은 url(이미지 경로)를 img 태그 src에 주입하고, text인자로 받은 값은 alt에 주입한다.
+
+
+```
+
+1.  이미지 파일 서버로 전송
+2.  파일이 저장된 경로만 DB저장 후, img 태그의 src 속성으로 사용.
+
+3.  blob : 첨부된 이미지를 file 형태로 받기
+4.  callback(url, string) : img 태그를 만들어 화면에 이미지를 표시. 인자로 받은 url(이미지 경로)를 img 태그의 src에 주입하고, text 인자로 받은 값은 alt에 주입함.
+
+#### 1. Editor color picker
+
+- npm i @toast-ui/editor-plugin-color-syntax
+
+#### 2. highlight (code highlighter)
+
+- npm i @toast-ui/editor-plugin-code-syntax-highlight
+
+#### 3. prisimjs (구문 강조 표시기)
+
+- npm i prismjs
 
 ### - moment (닐찌, 시간 포맷)
 
