@@ -57,11 +57,17 @@ export default function PostNewPage() {
     console.log(formData);
   };
 
+  // Editor 이미지 드래그 업로드 막기
+  // useEffect(() => {
+  //   // 이미지 업로드 막기
+  //   editorRef.current.getInstance().removeHook("addImageBlobHook");
+  // }, []);
+
   // 전송
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/posts", {
+      .post("localhost:4000/posts", {
         ...formData,
       })
       .then((response) => {
@@ -183,6 +189,41 @@ export default function PostNewPage() {
                       ...state,
                       desc: editorData,
                     }));
+                  }}
+                  // hooks={{
+                  //   addImageBlobHook: async (blob, callback) => {
+                  //     const upload = await this.uploadImage(blob);
+                  //     callback(upload, "alt text");
+                  //     return false;
+                  //   },
+                  // }}
+                  hooks={{
+                    addImageBlobHook: async (blob, callback) => {
+                      try {
+                        // blob 기반으로 File 객체 만들기
+                        const imageData = new FormData();
+                        const file = new File([blob], encodeURI(blob.name), {
+                          type: blob.type,
+                        });
+                        imageData.append("image", file);
+                        const imageURI = await axios({
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "multipart/form-data",
+                          },
+                          url: "localhost:3000/image/upload",
+                          data: imageData,
+                          withCredentials: true,
+                        });
+
+                        callback(
+                          `localhost:3000/image/${encodeURIComponent(imageURI.data.fileName)}`,
+                          "image",
+                        );
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    },
                   }}
                 />
               </div>

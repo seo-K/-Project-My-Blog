@@ -12,29 +12,20 @@
 
 - npm i @toast-ui/react-editor
 
-// 이미지 드래그 업로드 막기
-useEffect(() => {
-// 이미지 업로드 막기
-editorRef.current.getInstance().removeHook('addImageBlobHook');
-}, []);
-
 ##### 이슈 발생
 
-- 이미지 삽입 시, img 태그 src에 이미지 데이터 전체가 base64로 인코딩 되어 주입.
-- DB 저장 시, 레코드 한줄마다 몇 Mb씩 차지하는 상황 발생
+- 이미지 삽입 시, img 태그 src에 이미지 데이터 전체가 base64로 인코딩 되어 주입 -> DB 저장 시, 레코드 한줄마다 몇 Mb씩 차지하는 상황 발생
 - Toast-UI Editor 에서 첨부한 이미지를 File 객체에 담아서 다뤄야함!
-- addImageBlobHook 훅 사용. ( 첨부된 이미지를 file 객체로 받고, img 태그의 src와 alt 속성을 설정해 화면에 표시하는 역할)
-
-*
+- editor 자체에 메소드 [addImageBlobHook] 훅 사용. ( 첨부된 이미지를 file 객체로 받고, img 태그의 src와 alt 속성을 설정해 화면에 표시하는 역할)
 
 ```
+인자로 받은 url(이미지 경로)를 img 태그 src에 주입하고, text인자로 받은 값은 alt에 주입한다.
+
 type HookCallback = (url: string, text?: string) => void;
 
 export type HookMap = {
   addImageBlobHook?: (blob: Blob | File, callback: HookCallback) => void;
 };
-
-// 인자로 받은 url(이미지 경로)를 img 태그 src에 주입하고, text인자로 받은 값은 alt에 주입한다.
 
 
 ```
@@ -90,7 +81,7 @@ export type HookMap = {
   ]);
 ```
 
-## 연습용 서버 생성
+# 연습용 서버 생성
 
 ```
 https://react.vlpt.us/redux-middleware/08-json-server.html 연습용 서버
@@ -103,7 +94,13 @@ https://pinenamu.tistory.com/414
 $ npx json-server ./data.json --port 4000
 ```
 
-### 추가할 기능
+# 추가한 기능
+
+- 모달 ESC 버튼으로 닫기
+- 에디터
+- 스켈레톤 UI
+
+# 추가할 기능
 
 - 글 삭제, 수정
 - 글 좋아요 기능
@@ -112,3 +109,4 @@ $ npx json-server ./data.json --port 4000
 - 글 필터링 기능 ( 탭으로 분리된 부분)
 - 공유하기 기능
 - 페이지 네이션, 무한스크롤
+- select 리스트 따로 데이터로 빼기

@@ -34,33 +34,8 @@ export default function PostPage() {
 
   // photos, setPost 비구조화 할당
   const [posts, setPost] = useState([]);
-  const [category, setCategory] = useState([
-    {
-      id: 0,
-      status: "All",
-    },
-    {
-      id: 1,
-      status: "Html",
-    },
-    {
-      id: 2,
-      status: "Css",
-    },
-    {
-      id: 3,
-      status: "Js",
-    },
-    {
-      id: 4,
-      status: "React",
-    },
-    {
-      id: 5,
-      status: "etc",
-    },
-  ]);
-
+  const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"];
+  const [activeCategory, setActiveCategory] = useState(0);
   // 통신 메서드
   useEffect(() => {
     setLoading(true);
@@ -122,11 +97,17 @@ export default function PostPage() {
   // });
 
   // 필터링
-  // useEffect(() => {
-  //   const filtered = posts.filter((post) => post.category === category);
-  //   setPost(filtered);
-  //   console.log(category);
-  // }, [posts, category]);
+  useEffect(() => {
+    // const filtered = posts.filter((post) => console.log(post.category));
+    if (activeCategory !== 0) {
+      const filtered = posts.filter((post) => post.category === categoryList[activeCategory]);
+      setPost(filtered);
+    } else {
+      setPost(posts);
+    }
+    // console.log(activeCategory);
+    console.log(categoryList[activeCategory], activeCategory);
+  }, [posts, activeCategory]);
 
   // searchApi();
 
@@ -157,20 +138,44 @@ export default function PostPage() {
       <h2 className="blind">포스트 리스트</h2>
       <div className="content-wrap">
         <ul className="tab-list">
-          {category.map((list, index) => (
-            <li
-              key={list.id}
-              className={category == index ? "active" : undefined}
-              onClick={() => setCategory(index)}
-            >
-              <button type="button">{list.status}</button>
-            </li>
-          ))}
+          {categoryList.map((item, index) => {
+            return (
+              <li
+                key={index}
+                className={activeCategory == index ? "active" : undefined}
+                onClick={() => setActiveCategory(index)}
+              >
+                <button type="button">{item}</button>
+              </li>
+            );
+          })}
         </ul>
         <div className="button-wrap">
           <BasicButton data={buttonData} />
         </div>
         <ul className="post-list-wrap">
+          {loading ? (
+            new Array(10).fill(1).map((_, i) => {
+              return (
+                <li key={i}>
+                  <PostContentSkeleton />
+                </li>
+              );
+            })
+          ) : posts.length > 0 ? (
+            posts.map((list) => {
+              return (
+                <li key={list.id}>
+                  <PostContent data={list} />
+                </li>
+              );
+            })
+          ) : (
+            <p className="empty-content">포스트가 없습니다.</p>
+          )}
+        </ul>
+        {/* <ul className="post-list-wrap">
+        
           {loading
             ? new Array(10).fill(1).map((_, i) => {
                 return (
@@ -186,9 +191,8 @@ export default function PostPage() {
                   </li>
                 );
               })}
-        </ul>
+        </ul> */}
       </div>
-      <a href="src/html/three/index.html">three js로 가기</a>
     </Container>
   );
 }

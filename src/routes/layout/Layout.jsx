@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Outlet, useSearchParams } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Header from "../../components/common/Header";
 import axios from "axios";
 
@@ -98,6 +98,17 @@ export default function DefaultPage() {
     </Container>
   );
 }
+export const gradient = keyframes`
+0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+`;
 
 const Container = styled.div`
   display: flex;
@@ -109,8 +120,11 @@ const Container = styled.div`
 
     padding: 3rem;
     border-radius: 5rem 0 0 5rem;
-    background-color: var(--beige);
-    background: url(${사랑스러운핀}) no-repeat center / cover;
+    background-color: var(--deepDarkGray);
+    /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: ${gradient} 15s ease infinite; */
+    /* background: url(${사랑스러운핀}) no-repeat center / cover; */
 
     &__inner {
       width: 100%;
