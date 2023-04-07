@@ -13,8 +13,10 @@ import PostSearchResultPage from "./routes/post/PostSearchResultPage";
 import MyPage from "./routes/my/MyPage";
 import PortfolioPage from "./routes/portfolio/PortfolioPage";
 
-// react 공홈
+// error
 import ErrorPage from "./error-page";
+
+// hook
 // import Home, { loader as homeLoader } from './routes/home';
 // import Post, { loader as postLoader } from './routes/post';
 
@@ -38,11 +40,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <MainPage />,
+        element: <MainPage title="MainPage" />,
       },
       {
         path: "post",
-        element: <PostPage />,
+        element: <PostPage title="PostPage" />,
       },
       {
         path: "post/search/:searchWord",
