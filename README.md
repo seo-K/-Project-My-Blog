@@ -110,3 +110,4 @@ $ npx json-server ./data.json --port 4000
 - 공유하기 기능
 - 페이지 네이션, 무한스크롤
 - select 리스트 따로 데이터로 빼기
+- 새로고침해도 filter 그대로 적용되어있게되기
