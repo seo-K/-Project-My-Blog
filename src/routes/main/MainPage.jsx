@@ -3,6 +3,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import PostContent from "../../components/content/PostContent";
 import PostContentSkeleton from "../../components/content/PostContentSkeleton";
+import axios from "axios";
 
 // image
 import ArrowRightSvg from "../../assets/images/icon/arrow_right.svg";
@@ -17,7 +18,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
-import axios from "axios";
 
 export default function MainPage() {
   const navigate = useNavigate();
