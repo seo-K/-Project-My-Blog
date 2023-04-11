@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // component
 import BasicButton from "../../components/common/BasicButton";
+import Pagination from "../../components/pagination/Pagination";
 import PostContent from "../../components/content/PostContent";
 import PostContentSkeleton from "../../components/content/PostContentSkeleton";
 
@@ -34,6 +35,7 @@ export default function PostPage() {
 
   // photos, setPost 비구조화 할당
   const [posts, setPost] = useState([]);
+  const [filterList, setFilterList] = useState([]);
   const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"];
   const [activeCategory, setActiveCategory] = useState(0);
 
@@ -48,24 +50,13 @@ export default function PostPage() {
       .then(function (response) {
         setLoading(false);
         setPost(response.data);
+        setFilterList(response.data);
         // console.log(response.data);
       })
       .catch(function (error) {
         console.log("실패");
       });
   }, []);
-
-  // async function postUser() {
-  //   try {
-  //   // POST 요청은 body에 실어 보냄
-  //     await axios.post('/user', {
-  //         firstName: 'Fred',
-  //         lastName: 'Flintstone'
-  //     });
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
 
   // const searchList = PostData.filter((word) => {
   //   return word.title.toLowerCase().includes(searchWord.toLowerCase());
@@ -74,23 +65,16 @@ export default function PostPage() {
   const filtering = () => {
     if (activeCategory !== 0) {
       const filtered = posts.filter((post) => post.category === categoryList[activeCategory]);
-      setPost(filtered);
+      setFilterList(filtered);
       console.log(filtered);
     } else {
-      setPost(posts);
+      setFilterList(posts);
     }
   };
 
   // 필터링
   useEffect(() => {
-    // if (activeCategory !== 0) {
-    //   const filtered = posts.filter((post) => post.category === categoryList[activeCategory]);
-    //   setPost(filtered);
-    // } else {
-    //   setPost(posts);
-    // }
     filtering();
-    console.log(categoryList[activeCategory], activeCategory);
   }, [activeCategory]);
 
   // searchApi();
@@ -139,15 +123,15 @@ export default function PostPage() {
         </div>
         <ul className="post-list-wrap">
           {loading ? (
-            new Array(10).fill(1).map((_, i) => {
+            new Array(6).fill(1).map((_, i) => {
               return (
                 <li key={i}>
                   <PostContentSkeleton />
                 </li>
               );
             })
-          ) : posts.length > 0 ? (
-            posts.map((list) => {
+          ) : filterList.length > 0 ? (
+            filterList.map((list) => {
               return (
                 <li key={list.id}>
                   <PostContent data={list} />
@@ -158,24 +142,9 @@ export default function PostPage() {
             <p className="empty-content">포스트가 없습니다.</p>
           )}
         </ul>
-        {/* <ul className="post-list-wrap">
-        
-          {loading
-            ? new Array(10).fill(1).map((_, i) => {
-                return (
-                  <li key={i}>
-                    <PostContentSkeleton />
-                  </li>
-                );
-              })
-            : posts?.map((list) => {
-                return (
-                  <li key={list.id}>
-                    <PostContent data={list} />
-                  </li>
-                );
-              })}
-        </ul> */}
+        <div className="pagination-wrap">
+          <Pagination />
+        </div>
       </div>
     </Container>
   );
@@ -237,5 +206,8 @@ const Container = styled.section`
     > li:hover a {
       box-shadow: 0 0 0 10px var(--mainYellow);
     }
+  }
+  .pagination-wrap {
+    margin-top: 3rem;
   }
 `;
