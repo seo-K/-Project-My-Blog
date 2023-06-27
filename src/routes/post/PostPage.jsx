@@ -37,6 +37,7 @@ export default function PostPage() {
   const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"]; // 카테고리
   const [activeCategory, setActiveCategory] = useState(0);
 
+  // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
 
@@ -88,19 +89,6 @@ export default function PostPage() {
     filtering();
   }, [activeCategory]);
 
-  // searchApi();
-
-  // const [limit, setLimit] = useState(10);
-  // const [page, setPage] = useState(1);
-  // const offset = (page - 1) * limit;
-
-  // let pageData = {
-  //   postLength : posts.length,
-  //   limit : limit,
-  //   page : page,
-  //   setPage : setPage,
-  //   inMaxPageListNumber : 5, // 페이지 버튼을 몇개 보여줄지 정하는 곳
-  // }
   return (
     <Container>
       <h2 className="blind">포스트 리스트</h2>
@@ -169,7 +157,7 @@ export default function PostPage() {
             postsPerPage={postsPerPage}
             totalPosts={posts.length}
             paginate={setCurrentPage}
-            page={currentPage}
+            currentPage={currentPage}
           />
         </div>
       </div>

@@ -10,52 +10,40 @@ import ArrowSvg from "../../assets/images/icon/pagination_arrow.svg";
 
 // responsive
 
-export default function Pagination({ postsPerPage, totalPosts, paginate }) {
+export default function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
-
+  console.log(currentPage);
   return (
     <PaginationWrap>
       <button
         className="pagination-button prev-button"
         type="button"
         aria-label="Prev"
-        // onClick={() => paginate(page - 1)}
-        // disabled={page === numPages}
+        onClick={() => paginate(currentPage - 1)}
+        disabled={currentPage === 1}
       ></button>
       <ul className="pagination-list">
-        {pageNumbers.map((number) => (
+        {pageNumbers.map((pageNumber) => (
           <button
-            className="active"
+            className={currentPage === pageNumber ? "active" : null}
             type="button"
-            key={number}
-            onClick={() => paginate(number)}
-            // aria-current={page === number ? "page" : null}
+            key={pageNumber}
+            onClick={() => paginate(pageNumber)}
+            aria-current={currentPage === pageNumber ? "page" : null}
           >
-            {number}
+            {pageNumber}
           </button>
         ))}
-
-        {/* {resultList.map((i) => {
-          <button
-            className="active"
-            type="button"
-            key={i}
-            onClick={() => paginate(i)}
-            aria-current={page === i ? "page" : null}
-          >
-            {i}
-          </button>;
-        })} */}
       </ul>
       <button
         className="pagination-button next-button"
         type="button"
         aria-label="Next"
-        // onClick={() => paginate(page + 1)}
-        // disabled={page === numPages}
+        onClick={() => paginate(currentPage + 1)}
+        disabled={currentPage === totalPosts}
       ></button>
     </PaginationWrap>
   );
@@ -69,7 +57,6 @@ const PaginationWrap = styled.div`
   .pagination-button {
     width: 2.5rem;
     height: 2.5rem;
-    cursor: pointer;
     background: url(${ArrowSvg}) no-repeat center / contain;
     opacity: 0.8;
     &.next-button {
@@ -77,6 +64,10 @@ const PaginationWrap = styled.div`
     }
     &:hover {
       opacity: 1;
+    }
+    &:disabled {
+      cursor: unset;
+      opacity: 0.2;
     }
   }
 
