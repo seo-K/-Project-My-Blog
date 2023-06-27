@@ -10,20 +10,53 @@ import ArrowSvg from "../../assets/images/icon/pagination_arrow.svg";
 
 // responsive
 
-export default function Pagination() {
+export default function Pagination({ postsPerPage, totalPosts, paginate }) {
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <PaginationWrap>
-      <button className="pagination-button prev-button" type="button"></button>
+      <button
+        className="pagination-button prev-button"
+        type="button"
+        aria-label="Prev"
+        // onClick={() => paginate(page - 1)}
+        // disabled={page === numPages}
+      ></button>
       <ul className="pagination-list">
-        <button className="active" type="button">
-          1
-        </button>
-        <button type="button">2</button>
-        <button type="button">3</button>
-        <button type="button">4</button>
-        <button type="button">5</button>
+        {pageNumbers.map((number) => (
+          <button
+            className="active"
+            type="button"
+            key={number}
+            onClick={() => paginate(number)}
+            // aria-current={page === number ? "page" : null}
+          >
+            {number}
+          </button>
+        ))}
+
+        {/* {resultList.map((i) => {
+          <button
+            className="active"
+            type="button"
+            key={i}
+            onClick={() => paginate(i)}
+            aria-current={page === i ? "page" : null}
+          >
+            {i}
+          </button>;
+        })} */}
       </ul>
-      <button className="pagination-button next-button" type="button"></button>
+      <button
+        className="pagination-button next-button"
+        type="button"
+        aria-label="Next"
+        // onClick={() => paginate(page + 1)}
+        // disabled={page === numPages}
+      ></button>
     </PaginationWrap>
   );
 }

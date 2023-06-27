@@ -20,8 +20,6 @@ export default function PostPage() {
     navigate("new");
   };
 
-  const [loading, setLoading] = useState(true);
-
   const buttonData = {
     link: "new",
     text: (
@@ -33,10 +31,24 @@ export default function PostPage() {
   };
 
   // photos, setPost 비구조화 할당
-  const [posts, setPost] = useState([]);
-  const [filterList, setFilterList] = useState([]);
-  const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"];
+  const [posts, setPost] = useState([]); // post 담는 곳
+  const [loading, setLoading] = useState(true); // 로딩여부
+  const [filterList, setFilterList] = useState([]); // 필터된 post 담는 곳
+  const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"]; // 카테고리
   const [activeCategory, setActiveCategory] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentPosts = (posts) => {
+    let currentPosts = 0;
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  };
+
+  console.log(currentPosts(posts));
 
   // 통신 메서드
   useEffect(() => {
@@ -78,42 +90,6 @@ export default function PostPage() {
 
   // searchApi();
 
-  // useEffect(() => {
-  //   if ( status === 'All' && keyword === '') {
-  //     setBoard(PostData.slice((page - 1) * 6, page * 6));
-  //     setBoardsCount(PostData.length);
-  //   } else {
-  //     const filteredList = PostData.reduce<PostProps[]>((acc, cur) => {
-  //       const tagCondition = tag !== '전체' ? cur.tag === tag : true;
-  //       const statusCondition = status !== 'ALL' ? cur.status === status : true;
-  //       const keywordCondition = keyword.length > 0 ? cur.title.includes(keyword) : true;
-
-  //       if (tagCondition && statusCondition && keywordCondition) {
-  //         acc.push(cur);
-  //       }
-
-  //       return acc;
-  //     }, []);
-
-  //     setBoard(filteredList.slice((page - 1) * 6, page * 6));
-  //     setBoardsCount(filteredList.length);
-  //   }
-  // }, [PostData, page, tag, status, keyword]);
-
-  // pagination
-  // const [page, setPage] = useState(1); //페이지
-  // const limit = 10; // posts가 보일 최대한의 갯수
-  // const offset = (page - 1) * limit; // 시작점과 끝점을 구하는 offset
-
-  // const postsData = (posts) => {
-  //   if (posts) {
-  //     let result = posts.slice(offset, offset + limit);
-  //     return result;
-  //   }
-  // };
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
   // const [limit, setLimit] = useState(10);
   // const [page, setPage] = useState(1);
   // const offset = (page - 1) * limit;
@@ -160,7 +136,22 @@ export default function PostPage() {
           </label>
         </div>
         <ul className="post-list-wrap">
-          {filterList.length > 0 ? ( // 렌더링된 post 데이터가 있을때
+          {currentPosts(posts).length > 0 ? ( // 렌더링된 post 데이터가 있을때
+            <React.Fragment>
+              {currentPosts(posts).map((item, index) => {
+                return (
+                  <li key={item.id}>
+                    <PostContent data={item} loading={loading} />
+                  </li>
+                );
+              })}
+            </React.Fragment>
+          ) : (
+            // 렌더링된 post 데이터 0 일때
+            <p className="empty-content">포스트가 없습니다.</p>
+          )}
+
+          {/* {filterList.length > 0 ? ( // 렌더링된 post 데이터가 있을때
             filterList.map((list) => {
               return (
                 <li key={list.id}>
@@ -171,10 +162,15 @@ export default function PostPage() {
           ) : (
             // 렌더링된 post 데이터 0 일때
             <p className="empty-content">포스트가 없습니다.</p>
-          )}
+          )} */}
         </ul>
         <div className="pagination-wrap">
-          <Pagination />
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={setCurrentPage}
+            page={currentPage}
+          />
         </div>
       </div>
     </Container>
