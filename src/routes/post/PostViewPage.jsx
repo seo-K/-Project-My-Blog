@@ -46,17 +46,29 @@ export default function PostViewPage() {
     console.log(commentInput);
   };
 
+  // const handleCommentSubmit = () => {
+  //   setPost((prevPost) => {
+  //     const newComment = {
+  //       category: categoryList[0],
+  //       postImg: "",
+  //       title: "",
+  //       desc: "",
+  //       date: "0000.00.00.",
+  //       commnet: [
+  //         // // id: prevPost.comment ? prevPost.comment.length : 0,
+  //         // text: commentInput,
+  //         // date: new Date().toISOString().slice(0, 10),
+  //         // // date: moment().format("l"),
+  //       ],
+  //       // https://velog.io/@gene028/React-%EB%82%B4%EA%B0%80-%EC%9E%91%EC%84%B1%ED%95%9C-%EA%B8%80-%EB%8C%93%EA%B8%80-%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5%EC%8B%9C%ED%82%A4%EA%B8%B0
+  //     };
+  //     console.log(newComment);
+  //   });
+  //   setCommentInput("");
+  // };
+
   const handleCommentSubmit = () => {
-    setPost((prevPost) => {
-      const newComment = {
-        id: prevPost.comment ? prevPost.comment.length : 0,
-        text: commentInput,
-        date: new Date().toISOString().slice(0, 10),
-        // date: moment().format("l"),
-      };
-      console.log(newComment);
-    });
-    setCommentInput("");
+    console.log("first");
   };
 
   const commentSubmitData = {

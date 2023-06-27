@@ -5,7 +5,6 @@ import styled from "styled-components";
 import BasicButton from "../../components/common/BasicButton";
 import Pagination from "../../components/pagination/Pagination";
 import PostContent from "../../components/content/PostContent";
-import PostContentSkeleton from "../../components/content/PostContentSkeleton";
 
 import axios from "axios";
 
@@ -41,15 +40,15 @@ export default function PostPage() {
 
   // 통신 메서드
   useEffect(() => {
-    setLoading(true);
+    setLoading(true); // 로딩중이다
     const url = "http://localhost:4000/posts";
     // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
     // const url = "https://jsonplaceholder.typicode.com/photos";
     axios
       .get(url)
       .then(function (response) {
-        setLoading(false);
-        setPost(response.data);
+        setPost(response.data); // 데이터 받아옴
+        setLoading(false); // 로딩끝!
         setFilterList(response.data);
         // console.log(response.data);
       })
@@ -101,6 +100,31 @@ export default function PostPage() {
   //   }
   // }, [PostData, page, tag, status, keyword]);
 
+  // pagination
+  // const [page, setPage] = useState(1); //페이지
+  // const limit = 10; // posts가 보일 최대한의 갯수
+  // const offset = (page - 1) * limit; // 시작점과 끝점을 구하는 offset
+
+  // const postsData = (posts) => {
+  //   if (posts) {
+  //     let result = posts.slice(offset, offset + limit);
+  //     return result;
+  //   }
+  // };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+  // const [limit, setLimit] = useState(10);
+  // const [page, setPage] = useState(1);
+  // const offset = (page - 1) * limit;
+
+  // let pageData = {
+  //   postLength : posts.length,
+  //   limit : limit,
+  //   page : page,
+  //   setPage : setPage,
+  //   inMaxPageListNumber : 5, // 페이지 버튼을 몇개 보여줄지 정하는 곳
+  // }
   return (
     <Container>
       <h2 className="blind">포스트 리스트</h2>
@@ -120,25 +144,32 @@ export default function PostPage() {
         </ul>
         <div className="button-wrap">
           <BasicButton data={buttonData} />
+          <label>
+            페이지 당 표시할 게시물 수:&nbsp;
+            <select
+              type="number"
+              // value={limit}
+              // onChange={({ target: { value } }) => setLimit(Number(value))}
+            >
+              <option value="10">10</option>
+              <option value="12">12</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </label>
         </div>
         <ul className="post-list-wrap">
-          {loading ? (
-            new Array(6).fill(1).map((_, i) => {
-              return (
-                <li key={i}>
-                  <PostContentSkeleton />
-                </li>
-              );
-            })
-          ) : filterList.length > 0 ? (
+          {filterList.length > 0 ? ( // 렌더링된 post 데이터가 있을때
             filterList.map((list) => {
               return (
                 <li key={list.id}>
-                  <PostContent data={list} />
+                  <PostContent data={list} loading={loading} />
                 </li>
               );
             })
           ) : (
+            // 렌더링된 post 데이터 0 일때
             <p className="empty-content">포스트가 없습니다.</p>
           )}
         </ul>

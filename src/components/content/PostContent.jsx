@@ -2,34 +2,42 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import PostContentSkeleton from "../../components/content/PostContentSkeleton";
+
 // img
 import ImgSvg from "../../assets/images/icon/image.svg";
 
-export default function PostContent({ data }) {
+export default function PostContent({ loading, data }) {
   const { id, img, category, title, desc } = data || {};
 
   return (
-    <Container to={`/post/detail/${id}`}>
-      <div className="post-content">
-        {img ? (
-          <figure>
-            <img src={img} alt="포스트 이미지" />
-          </figure>
-        ) : (
-          <figure className="empty-img-wrap">
-            <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
-          </figure>
-        )}
-        <hgroup>
-          <h4 className="post-content__title">
-            &#91;{category}&#93;
-            <br />
-            {title}
-          </h4>
-          <p className="post-content__desc">{desc}</p>
-        </hgroup>
-      </div>
-    </Container>
+    <React.Fragment>
+      {loading ? (
+        <PostContentSkeleton />
+      ) : (
+        <Container to={`/post/detail/${id}`}>
+          <div className="post-content">
+            {img ? (
+              <figure>
+                <img src={img} alt="포스트 이미지" />
+              </figure>
+            ) : (
+              <figure className="empty-img-wrap">
+                <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
+              </figure>
+            )}
+            <hgroup>
+              <h4 className="post-content__title">
+                &#91;{category}&#93;
+                <br />
+                {title}
+              </h4>
+              <p className="post-content__desc">{desc}</p>
+            </hgroup>
+          </div>
+        </Container>
+      )}
+    </React.Fragment>
   );
 }
 

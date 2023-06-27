@@ -231,7 +231,7 @@ del { text-decoration: line-through; }
 blockquote:before,blockquote:after,q:before,q:after { content: ""; }
 blockquote,q { quotes: "" ""; }
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display: block; }
-audio,canvas,video { display: inline-block; *display: inline; *zoom: 1; }
+audio,canvas,video { display: inline-block; display: inline; zoom: 1; }
 img { display: inline-block; width: 100%; height: 100%; object-fit: cover;image-rendering: -moz-auto; /*firefox*/image-rendering: -o-auto; /*opera*/image-rendering: -webkit-optimize-contrast; /*webkit*/image-rendering: auto; -ms-interpolation-mode: nearest-neighbor; -webkit-perspective: 1; }
 a { display: block; text-decoration: none; color: inherit; } 
 input:is([type="text"],[type="tel"],[type="button"],[type="password"],[type="email"],[type="search"]),textarea,button { -webkit-appearance: none; appearance: none; -moz-appearance: none; border-radius: 0; -webkit-border-radius: 0; -moz-border-radius: 0; } 
@@ -249,7 +249,7 @@ input,select,textarea,button { font-size: 100%; font-weight: normal; letter-spac
 button,input { line-height: normal; }
 button,select { text-transform: none; }
 button::-moz-focus-inner,input::-moz-focus-inner { border: 0; padding: 0; }
-button:not(:disabled),input[type="button"]:not(:disabled),input[type="reset"]:not(:disabled),input[type="submit"]:not(:disabled) { -webkit-appearance: button; cursor: pointer; *overflow: visible; }
+button:not(:disabled),input[type="button"]:not(:disabled),input[type="reset"]:not(:disabled),input[type="submit"]:not(:disabled) { -webkit-appearance: button; cursor: pointer; overflow: visible; }
 select { -webkit-appearance: none; /* 네이티브 외형 감추기*/ -moz-appearance: none; appearance: none; cursor: pointer; }/* IE 10, 11의 네이티브 화살표 숨기기 */select::-ms-expand { display: none; }
 textarea { overflow: auto; resize: none; box-shadow: none; }
 details summary::-webkit-details-marker { display: none; } 
