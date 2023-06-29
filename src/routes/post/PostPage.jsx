@@ -133,7 +133,15 @@ export default function PostPage() {
             <React.Fragment>
               {currentPosts(filterList).map((item, index) => {
                 return (
-                  <li key={item.id}>
+                  <li
+                    key={item.id}
+                    className={index}
+                    style={{
+                      transform: `translateY(${index * -20}px)`,
+                      opacity: `${1 - index * 0.15}`,
+                      zIndex: `${5 - index}`,
+                    }}
+                  >
                     <PostContent data={item} loading={loading} />
                   </li>
                 );
@@ -209,18 +217,26 @@ const Container = styled.section`
   }
   .button-wrap {
     text-align: right;
+    margin-bottom: 5rem;
   }
   .post-list-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3rem 1rem;
-    margin-top: 3rem;
+    position: relative;
+    width: 28rem;
+    height: 50vh;
+    margin: 0 auto;
     > li {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40rem;
+    }
+    /* > li {
       flex: 0 0 calc((100% - 3rem) / 4);
     }
     > li:hover a {
       box-shadow: 0 0 0 10px var(--mainYellow);
-    }
+    } */
   }
   .pagination-wrap {
     margin-top: 3rem;
