@@ -43,13 +43,18 @@ export default function PostPage() {
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = (posts) => {
+  const currentPosts = (post) => {
     let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    currentPosts = post.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
 
-  console.log(currentPosts(posts));
+  const paginationData = {
+    postsPerPage: postsPerPage,
+    totalPosts: posts.length,
+    paginate: setCurrentPage,
+    currentPage: currentPage,
+  };
 
   // 통신 메서드
   useEffect(() => {
@@ -124,9 +129,9 @@ export default function PostPage() {
           </label>
         </div>
         <ul className="post-list-wrap">
-          {currentPosts(posts).length > 0 ? ( // 렌더링된 post 데이터가 있을때
+          {currentPosts(filterList).length > 0 ? ( // 렌더링된 post 데이터가 있을때
             <React.Fragment>
-              {currentPosts(posts).map((item, index) => {
+              {currentPosts(filterList).map((item, index) => {
                 return (
                   <li key={item.id}>
                     <PostContent data={item} loading={loading} />
@@ -153,12 +158,7 @@ export default function PostPage() {
           )} */}
         </ul>
         <div className="pagination-wrap">
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            paginate={setCurrentPage}
-            currentPage={currentPage}
-          />
+          <Pagination data={paginationData} />
         </div>
       </div>
     </Container>

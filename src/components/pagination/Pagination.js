@@ -10,12 +10,13 @@ import ArrowSvg from "../../assets/images/icon/pagination_arrow.svg";
 
 // responsive
 
-export default function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
+export default function Pagination({ data }) {
+  const { postsPerPage, totalPosts, paginate, currentPage } = data || "";
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
-  console.log(currentPage);
   return (
     <PaginationWrap>
       <button
