@@ -3,7 +3,7 @@
     {
       "id": 0,
       "category": "Javascript",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "블로그01블로그01블로그01블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다. 설명이 들어가는 장소입니다.",
       "date": "2023-03-06",
@@ -29,7 +29,7 @@
     {
       "id": 1,
       "category": "React",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -38,7 +38,7 @@
     {
       "id": 2,
       "category": "Html",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "A530",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -47,7 +47,7 @@
     {
       "id": 3,
       "category": "Css",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -56,7 +56,7 @@
     {
       "id": 4,
       "category": "Etc",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "FiA530laments",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -65,7 +65,7 @@
     {
       "id": 5,
       "category": "Etc",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "A530",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -74,7 +74,7 @@
     {
       "id": 6,
       "category": "Etc",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "블로그01",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -83,7 +83,7 @@
     {
       "id": 7,
       "category": "Javascript",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "FiA530laments",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -92,7 +92,7 @@
     {
       "id": 8,
       "category": "Javascript",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "A530",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -101,7 +101,7 @@
     {
       "id": 9,
       "category": "Javascript",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "title": "A530",
       "desc": "[Description] 설명이 들어가는 장소입니다.",
       "date": "2023-03-10",
@@ -109,7 +109,7 @@
     },
     {
       "category": "Javascript",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "postImg": "",
       "title": "제목ㅇ",
       "desc": "",
@@ -118,7 +118,7 @@
     },
     {
       "category": "Javascript",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "postImg": "",
       "title": "제목ㅇ",
       "desc": "",
@@ -127,7 +127,7 @@
     },
     {
       "category": "Javascript",
-      "img": "https://placeimg.com/640/480/tech",
+      "img": "https://placekitten.com/640/360",
       "postImg": "",
       "title": "ㄴㅇㄹ",
       "desc": "<p>에디터ㄴㅇㄹㄴㅇㄹㄴㄹㄴㅇㄹㄹㄴㅇ</p>",

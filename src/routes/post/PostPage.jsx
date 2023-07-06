@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import styled, { css } from "styled-components";
 // component
 import BasicButton from "../../components/common/BasicButton";
 import Pagination from "../../components/pagination/Pagination";
@@ -32,14 +32,17 @@ export default function PostPage() {
 
   // photos, setPost 비구조화 할당
   const [posts, setPost] = useState([]); // post 담는 곳
-  const [loading, setLoading] = useState(true); // 로딩여부
+  const [loading, setLoading] = useState(false); // 로딩여부
   const [filterList, setFilterList] = useState([]); // 필터된 post 담는 곳
   const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"]; // 카테고리
   const [activeCategory, setActiveCategory] = useState(0);
 
+  // active
+  const [postActive, setPostActive] = useState(0);
+
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(5);
+  const [postsPerPage, setPostsPerPage] = useState(7);
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
@@ -94,6 +97,8 @@ export default function PostPage() {
     filtering();
   }, [activeCategory]);
 
+  console.log(postActive);
+
   return (
     <Container>
       <h2 className="blind">포스트 리스트</h2>
@@ -103,7 +108,7 @@ export default function PostPage() {
             return (
               <li
                 key={index}
-                className={activeCategory == index ? "active" : undefined}
+                className={activeCategory === index ? "active" : undefined}
                 onClick={() => setActiveCategory(index)}
               >
                 <button type="button">{item}</button>
@@ -128,22 +133,26 @@ export default function PostPage() {
             </select>
           </label>
         </div>
-        <ul className="post-list-wrap">
+        {/* <ul className={`post-list-wrap `}> */}
+        <ul className={`post-list-wrap ${!loading && "load"}`}>
           {currentPosts(filterList).length > 0 ? ( // 렌더링된 post 데이터가 있을때
             <React.Fragment>
               {currentPosts(filterList).map((item, index) => {
                 return (
-                  <li
+                  <PostList
                     key={item.id}
-                    className={index}
-                    style={{
-                      transform: `translateY(${index * -20}px)`,
-                      opacity: `${1 - index * 0.15}`,
-                      zIndex: `${5 - index}`,
-                    }}
+                    className={`${index} ${postActive === index ? "active" : ""}`}
+                    listIndex={index}
+                    color="pink"
+                    onMouseEnter={() => setPostActive(index)}
+                    onMouseLeave={() => setPostActive(0)}
                   >
-                    <PostContent data={item} loading={loading} />
-                  </li>
+                    <PostContent
+                      data={item}
+                      loading={loading}
+                      //
+                    />
+                  </PostList>
                 );
               })}
             </React.Fragment>
@@ -224,21 +233,71 @@ const Container = styled.section`
     width: 28rem;
     height: 50vh;
     margin: 0 auto;
-    > li {
-      position: absolute;
-      bottom: 0;
-      left: 0;
+
+    &.load {
       width: 100%;
-      height: 40rem;
-    }
-    /* > li {
-      flex: 0 0 calc((100% - 3rem) / 4);
-    }
-    > li:hover a {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas:
+        ". b . c ."
+        "f e a g d";
+      /* > li:hover a {
       box-shadow: 0 0 0 10px var(--mainYellow);
     } */
+    }
   }
   .pagination-wrap {
     margin-top: 3rem;
+  }
+`;
+
+const PostList = styled.li`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: ${(props) => "translateY(" + props.listIndex * -20 + "px)" || "0"};
+  opacity: ${(props) => 1 - props.listIndex * 0.1 || "0"};
+  z-index: ${(props) => 10 - props.listIndex || "0"};
+  transition: all 0.5s;
+
+  &:hover {
+    z-index: 10 !important;
+    transform: scale(1.1) !important;
+  }
+  .load & {
+    position: unset;
+    transform: none;
+    opacity: 1;
+
+    &:nth-child(1) {
+      grid-area: a;
+      transform: rotate(-8deg) translateY(-15rem);
+    }
+    &:nth-child(2) {
+      grid-area: b;
+      transform: rotate(20deg) translate(8rem, -10rem);
+    }
+    &:nth-child(3) {
+      grid-area: c;
+      transform: rotate(16deg) translateX(-2rem);
+    }
+    &:nth-child(4) {
+      grid-area: d;
+      transform: rotate(13deg) translate(-3rem, -8rem);
+    }
+    &:nth-child(5) {
+      grid-area: e;
+      transform: rotate(-12deg) translateX(-2rem);
+    }
+    &:nth-child(6) {
+      grid-area: f;
+      transform: rotate(-10deg) translate(3rem, -13rem);
+    }
+    &:nth-child(7) {
+      grid-area: g;
+      transform: rotate(9deg) translateX(-3rem);
+    }
   }
 `;

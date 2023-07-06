@@ -67,6 +67,17 @@ const Container = styled(Link)`
     border-right: 1.5rem solid transparent;
     border-left: 0.75rem solid var(--white);
   }
+  .active & {
+    background-color: #000;
+    color: #fff;
+    &:after {
+      background-color: #000;
+    }
+    :before {
+      border-bottom-color: #000;
+      border-left-color: #000;
+    }
+  }
 
   .post-content {
     display: flex;
