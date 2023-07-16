@@ -27,8 +27,10 @@ export default function PostViewPage() {
 
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState("");
+  const [commentList, setCommentList] = useState([]);
   const [commentInput, setCommentInput] = useState("");
   const [alertModal, setAlertModal] = useState(false);
+  const [addCommendModal, setAddCommendModal] = useState(false);
 
   const alertModalData = {
     isState: {
@@ -38,27 +40,61 @@ export default function PostViewPage() {
     text: "검색어를 입력하세요",
   };
 
-  const onChange = (e) => {
+  const addCommendModalData = {
+    isState: {
+      state: addCommendModal,
+      setState: setAddCommendModal,
+    },
+    text: "댓글 등록이 완료되었습니다!",
+  };
+
+  const saveComment = (e) => {
     setCommentInput(e.target.value);
     // console.log(commentInput);
-    console.log(commentInput.length);
   };
 
   const AddCommend = (e) => {
     console.log(commentInput, moment().format("l"));
-    setPost((state) => ({
-      ...state,
-      comments: [
-        {
-          id: post.comments ? post.comments.length : 0,
-          text: setCommentInput(e.target.value),
-          date: moment().format("l"),
-        },
-      ],
-    }));
+    // setPost((state) => ({
+    //   ...state.comments,
+    //   comments: [
+    //     {
+    //       id:post.comments.length + 1,
+    //       text: commentInput,
+    //       date: moment().format("l"),
+    //     },
+    //   ],
+    // }));
 
-    console.log(post, post.comments?.length);
+    const commentValue = {
+      id: post.comments.length + 1,
+      text: commentInput,
+      date: moment().format("l"),
+    };
+    axios
+      .post(`http://localhost:4000/posts/${id}`, {
+        ...post,
+        comments: commentValue,
+      })
+      .then((response) => {
+        console.log(response);
+        window.location.reload(); // 댓글 등록 후 리로드
+      })
+      .catch((error) => {
+        console.error("에러!", error);
+      });
+    setCommentInput("");
   };
+
+  // 삭제
+  // const deleteBoard = async () => {
+  //   if (window.confirm('게시글을 삭제하시겠습니까?')) {
+  //     await axios.delete(`//localhost:8080/board/${idx}`).then((res) => {
+  //       alert('삭제되었습니다.');
+  //       navigate('/board');
+  //     });
+  //   }
+  // };
 
   // const handleCommentSubmit = () => {
   //   setPost((prevPost) => {
@@ -118,6 +154,7 @@ export default function PostViewPage() {
   return (
     <Container>
       <BasicModal data={alertModalData} />
+      <BasicModal data={addCommendModalData} />
       <div className="post-detail">
         <hgroup>
           <h2>{post.category}</h2>
@@ -136,15 +173,9 @@ export default function PostViewPage() {
             </svg>
           </button>
         </hgroup>
-        {post.img ? (
-          <figure>
-            <img src={post.img} alt="포스트 이미지" />
-          </figure>
-        ) : (
-          <figure className="empty-img-wrap">
-            <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
-          </figure>
-        )}
+        <figure>
+          <img src={post.img} alt="포스트 이미지" />
+        </figure>
         <h3>{post.title}</h3>
         <hr />
         <div className="editor-viewer">
@@ -167,10 +198,11 @@ export default function PostViewPage() {
           </ul>
           <div className="comment__input-wrap">
             <input
+              name="comment"
               type="text"
               placeholder="댓글을 입력해주세요."
               value={commentInput}
-              onChange={onChange}
+              onChange={saveComment}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   if (e.target.value.length > 0) {
@@ -228,10 +260,11 @@ const Container = styled.div`
     figure {
       width: 100%;
       height: 40rem;
-      object-fit: contain;
-      border-radius: 1rem;
-      overflow: hidden;
       margin-bottom: 2rem;
+      background: url(${ImgSvg}) no-repeat center / contain;
+    }
+    figure img {
+      object-fit: contain;
     }
     .editor-viewer {
       padding-bottom: 3rem;
