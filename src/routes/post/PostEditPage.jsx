@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // component
+import PostContent from "../../components/content/PostContent";
 import BasicButton from "../../components/common/BasicButton";
 import BasicModal from "../../components/common/BasicModal";
 import ModalHook from "../../util/ModalHook";
-// editor, colorPicker, axios
+// editor, colorPicker, axios, moment
 // https://nhn.github.io/tui.editor/latest/ToastUIEditorCore
 // https://curryyou.tistory.com/473 image 업로드 방법 참고
 // https://hayeondev.gatsbyjs.io/221021-tui-editor/ 플러그인 설명
@@ -15,43 +16,71 @@ import "@toast-ui/editor/dist/i18n/ko-kr"; // 언어설정 kor
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax"; // color picker
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-// code highlighter
-// npm i prismjs = 구문 강조 표시기
-// npm install @toast-ui/editor-plugin-code-syntax-highlight = code highlighter
 import "prismjs/themes/prism.css";
 import Prism from "prismjs";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+import moment from "moment";
+import "moment/locale/ko"; //선언하지 않아도, 디바이스 혹은 locale의 시간을 불러온다.
 
 import axios from "axios";
 
 // img
 import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
 
-export default function PostNewPage() {
+export default function PostEditPage() {
   const navigate = useNavigate();
 
-  const categoryList = ["All", "Html", "Css", "Js", "React", "etc"];
-
+  const categoryList = ["Html", "Css", "Javascript", "React", "Etc"];
   // form
+
+  // +++++ 추가내용
+  // const data = editorRef.current.getInstance().getHTML();
   const [formData, setFormData] = useState({
     category: categoryList[0],
     postImg: "",
     title: "",
     desc: "",
-    date: new Date(),
+    date: "0000.00.00.",
   });
+  // const [formData, setFormData] = useState({
+  //   category: categoryList[0],
+  //   postImg: "",
+  //   title: "",
+  //   desc: "",
+  //   date: "0000.00.00.",
+  // });
 
   const editorRef = useRef();
-  const onChange = (e) => {
-    console.log(formData);
-  };
+  // const onChange = (e) => {
+  //   const editorData = editorRef?.current?.getInstance().getHTML();
+  //   setFormData((state) => ({
+  //     ...state,
+  //     date: new Date(),
+  //   }));
+  //   console.log(formData);
+  // };
+
+  // Editor 이미지 드래그 업로드 막기
+  // useEffect(() => {
+  //   // 이미지 업로드 막기
+  //   editorRef.current.getInstance().removeHook("addImageBlobHook");
+  // }, []);
 
   // 전송
   const handleSubmit = (e) => {
     e.preventDefault();
-    const editorData = editorRef?.current?.getInstance().getHTML();
-    console.log(formData);
+    axios
+      .post("http://localhost:4000/posts", {
+        ...formData,
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/post");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   // 취소 모달
@@ -84,13 +113,28 @@ export default function PostNewPage() {
       {isActiveModal && <BasicModal data={CancelModal} />}
       <h2 className="blind">포스트 리스트</h2>
       <div className="content-wrap">
-       
+        {/* <Editor
+          initialValue="Write Here!"
+          previewStyle="vertical"
+          height="600px"
+          initialEditType="markdown"
+          useCommandShortcut={true}
+        /> */}
         <form action="" onSubmit={handleSubmit}>
           <fieldset>
             <legend className="blind">새 글 쓰기</legend>
             <div className="content-box">
               <div className="content-box__title-wrap">
-                <select name="category" value={formData.category} onChange={onChange}>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={(e) => {
+                    setFormData((state) => ({
+                      ...state,
+                      category: e.target.value,
+                    }));
+                  }}
+                >
                   {categoryList.map((item, index) => (
                     <option key={"category" + index} value={item}>
                       {item}
@@ -110,17 +154,25 @@ export default function PostNewPage() {
                     placeholder="Your title"
                     required
                     value={formData.title}
-                    onChange={onChange}
+                    onChange={(e) => {
+                      setFormData((state) => ({
+                        ...state,
+                        title: e.target.value,
+                        date: new Date(),
+                      }));
+                    }}
                   />
                 </div>
               </div>
               <div className="content-box__editor">
                 <Editor
                   ref={editorRef}
-                  initialValue="에디터"
+                  initialValue={formData?.desc || ""} // 글 수정 시 사용
+                  // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
                   previewStyle="vertical" // tab, vertical
                   height="100%"
                   initialEditType="wysiwyg" // wysiwyg & markdown
+                  // what you see is what you get = 보는대로 얻는다 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다
                   useCommandShortcut={false}
                   plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                   theme={""} // '' & 'dark'
@@ -135,10 +187,66 @@ export default function PostNewPage() {
                     ["code", "codeblock"],
                     ["scrollSync"],
                   ]}
-                  onChange={onChange}
+                  onChange={() => {
+                    const editorData = editorRef?.current?.getInstance().getHTML();
+                    // const editorData = editorRef?.current?.getInstance().getMarkdown();
+                    setFormData((state) => ({
+                      ...state,
+                      desc: editorData,
+                    }));
+                  }}
+                  // hooks={{
+                  //   addImageBlobHook: async (blob, callback) => {
+                  //     const upload = await this.uploadImage(blob);
+                  //     callback(upload, "alt text");
+                  //     return false;
+                  //   },
+                  // }}
+                  hooks={{
+                    addImageBlobHook: async (blob, callback) => {
+                      try {
+                        // blob 기반으로 File 객체 만들기
+                        const imageData = new FormData();
+                        const file = new File([blob], encodeURI(blob.name), {
+                          type: blob.type,
+                        });
+                        imageData.append("image", file);
+                        const imageURI = await axios({
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "multipart/form-data",
+                          },
+                          url: "localhost:3000/image/upload",
+                          data: imageData,
+                          withCredentials: true,
+                        });
+
+                        callback(
+                          `localhost:3000/image/${encodeURIComponent(imageURI.data.fileName)}`,
+                          "image",
+                        );
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    },
+                  }}
                 />
               </div>
             </div>
+            {/* {editorRef && (
+        <Editor
+          ref={editorRef}
+          initialValue={content || ' '} // 글 수정 시 사용
+          initialEditType="markdown" // wysiwyg & markdown
+          previewStyle={window.innerWidth > 1000 ? 'vertical' : 'tab'} // tab, vertical
+          hideModeSwitch={true}
+          height="calc(100% - 10rem)"
+          theme={''} // '' & 'dark'
+          usageStatistics={false}
+          toolbarItems={toolbarItems}
+          useCommandShortcut={true}
+          plugins={[colorSyntax]}
+        /> */}
             <div className="util-box">
               <div className="util-box__button-wrap">
                 <BasicButton data={cancelButton} />
@@ -153,6 +261,7 @@ export default function PostNewPage() {
 }
 
 const Container = styled.section`
+  /* date: moment().format("l") */
   .tab-list {
     display: flex;
     align-items: center;
@@ -225,7 +334,7 @@ const Container = styled.section`
     input {
       width: 100%;
       font-size: 1.4rem;
-      padding: 1.4rem 2rem;
+      padding: 2rem;
       background-color: var(--white);
       border-left: 1px solid var(--border);
     }

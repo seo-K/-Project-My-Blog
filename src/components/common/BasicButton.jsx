@@ -3,14 +3,14 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export default function BasicButton({ data }) {
-  const { link, submit, onClick, text } = data || "";
+  const { link, submit, onClick, text, disabled } = data || "";
 
   return (
     <React.Fragment>
       {link ? (
         <BasicLink to={link}>{text}</BasicLink>
       ) : (
-        <BasicBtn type={submit ? "submit" : "button"} onClick={onClick}>
+        <BasicBtn type={submit ? "submit" : "button"} onClick={onClick} disabled={disabled}>
           {text}
         </BasicBtn>
       )}
@@ -35,6 +35,10 @@ const buttonStyle = css`
   }
   &:hover {
     background-color: var(--mainGreen);
+  }
+  &:disabled {
+    background-color: darkgrey;
+    color: gray;
   }
 `;
 const BasicBtn = styled.button`

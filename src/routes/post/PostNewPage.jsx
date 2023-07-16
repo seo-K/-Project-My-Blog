@@ -31,7 +31,7 @@ import ArrowIconSvg from "../../assets/images/icon/arrow_down.svg";
 export default function PostNewPage() {
   const navigate = useNavigate();
 
-  const categoryList = ["All", "Html", "Css", "Javascript", "React", "Etc"];
+  const categoryList = ["Html", "Css", "Javascript", "React", "Etc"];
   // form
   const [formData, setFormData] = useState({
     category: categoryList[0],
@@ -49,13 +49,14 @@ export default function PostNewPage() {
   // });
 
   const editorRef = useRef();
-  const onChange = (e) => {
-    const editorData = editorRef?.current?.getInstance().getHTML();
-    setFormData({
-      date: new Date(),
-    });
-    console.log(formData);
-  };
+  // const onChange = (e) => {
+  //   const editorData = editorRef?.current?.getInstance().getHTML();
+  //   setFormData((state) => ({
+  //     ...state,
+  //     date: new Date(),
+  //   }));
+  //   console.log(formData);
+  // };
 
   // Editor 이미지 드래그 업로드 막기
   // useEffect(() => {
@@ -67,7 +68,7 @@ export default function PostNewPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("localhost:4000/posts", {
+      .post("http://localhost:4000/posts", {
         ...formData,
       })
       .then((response) => {
@@ -109,13 +110,6 @@ export default function PostNewPage() {
       {isActiveModal && <BasicModal data={CancelModal} />}
       <h2 className="blind">포스트 리스트</h2>
       <div className="content-wrap">
-        {/* <Editor
-          initialValue="Write Here!"
-          previewStyle="vertical"
-          height="600px"
-          initialEditType="markdown"
-          useCommandShortcut={true}
-        /> */}
         <form action="" onSubmit={handleSubmit}>
           <fieldset>
             <legend className="blind">새 글 쓰기</legend>
@@ -154,6 +148,7 @@ export default function PostNewPage() {
                       setFormData((state) => ({
                         ...state,
                         title: e.target.value,
+                        date: moment().format("l"),
                       }));
                     }}
                   />
@@ -162,7 +157,7 @@ export default function PostNewPage() {
               <div className="content-box__editor">
                 <Editor
                   ref={editorRef}
-                  initialValue={formData?.desc || ""} // 글 수정 시 사용
+                  initialValue={formData?.desc || "<p>내용을 입력해주세욤</p>"} // 글 수정 시 사용
                   // previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"} // tab, vertical
                   previewStyle="vertical" // tab, vertical
                   height="100%"

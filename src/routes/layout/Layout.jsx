@@ -112,7 +112,8 @@ export const gradient = keyframes`
 
 const Container = styled.div`
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 
   .main {
     flex: 1;

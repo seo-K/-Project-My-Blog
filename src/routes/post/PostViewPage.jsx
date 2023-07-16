@@ -24,9 +24,6 @@ import "moment/locale/ko";
 
 export default function PostViewPage() {
   const { id } = useParams();
-  // let 찾은상품 = props.shoes.find(function(상품){
-  //   return 상품.id == id
-  // });
 
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState("");
@@ -43,7 +40,24 @@ export default function PostViewPage() {
 
   const onChange = (e) => {
     setCommentInput(e.target.value);
-    console.log(commentInput);
+    // console.log(commentInput);
+    console.log(commentInput.length);
+  };
+
+  const AddCommend = (e) => {
+    console.log(commentInput, moment().format("l"));
+    setPost((state) => ({
+      ...state,
+      comments: [
+        {
+          id: post.comments ? post.comments.length : 0,
+          text: setCommentInput(e.target.value),
+          date: moment().format("l"),
+        },
+      ],
+    }));
+
+    console.log(post, post.comments?.length);
   };
 
   // const handleCommentSubmit = () => {
@@ -54,7 +68,7 @@ export default function PostViewPage() {
   //       title: "",
   //       desc: "",
   //       date: "0000.00.00.",
-  //       commnet: [
+  //       comments: [
   //         // // id: prevPost.comment ? prevPost.comment.length : 0,
   //         // text: commentInput,
   //         // date: new Date().toISOString().slice(0, 10),
@@ -67,15 +81,12 @@ export default function PostViewPage() {
   //   setCommentInput("");
   // };
 
-  const handleCommentSubmit = () => {
-    console.log("first");
-  };
-
   const commentSubmitData = {
     // 댓글 등록 버튼 데이터
     submit: true,
     text: "등록",
-    onClick: handleCommentSubmit,
+    onClick: AddCommend,
+    disabled: commentInput.length > 0 ? false : true,
   };
   const editButtonData = {
     // 수정버튼 데이터
@@ -89,68 +100,24 @@ export default function PostViewPage() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
+    setLoading(true); // 로딩중이다
     const url = `http://localhost:4000/posts/${id}`;
+    // const url = "https://my.api.mockaroo.com/post.json?key=3c755570";
     // const url = `https://jsonplaceholder.typicode.com/photos/${id}`;
     axios
       .get(url)
       .then(function (response) {
-        setLoading(false);
         setPost(response.data);
+        setLoading(false); // 로딩 끝!
       })
       .catch(function (error) {
-        console.log("실패");
-        console.log(error);
+        console.log("실패", error);
       });
   }, []);
-
-  // console.log(id);
 
   return (
     <Container>
       <BasicModal data={alertModalData} />
-      {/* <div className="post-detail">
-        <hgroup>
-          <h2>{posts.albumId}</h2>
-          <button className="post-detail__share" type="button">
-            <span className="blind">공유</span>
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M8.68445 10.6578L13 8.50003M15.3157 16.6578L11 14.5M21 6C21 7.65685 19.6569 9 18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6ZM9 12C9 13.6569 7.65685 15 6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12ZM21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"
-                  stroke="#59616f"
-                  strokeWidth="1.5"
-                ></path>
-              </g>
-            </svg>
-          </button>
-        </hgroup>
-        {posts.thumbnailUrl ? (
-          <figure>
-            <img src={posts.url} alt="포스트 이미지" />
-          </figure>
-        ) : (
-          <figure className="empty-img-wrap">
-            <img src={ImgSvg} alt="포스트 이미지가 없습니다." />
-          </figure>
-        )}
-
-        <h3>{posts.title}</h3>
-
-        <hr />
-        <p className="post-text">{posts.url}설명</p>
-        <Viewer initialValue={markdown} />
-        <Viewer initialValue={html} />
-        <Viewer initialValue={contents  || ""} />
-      </div>
-
-      <div className="util-wrap">
-        <BasicButton data={editButtonData} />
-        <BasicButton data={deleteButtonData} />
-      </div> */}
       <div className="post-detail">
         <hgroup>
           <h2>{post.category}</h2>
@@ -180,12 +147,13 @@ export default function PostViewPage() {
         )}
         <h3>{post.title}</h3>
         <hr />
-        <p className="post-text">{post.desc} 설명</p>
         <div className="editor-viewer">
-          <Viewer
-            initialValue={post.desc || ""}
-            plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
-          />
+          {!loading && (
+            <Viewer
+              initialValue={post.desc}
+              plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+            />
+          )}
         </div>
         <time dateTime={post.date}>{post.date}</time>
         <div className="comment">
@@ -206,7 +174,7 @@ export default function PostViewPage() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   if (e.target.value.length > 0) {
-                    handleCommentSubmit(e);
+                    AddCommend(e);
                   } else {
                     setAlertModal(true);
                     ModalHook.modalOpen();
@@ -214,10 +182,7 @@ export default function PostViewPage() {
                 }
               }}
             />
-            <BasicButton data={commentSubmitData} />
-            {/* <button type="submit">
-              <img src={AddSvg} alt="댓글 추가" />
-            </button> */}
+            <BasicButton data={commentSubmitData}></BasicButton>
           </div>
         </div>
       </div>

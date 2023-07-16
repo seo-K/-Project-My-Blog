@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 // component
 import BasicButton from "../../components/common/BasicButton";
@@ -14,12 +13,6 @@ import { PostData } from "../../MockData";
 import AddSvg from "../../assets/images/icon/add.svg";
 
 export default function PostPage() {
-  const navigate = useNavigate();
-
-  const onClick = () => {
-    navigate("new");
-  };
-
   const buttonData = {
     link: "new",
     text: (
@@ -69,12 +62,11 @@ export default function PostPage() {
       .get(url)
       .then(function (response) {
         setPost(response.data); // 데이터 받아옴
-        setLoading(false); // 로딩끝!
         setFilterList(response.data);
-        // console.log(response.data);
+        setLoading(false); // 로딩끝!
       })
       .catch(function (error) {
-        console.log("실패");
+        console.log("실패", error);
       });
   }, []);
 
@@ -97,7 +89,7 @@ export default function PostPage() {
     filtering();
   }, [activeCategory]);
 
-  console.log(postActive);
+  // console.log(postActive);
 
   return (
     <Container>
@@ -231,7 +223,8 @@ const Container = styled.section`
   .post-list-wrap {
     position: relative;
     width: 28rem;
-    height: 50vh;
+    /* height: 80vh; */
+    height: auto;
     margin: 0 auto;
 
     &.load {
@@ -264,7 +257,7 @@ const PostList = styled.li`
 
   &:hover {
     z-index: 10 !important;
-    transform: scale(1.1) !important;
+    /* transform: scale(1.1) !important; */
   }
   .load & {
     position: unset;
