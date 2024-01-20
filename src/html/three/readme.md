@@ -101,15 +101,18 @@
 
 4. 자전과 공전을 위해 메서드를 따로 불러오고 update 에 해당 y축 회전 값 추가
 
-# Material
+# Material (3차원 객체를 구성하는 재질)
 
 ![alt text](./image/three6.png)
 
-- PointMaterial (point 타입 object3D 객체를 위한 재질)
-  - LineBasicMaterial (Line 타입 object3D 객체를 위한 재질)
-  - LineDashedMaterial
+1. Point 재질 (점 재질, 점 객체)
+  - PointMaterial
 
-## Mesh 타입 Object3D 객체를 위한 재질
+2. Line 재질(선 재질, 라인 객체)
+  - LineBasicMaterial = 실선
+    - LineDashedMaterial = 점선
+
+3. Mesh 재질(면 재질)
 
 - MeshBasicMaterial
 - MeshLambertMaterial
@@ -119,3 +122,7 @@
 - MeshDepthMaterial
 - MeshNormalMaterial
 - MeshToonMaterial
+
+
+
+![alt text](./image/three7.png)
